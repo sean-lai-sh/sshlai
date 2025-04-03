@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
-import React, {useRef} from 'react'
-import { useScroll, useTransform, motion } from 'motion/react'
+import React, {} from 'react'
+import {motion } from 'motion/react'
 
 const StackingCard = ({ title, src, description, link, color} : {
     title: string,
@@ -10,11 +10,11 @@ const StackingCard = ({ title, src, description, link, color} : {
     link: string,
     color?: string
 }) => {
-    const container = useRef<HTMLDivElement>(null);
-    const {scrollYProgress} = useScroll({
-        target: container, // The target element to track scroll progress
-        offset: ["start end", "start start"] // Adjust the offset to control when the animation triggers
-    });
+    // const container = useRef<HTMLDivElement>(null);
+    // const {scrollYProgress} = useScroll({
+    //     target: container, // The target element to track scroll progress
+    //     offset: ["start end", "start start"] // Adjust the offset to control when the animation triggers
+    // });
   return (
     <div className='h-screen flex justify-center items-center sticky lg:top-[-5%] top-[0%]'>
        <div className={`w-[70vw] h-[60vh] ${color || 'bg-charcoal'} text-charcoal rounded-xl border-charcoal-darker border-4 flex flex-col relative p-5`}>
