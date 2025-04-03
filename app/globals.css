@@ -2,26 +2,90 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/static/JetBrainsMono-Regular.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html.light {
+  @apply bg-charcoal text-beige;
+}
+
+:root {
+
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+
+  --primary: #eae4d3; /* beige accent */
+  --primary-foreground: #1a1a1a;
+
+  --secondary: #2b2b2b;
+  --secondary-foreground: #f5f5f5;
+
+  --muted: #eaeaea;
+  --muted-foreground: #555555;
+
+  --accent: #fefae0;
+  --accent-foreground: #1a1a1a;
+
+  --destructive: #ff5555;
+  --destructive-foreground: #fff;
+
+  --border: #333333;
+  --input: #444444;
+  --ring: #eae4d3;
+
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: #1a1a1a;
+  --foreground: #eae4d3;
+
+  --card: #2b2b2b;
+  --card-foreground: #f5f5f5;
+
+  --popover: #2b2b2b;
+  --popover-foreground: #f5f5f5;
+
+  --primary: #eae4d3;
+  --primary-foreground: #1a1a1a;
+
+  --secondary: #333333;
+  --secondary-foreground: #f5f5f5;
+
+  --accent: #fefae0;
+  --accent-foreground: #1a1a1a;
+
+  --border: #3a3a3a;
+  --input: #3a3a3a;
+  --ring: #eae4d3;
+}
+
+
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
