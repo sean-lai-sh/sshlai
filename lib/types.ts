@@ -14,3 +14,22 @@ export interface ProjectDetails {
     CTA: string;
     CTA_link: string;
 }
+
+export interface CardStackDetails {
+    title: string;
+    titleCSS: string;
+    jobTitle?: string;
+    description: string;
+    achievements: string;
+    duration?:string;
+    skills: string[];
+    workProof: miniWorkDetails[];
+    src: string;
+    link: string;
+    boxColor: string;
+}
+
+export interface miniWorkDetails {
+    name: string;
+    link:string ;
+}

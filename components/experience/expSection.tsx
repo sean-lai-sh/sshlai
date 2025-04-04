@@ -1,34 +1,10 @@
 'use client'
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import StackingCard from "../ui/StackingCard";
 import Lenis from "lenis";
+import { expConsts } from "@/lib/consts";
+import { useScroll } from "motion/react";
 export default function StackedExperience() {
-    const experiences = [
-      {
-        title: "AI4CE",
-        description: "Integrating work for Open Source SimplerEnv robotic simulator for openVLA",
-        color:"bg-charcoal-light" // Optional color for the card background
-      },
-      {
-        title: "HSRN",
-        description: "Helped in experimentation plugin design and contributed to python and Unreal Engine codebases",
-        color:"bg-red-500"
-
-      },
-      {
-        title: "New York University",
-        description: "Sustainable Engineering Institute. Understanding effective curriculum implementations to create sustainability conscious engineers",
-        color:"bg-charcoal-darker" // Optional color for the card background
-      },
-      {
-        title: "Tech@NYU",
-        description: "Grew sponsorship by 20%, hosted 40+ founders, scaled NYU's largest founder event.",
-        src: "/portfolio_filler.png",
-        color:"bg-charcoal-light" // Optional color for the card background
-      },
-      
-      
-    ];
     
     useEffect( () => {
 
@@ -40,21 +16,29 @@ export default function StackedExperience() {
         requestAnimationFrame(raf)
     
       })
+    const container = useRef(null);
 
+    const { scrollYProgress } = useScroll({
+  
+      target: container,
+  
+      offset: ['start start', 'end end']
+  
+    })
     return (
         
       <section className="mt-[20vh] mb-[10vh] block">
-        <h1 className="text-7xl text-charcoal font-bold text-center">Work Experience</h1>
+        <h1 className="md:text-7xl text-5xl text-charcoal font-bold text-center">Work Experience</h1>
         {
-            experiences.map( (exp, index) => {
+            expConsts.map( (exp, index) => {
+                const targetScale = 1- ( (expConsts.length - index) * 0.05)
                 return (
                     <StackingCard
                         key={`exp-${index}`} // Unique key for each experience
-                        title={exp.title} // Title of the experience
-                        src={"/portfolio_filler.png"} // Placeholder image source
-                        link={"#"} // Link for more details (if applicable)
-                        description={exp.description} // Description of the experience
-                        color={exp.color} // Optional color for the card background
+                        cardDetail={exp}
+                        targetScale  ={targetScale}
+                        progress={scrollYProgress}
+                        range={[index * .25, 1]}
                     />
                 )
             })

@@ -6,7 +6,7 @@ const MarqueeBanner = () => {
   const content = Array(20).fill('Looking for Internships');
 
   return (
-    <div className="fixed bottom-0 w-full bg-charcoal-light text-beige overflow-hidden z-30 border-t border-accent/40 shadow-inner">
+    <div className="fixed bottom-0 w-screen bg-charcoal-light text-beige overflow-hidden z-30 border-t border-accent/40 shadow-inner">
       <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused] gap-6 py-2 px-4">
         {content.map((text, index) => (
         <div key={index} className='flex justify-between items-center gap-4'>
