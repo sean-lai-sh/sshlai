@@ -48,9 +48,9 @@ const ContactForm = () => {
   }
   return (
     <Form {...form}>
-        <h1 className='md:text-7xl text-5xl text-start'>
+        {/* <h1 className='md:text-7xl text-5xl text-start'>
             Contact
-        </h1>
+        </h1> */}
         <Separator className="w-full h-[1px] my-4 bg-gray-600 rounded-xl" />
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 text-7xl w-full">
             {contactFields.map(({ name, label, placeholder }, index) => (

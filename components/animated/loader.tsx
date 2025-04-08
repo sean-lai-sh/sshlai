@@ -38,14 +38,49 @@ export default function Loader() {
     const width = window.innerWidth;
     const calculatedPanelCount = width < 640 ? 1 : width < 1024 ? 2 : 5;
     setPanelCount(calculatedPanelCount);
+    const textOutTime = 1.5; // seconds before text fades
+    const totalTime = textOutTime + (panelCount * 0.1) + 0.3; // total animation time in seconds
+
+    // Begin text fade-out
+    const textTimer = setTimeout(() => setShowText(false), textOutTime * 1000);
+    const loaderTimer = setTimeout(() => {
+      setTransitioning(false)
+      setPreLoadAnim(false)
+      
+    }, totalTime * 1000);
+
+    return () => {
+      window.scrollTo(0, 0); // Reset scroll position to top
+    clearTimeout(textTimer);
+    clearTimeout(loaderTimer);
     
+    };
   }, [] )
 
   useEffect( () => {
-    if(preLoadAnim && pathname === '/') { //. special case of root + first visit
+    if(pathname === '/' && !preLoadAnim){
+      setPreLoadAnim(false) // ensure never runs again
+      // Start timer:
+      const timer = setTimeout(() => {
+        setMaskState(false); // show mask
+        setTimeout(() => {
+          setTransitioning(false); // show index page
+        },700);
+      }, 1000); // 1 second delay before showing the mask
+
+      return () => {
+        window.scrollTo(0, 0); // Reset scroll position to top
+        clearTimeout(timer); // Cleanup the timer on unmount or when pathname changes
+        
+      }
+    }else if(pathname == '/' && preLoadAnim){
+      // update pathname 
+      const width = window.innerWidth;
+      const calculatedPanelCount = width < 640 ? 1 : width < 1024 ? 2 : 5;
+      setPanelCount(calculatedPanelCount);
       const textOutTime = 1.5; // seconds before text fades
       const totalTime = textOutTime + (panelCount * 0.1) + 0.3; // total animation time in seconds
-
+  
       // Begin text fade-out
       const textTimer = setTimeout(() => setShowText(false), textOutTime * 1000);
       const loaderTimer = setTimeout(() => {
@@ -55,12 +90,11 @@ export default function Loader() {
       }, totalTime * 1000);
   
       return () => {
-      clearTimeout(textTimer);
-      clearTimeout(loaderTimer);
-      window.scrollTo(0, 0); // Reset scroll position to top
+        window.scrollTo(0, 0); // Reset scroll position to top
+        clearTimeout(textTimer);
+        clearTimeout(loaderTimer);
+      
       };
-    }else if(pathname === '/'){
-      setPreLoadAnim(false)
     }else{
       setPreLoadAnim(false) // ensure never runs again
       // Start timer:
@@ -72,11 +106,12 @@ export default function Loader() {
       }, 1000); // 1 second delay before showing the mask
 
       return () => {
-        clearTimeout(timer); // Cleanup the timer on unmount or when pathname changes
         window.scrollTo(0, 0); // Reset scroll position to top
+        clearTimeout(timer); // Cleanup the timer on unmount or when pathname changes
+        
       }
     }
-  },[pathname, preLoadAnim, setPreLoadAnim, setTransitioning, setMaskState, panelCount])
+  },[pathname])
 
   // if(preLoadAnim){
   //   return <AnimatePresence mode="wait">

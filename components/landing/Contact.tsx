@@ -4,22 +4,23 @@ import { Separator } from '@radix-ui/react-separator'
 import { Button } from '../ui/button'
 import Link from 'next/link'
 import { motion } from 'motion/react'
+import NavigationLink from '../ui/navLink'
 const Contact = () => {
   return (
     <div className='w-full relative bg-charcoal min-h-[60vh] px-10 pt-32'>
         <div className='flex md:flex-row flex-col justify-between h-[50%] items-center md:items-start'>
-            <h2 className='text-7xl text-offwhite font-bold'>
+            <h2 className='md:text-7xl text-5xl text-offwhite font-bold mb-5 md:mb-0'>
                 {"Let's Work Together!"}
             </h2> 
            
             <motion.div className={`lg:absolute lg:right-[25%] lg:top-[25%] lg:items-center justify-center`}>
-                <Link href="/contact" className='bg-offwhite text-charcoal text-2xl h-52 rounded-full border-5 w-52 items-center justify-center flex
+                <NavigationLink href="/contact" className='bg-offwhite text-charcoal text-2xl h-52 rounded-full border-5 w-52 items-center justify-center flex
                 hover:bg-beige duration-1000 transition-all ease-in-out hover:text-black
                 '>
 
                     <div>Contact</div>
 
-                </Link>
+                </NavigationLink>
             </motion.div> 
             <div className='justify-center items-center w-[40%] hidden md:flex h-full'>
                 <ArrowDownLeft size={100} className='top-0'/>
@@ -30,8 +31,8 @@ const Contact = () => {
             </motion.svg> */}
         </div>
         <Separator className='w-full bg-beige h-1 mt-5 mb-10'/>
-        <div className='md:space-x-14 space-y-6 md:space-y-0'>
-            <Link href="mailto:seanlai221@gmail.com">
+        <div className='md:space-x-14 space-y-12 md:space-y-0'>
+            <Link href="mailto:seanlai221@gmail.com" className='mb-10'>
                 <Button className='
                 bg-beige text-charcoal hover:bg-charcoal hover:text-beige hover:shadow-sm 
                 hover:shadow-beige transition-all duration-600 rounded-lg underline

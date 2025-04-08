@@ -11,7 +11,7 @@ import {
 import Link from "next/link"
 import { NavBarDetails } from "@/lib/types"
 import { cn } from "@/lib/utils"
-import { SquareTerminalIcon, WebhookIcon } from "lucide-react"
+import { Navigation, SquareTerminalIcon, WebhookIcon } from "lucide-react"
 import NavigationLink from "../ui/navLink"
 
 
@@ -42,16 +42,16 @@ export default function Navbar()  {
                 <NavigationLink
                     href="/"
                 >
-                    <p className="block px-3 py-1 rounded-md hover:bg-charcoal-light hover:text-white text-beige text-3xl">
+                    <span className="block px-3 py-1 rounded-md hover:bg-charcoal-light hover:text-white text-beige text-3xl">
                     SL
-                    </p>
+                    </span>
                 </NavigationLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                    <Link href="/projects" legacyBehavior passHref className="sm:hidden">
-                        <NavigationMenuLink className={`${navigationMenuTriggerStyle()} inline-flex sm:hidden items-center justify-center`}>
+                    <Link href="/projects" passHref>
+                        <span className={`${navigationMenuTriggerStyle()} inline-flex sm:hidden items-center justify-center`}>
                             <WebhookIcon className="w-7 h-7" />
-                        </NavigationMenuLink>
+                        </span>
                     </Link>
                     <NavigationMenuTrigger className="sm:inline-flex hidden">
                        <p className="">Projects</p> 
@@ -60,22 +60,21 @@ export default function Navbar()  {
                     <NavigationMenuContent className="bg-charcoal-light/50 shadow-lg shadow-charcoal-darker rounded-md duration-300">
                     <ul className="gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] grid">
                         <li className="row-span-3">
-                            <NavigationMenuLink asChild>
-                            <NavigationLink
-                                className="flex h-full w-full select-none flex-col justify-end rounded-md bg-offwhite text-charcoal-light shadow-sm shadow-charcoal from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md hover:text-black transition-all duration-400 ease-in-out hover:scale-[1.025]"
-                                href="/projects"
-                            >
-                                <div className="items-center justify-center flex top-0">
-                                    <WebhookIcon className="w-[100px] h-[100px] top-0 text-muted-foreground mb-2" />
-                                </div>
-                                <div className="mb-2 mt-4 text-lg font-medium">
-                                Showcase
-                                </div>
-                                <p className="text-sm leading-tight text-muted-foreground">
-                                A collection of projects
-                                </p>
-                            </NavigationLink>
-                            </NavigationMenuLink>
+                            
+                                <NavigationLink
+                                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-offwhite text-charcoal-light shadow-sm shadow-charcoal from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md hover:text-black transition-all duration-400 ease-in-out hover:scale-[1.025]"
+                                    href="/projects"
+                                >
+                                    <div className="items-center justify-center flex top-0">
+                                        <WebhookIcon className="w-[100px] h-[100px] top-0 text-muted-foreground mb-2" />
+                                    </div>
+                                    <div className="mb-2 mt-4 text-lg font-medium">
+                                    Showcase
+                                    </div>
+                                    <p className="text-sm leading-tight text-muted-foreground">
+                                    A collection of projects
+                                    </p>
+                                </NavigationLink>
                         </li>
                         {
                             projects.map((project) => (
@@ -97,11 +96,13 @@ export default function Navbar()  {
                     </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                    <Link href="/experience" legacyBehavior passHref className="sm:hidden">
-                        <NavigationMenuLink className={`${navigationMenuTriggerStyle()} inline-flex sm:hidden items-center justify-center`}>
-                            <SquareTerminalIcon className="w-7 h-7" />
-                        </NavigationMenuLink>
-                    </Link>
+                    
+                        <div className={`${navigationMenuTriggerStyle()} inline-flex sm:hidden items-center justify-center`}>
+                            <Link href="/experience"className="sm:hidden" passHref>
+                                <SquareTerminalIcon className="w-7 h-7" />
+                            </Link>
+                        </div>
+                    
                     <NavigationMenuTrigger className="sm:inline-flex hidden">
                         
                         Experience
@@ -109,8 +110,8 @@ export default function Navbar()  {
                     <NavigationMenuContent className="bg-charcoal-light/50 shadow-lg shadow-charcoal-darker rounded-md duration-300">
                     <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                         <li className="row-span-3">
-                            <NavigationMenuLink asChild>
-                            <a
+                            {/* <NavigationMenuLink asChild> */}
+                            <NavigationLink
                                 className="flex h-full w-full select-none flex-col justify-end rounded-md bg-offwhite text-charcoal-light shadow-sm shadow-charcoal from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md hover:text-black transition-all duration-400 ease-in-out hover:scale-[1.025]"
                                 href="/experience"
                             >
@@ -123,8 +124,8 @@ export default function Navbar()  {
                                 <p className="text-sm leading-tight text-muted-foreground">
                                 How I got here
                                 </p>
-                            </a>
-                            </NavigationMenuLink>
+                            </NavigationLink>
+                            {/* </NavigationMenuLink> */}
                         </li>
                         {
                             experience.map((exp) => (
@@ -144,11 +145,9 @@ export default function Navbar()  {
                     </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                    <Link href="/contact" legacyBehavior passHref>
-                        <NavigationMenuLink className={`${navigationMenuTriggerStyle()} sm:inline-flex hidden`}>
+                    <NavigationLink href="/contact"  className={`${navigationMenuTriggerStyle()} sm:inline-flex hidden cursor-pointer`}>
                         Contact
-                        </NavigationMenuLink>
-                    </Link>
+                    </NavigationLink>
                 </NavigationMenuItem>
             </NavigationMenuList>
         </NavigationMenu>
