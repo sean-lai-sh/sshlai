@@ -4,7 +4,7 @@ import {useHover} from '@uidotdev/usehooks'
 import Transition from '../transitions/Glitch'
 import { ProjectDetails } from '@/lib/types'
 import Link from 'next/link'
-const ProjBox = ({project, key}:{project: ProjectDetails, key?: string}) => {
+const ProjBox = ({project}:{project: ProjectDetails}) => {
   const transitionRef = useRef<HTMLDivElement>(null); 
   const [hoverRef, isHovered] = useHover()
   return (
@@ -33,7 +33,7 @@ const ProjBox = ({project, key}:{project: ProjectDetails, key?: string}) => {
             </div>
             
             {project.CTA && project.CTA_link && (
-            <a
+            <Link
                 href={`${project.CTA_link}`}// Link to the project or external site
                 className="mt-2 inline-block py-3 px-2 text-accent underline underline-offset-4 transition hover:bg-beige rounded-lg 
                 hover:text-charcoal hover:shadow-md hover:shadow-beige hover:ring-2 hover:ring-offwhite w-fit min-w-[20%]"
@@ -41,7 +41,7 @@ const ProjBox = ({project, key}:{project: ProjectDetails, key?: string}) => {
                 rel="noopener noreferrer"
             >
                 {project.CTA}
-            </a>
+            </Link>
             )}
         </article>
     </div>

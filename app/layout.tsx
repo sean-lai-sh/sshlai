@@ -4,7 +4,9 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { Share_Tech_Mono } from 'next/font/google';
 import localFont from 'next/font/local'
-import MarqueeBanner from '@/components/Navigation/marquee'
+import { AnimationProvider } from '@/components/animated/AnimContext';
+import Loader from '@/components/animated/loader';
+import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -44,10 +46,13 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`dark ${inter.variable} ${jetbrainsMono.variable} ${shareTechMono.variable}`}>
-      <body className="font-sans bg-charcoal-darker text-beige flex items-center justify-center min-h-screen w-screen overflow-x-hidden">
-        <Navbar />
-        {children}
-        <MarqueeBanner />
+      <body className="font-sans text-beige flex items-center justify-center w-screen overflow-x-hidden">
+        <AnimationProvider>
+          <Navbar />
+          <Loader/>
+          {children}
+          <Toaster/>
+        </AnimationProvider>
       </body>
     </html>
   )

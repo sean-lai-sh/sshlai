@@ -5,7 +5,7 @@ export const allProjects: ProjectDetails[] = [
     {
         ProjName: "AI Chatbot",
         TechStack:"Python, FastAPI, OpenAI, React",
-        Liner:"An AI-powered chatbot for customer support.",
+        Liner:"An AI-powered chatbot for customer support",
         frontImg:"https://images.unsplash.com/photo-1742943679521-f4736500a471?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         backImg:"https://images.unsplash.com/photo-1742993493624-ac0f22810eb6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         CTA:"Learn More",
@@ -14,7 +14,7 @@ export const allProjects: ProjectDetails[] = [
     {
         ProjName: "AutoGo",
         TechStack:"Python, TensorFlow, OpenCV, Arduino",
-        Liner:"Self-playing Chinese chess board with ML.",
+        Liner:"Self-playing Chinese chess board with ML",
         frontImg:"https://images.unsplash.com/photo-1742943679521-f4736500a471?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         backImg:"https://images.unsplash.com/photo-1742993493624-ac0f22810eb6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         CTA:"Learn More",
@@ -39,6 +39,32 @@ export const allProjects: ProjectDetails[] = [
         CTA_link:"https://example.com/design-report-embodied-ai-navigation",
     }
 ]
+export const contactFields = [
+  {
+    name: 'name',
+    label: 'Full Name',
+    placeholder: 'john smith*',
+    type: 'text',
+  },
+  {
+    name: 'email',
+    label: 'Email',
+    placeholder: 'you@example.com*',
+    type: 'email',
+  },
+  {
+    name: 'company',
+    label: 'Company / Organization',
+    placeholder: 'acme inc*',
+    type: 'text',
+  },
+  {
+    name: 'msg',
+    label: 'Message',
+    placeholder: 'I want you to...*',
+    type: 'textarea', // 👈 for multiline message
+  },
+] as const;
 
 
 export const expConsts: CardStackDetails[] = [
@@ -54,7 +80,7 @@ export const expConsts: CardStackDetails[] = [
       skills: ["PyTorch", "Linux", "SimplerEnv", "ManiSkill3"],
       workProof: [
       ],
-      src: "/ai4cewide.png",
+      src: "/ai4ce_new_block_trans.png",
       link: "https://linkedin.com/in/sean-sh-lai",
       boxColor: "bg-charcoal"
     },
@@ -72,22 +98,7 @@ export const expConsts: CardStackDetails[] = [
         { name: "Plugin POC", link: "https://www.example.com/networking/plugin-growth" },
         { name: "PR: Implementation", link: "https://www.example.com/networking/jitter" },
       ],
-      src: "/ai4cewide.png",
-      link: "https://linkedin.com/in/sean-sh-lai",
-      boxColor: "bg-charcoal"
-    },
-    {
-      title: "New York University Sustainble Engineering",
-      titleCSS: "text-beige",
-      jobTitle: "UGRSP Research Fellow",
-      duration: "June 2024 — Sept 2024",
-      description: "Helped guide NYU curriculum changes and learned ML techniques",
-      achievements: `- Collaborated on a sustainable engineering curriculum impacting 1000+ students
-  - Built NLP models for word cloud generation and embeddings, reducing processing times by 25%
-  - Implemented sentiment analysis and data aggregation for 300+ student responses`,
-      skills: ["NLP", "Data Processing", "Python", "Numpy"],
-      workProof: [],
-      src: "/ai4cewide.png",
+      src: "/ai4ce_new_block_trans.png",
       link: "https://linkedin.com/in/sean-sh-lai",
       boxColor: "bg-charcoal"
     },
@@ -106,9 +117,25 @@ export const expConsts: CardStackDetails[] = [
         { name: "Startup Connections", link: "https://www.example.com/startup/hackathon" },
         { name: "Member Tooling", link: "https://www.example.com/startup/members" }
       ],
-      src: "/ai4cewide.png",
+      src: "/ai4ce_new_block_trans.png",
       link: "https://linkedin.com/in/sean-sh-lai",
       boxColor: "bg-charcoal"
     },
+    {
+      title: "New York University Sustainble Engineering",
+      titleCSS: "text-beige",
+      jobTitle: "UGRSP Research Fellow",
+      duration: "June 2024 — Sept 2024",
+      description: "Helped guide NYU curriculum changes and learned ML techniques",
+      achievements: `- Collaborated on a sustainable engineering curriculum impacting 1000+ students
+  - Built NLP models for word cloud generation and embeddings, reducing processing times by 25%
+  - Implemented sentiment analysis and data aggregation for 300+ student responses`,
+      skills: ["NLP", "Data Processing", "Python", "Numpy"],
+      workProof: [],
+      src: "/ai4ce_new_block_trans.png",
+      link: "https://linkedin.com/in/sean-sh-lai",
+      boxColor: "bg-charcoal"
+    },
+    
     
 ]

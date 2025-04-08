@@ -1,26 +1,36 @@
-import ExperienceSection from "@/components/experience/expSection";
-import Loader from "@/components/loader";
+'use client';
+import Loader from "@/components/animated/loader";
+import {HeroSection, RecentWork} from "@/components/landing";
+import { useEffect } from "react";
+import Lenis from "lenis";
+import Contact from "@/components/landing/Contact";
+
 
 // components/Hero.tsx
 export default function Hero() {
+  useEffect(() => {
+    const lenis = new Lenis();
+  
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+  
+    requestAnimationFrame(raf);
+    document.documentElement.classList.add('scroll-hidden') // 
+
+    return () => {
+      document.documentElement.classList.remove('scroll-hidden')
+      lenis.destroy();
+    };
+  }, []);
+  
   return (
-    <Loader>
-      <section className="min-h-screen w-full text-black flex flex-col justify-center items-center px-6 bg-beige">
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-          Sean Lai
-        </h1>
-        <p className="mt-4 text-lg md:text-xl max-w-xl text-offwhite text-center">
-          Full Stack & AI Engineer. Building systems where code meets cognition.
-        </p>
-        <a
-          href="/projects"
-          className="mt-8 px-6 py-3 border border-beige text-beige hover:bg-beige hover:text-charcoal transition-all duration-300 rounded-lg"
-        >
-          View My Work
-        </a>
-      </section>
-      <ExperienceSection />
-    </Loader>
+    <main className="w-full scroll-hidden overflow-y-scroll z-0">
+      <HeroSection/>
+      <RecentWork />
+      <Contact />
+    </main>
   );
 }
 

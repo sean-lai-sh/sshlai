@@ -11,7 +11,8 @@ import {
 import Link from "next/link"
 import { NavBarDetails } from "@/lib/types"
 import { cn } from "@/lib/utils"
-import { Square, SquareTerminalIcon, WebhookIcon } from "lucide-react"
+import { SquareTerminalIcon, WebhookIcon } from "lucide-react"
+import NavigationLink from "../ui/navLink"
 
 
 export default function Navbar()  {
@@ -21,31 +22,30 @@ export default function Navbar()  {
             shortDescript: "Self playing chinese chess board with ML"
         },
         { name: "Plugma" , href: "/projects/plugma",
-            shortDescript: "An event platform for community organizers and growth"
+            shortDescript: "An event platform to drive community growth"
         },
     ]
     const experience: NavBarDetails[] = [
-        { name: "Resume", href: "/resume", shortDescript: "Let me see it" },
-        { name: "Skills", href: "/experience",
-            shortDescript: "Just see what I can do"
-        },
+        { name: "Resume", href: "/Sean%20Lai%20Resume.pdf", shortDescript: "Simple Quick Easy" },
+        
         { name: "Jobs" , href: "/experience",
             shortDescript: "Everything I've done in the past"
         },
+        { name: "Community", href: "/community",
+            shortDescript: "Alittle bit of everything"
+        },
     ]
     return (
-        <NavigationMenu className="fixed top-0 justify-center items-center mt-2 z-20">
+        <NavigationMenu className="fixed top-0 justify-center items-center mt-2 z-30">
             <NavigationMenuList className=" items-center justify-center w-full flex gap-6 bg-charcoal text-beige text-xl px-6 py-3 rounded-xl border dark:border-white/[0.2] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
                 <NavigationMenuItem className=" transition duration-300 ease-in-out rounded-md border-lg">
-                <Link
+                <NavigationLink
                     href="/"
-                    passHref
-                    legacyBehavior
                 >
-                    <a className="block px-3 py-1 rounded-md hover:bg-charcoal-light hover:text-white text-beige text-3xl">
+                    <p className="block px-3 py-1 rounded-md hover:bg-charcoal-light hover:text-white text-beige text-3xl">
                     SL
-                    </a>
-                </Link>
+                    </p>
+                </NavigationLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                     <Link href="/projects" legacyBehavior passHref className="sm:hidden">
@@ -61,7 +61,7 @@ export default function Navbar()  {
                     <ul className="gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] grid">
                         <li className="row-span-3">
                             <NavigationMenuLink asChild>
-                            <a
+                            <NavigationLink
                                 className="flex h-full w-full select-none flex-col justify-end rounded-md bg-offwhite text-charcoal-light shadow-sm shadow-charcoal from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md hover:text-black transition-all duration-400 ease-in-out hover:scale-[1.025]"
                                 href="/projects"
                             >
@@ -74,7 +74,7 @@ export default function Navbar()  {
                                 <p className="text-sm leading-tight text-muted-foreground">
                                 A collection of projects
                                 </p>
-                            </a>
+                            </NavigationLink>
                             </NavigationMenuLink>
                         </li>
                         {
@@ -144,9 +144,9 @@ export default function Navbar()  {
                     </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                    <Link href="/community" legacyBehavior passHref>
+                    <Link href="/contact" legacyBehavior passHref>
                         <NavigationMenuLink className={`${navigationMenuTriggerStyle()} sm:inline-flex hidden`}>
-                        Community
+                        Contact
                         </NavigationMenuLink>
                     </Link>
                 </NavigationMenuItem>

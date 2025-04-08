@@ -13,6 +13,7 @@ export interface ProjectDetails {
     backImg: string;
     CTA: string;
     CTA_link: string;
+    tag?:string; // for landing page
 }
 
 export interface CardStackDetails {
