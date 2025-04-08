@@ -57,6 +57,7 @@ export default function Loader() {
       return () => {
       clearTimeout(textTimer);
       clearTimeout(loaderTimer);
+      window.scrollTo(0, 0); // Reset scroll position to top
       };
     }else if(pathname === '/'){
       setPreLoadAnim(false)
@@ -72,9 +73,10 @@ export default function Loader() {
 
       return () => {
         clearTimeout(timer); // Cleanup the timer on unmount or when pathname changes
+        window.scrollTo(0, 0); // Reset scroll position to top
       }
     }
-  },[pathname])
+  },[pathname, preLoadAnim, setPreLoadAnim, setTransitioning, setMaskState, panelCount])
 
   // if(preLoadAnim){
   //   return <AnimatePresence mode="wait">

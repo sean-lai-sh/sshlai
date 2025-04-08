@@ -8,8 +8,8 @@ const NavigationLink = ({
   href,
   children,
   className = '',
-  loadUpDuration = 1400, // Should match your LoadUp animation duration
-  indexDuration = 1400,  // Should match your Index animation duration
+  loadUpDuration = 700, // Should match your LoadUp animation duration
+  indexDuration = 700,  // Should match your Index animation duration
 }: {
   href: string;
   children: React.ReactNode;
@@ -21,8 +21,10 @@ const NavigationLink = ({
   const { setTransitioning, setMaskState } = useAnimationState();
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    console.log("Tramsitioning to: ", e);
 
-    // 1. Start LoadUp animation
+
+    // 1. Start LoadUp animation and set transitioning state
     setTransitioning(true);
     setMaskState(true);
 
@@ -36,7 +38,7 @@ const NavigationLink = ({
         // 4. Finally complete transition after Index animation
         setTimeout(() => {
           setTransitioning(false);
-        }, 100);
+        }, indexDuration);
       }, 10); // Small delay to ensure route change is processed
     }, loadUpDuration);
   };

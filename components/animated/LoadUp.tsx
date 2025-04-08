@@ -2,7 +2,7 @@
 import styles from './circleLoad.module.scss';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { opacity, bottomUp } from './anim';
+import { bottomUp } from './anim';
 
 export default function LoadUp() {
   const [dimension, setDimension] = useState({ width: 0, height: 0 });

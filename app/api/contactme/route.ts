@@ -29,8 +29,12 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ success: true }, { status: 200 });
-  } catch (error: any) {
+  } catch (error) { 
     console.error(error);
-    return NextResponse.json({ success: false, error: error.message || 'Internal Server Error' }, { status: 500 });
+    if (error instanceof Error) {
+        return NextResponse.json({ success: false, error: error.message || 'Internal Server Error' }, { status: 500 });
+    }else{
+        return NextResponse.json({ success: false, error: 'Internal Server Error with unknown causes' }, { status: 500 });
+    }
   }
 }

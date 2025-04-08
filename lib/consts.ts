@@ -1,3 +1,4 @@
+import { z } from 'zod'
 import { CardStackDetails, ProjectDetails } from "./types";
 
 export const top3Featured: number[] = [0, 1, 2]; // Indexes of the top 3 featured projects
@@ -138,4 +139,24 @@ export const expConsts: CardStackDetails[] = [
     },
     
     
-]
+];
+export const contactFormSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: 'Name must be at least 2 characters' })
+    .max(50, { message: 'Name must be less than 50 characters' }),
+
+  email: z
+    .string()
+    .email({ message: 'Invalid email address' }),
+
+  company: z
+    .string()
+    .min(1, { message: 'Company or organization is required' })
+    .max(100, { message: 'Company name too long' }),
+
+  msg: z
+    .string()
+    .min(10, { message: 'Message must be at least 10 characters' })
+    .max(1000, { message: 'Message must be under 1000 characters' }),
+});

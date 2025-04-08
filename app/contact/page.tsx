@@ -1,6 +1,4 @@
 import ContactForm from '@/components/contact/contactform'
-import { Form } from '@/components/ui/form'
-import { Separator } from '@radix-ui/react-separator'
 import Link from 'next/link'
 
 import React from 'react'
@@ -12,7 +10,7 @@ const Contact = () => {
         <div className=' flex flex-col justify-center items-center'>
             <div className='md:w-3/4 flex flex-row items-start justify-between mt-44 md:mx-20'>
                 <h1 className='text-start'>Ready to Start Something Special?</h1>
-                <h1 className='text-end'>Let's Connect!</h1>
+                <h1 className='text-end'>{"Let's Connect!"}</h1>
             </div>
             <div className='md:w-3/4 flex md:flex-row flex-col justify-center mb-10'>
                 <div className='md:w-[75%] items-start md:mx-20'>

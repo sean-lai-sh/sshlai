@@ -1,5 +1,4 @@
 'use client';
-import Loader from "@/components/animated/loader";
 import {HeroSection, RecentWork} from "@/components/landing";
 import { useEffect } from "react";
 import Lenis from "lenis";

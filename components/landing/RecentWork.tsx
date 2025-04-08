@@ -2,10 +2,8 @@
 import React, {useRef} from 'react'
 import { top3Featured, allProjects } from '@/lib/consts'
 import { Separator } from '../ui/separator'
-import {useScroll, useTransform, motion} from 'framer-motion'
 import styles from './sliding.module.scss';
 import { Button } from '../ui/button';
-import { redirect } from 'next/navigation';
 import Link from 'next/link';
 const RecentWork = () => {
     const featuredProjects = allProjects.filter((_, index) => top3Featured.includes(index))

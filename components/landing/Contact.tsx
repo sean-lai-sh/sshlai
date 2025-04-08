@@ -9,7 +9,7 @@ const Contact = () => {
     <div className='w-full relative bg-charcoal min-h-[60vh] px-10 pt-32'>
         <div className='flex md:flex-row flex-col justify-between h-[50%] items-center md:items-start'>
             <h2 className='text-7xl text-offwhite font-bold'>
-                Let's Work Together!
+                {"Let's Work Together!"}
             </h2> 
            
             <motion.div className={`lg:absolute lg:right-[25%] lg:top-[25%] lg:items-center justify-center`}>

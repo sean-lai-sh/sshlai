@@ -1,10 +1,12 @@
 import React, {useState} from 'react'
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
+import { FormControl, FormField, FormItem, FormLabel } from '../ui/form'
 import { Input } from '../ui/input'
 import type { UseFormReturn } from 'react-hook-form';
 import { Separator } from '@radix-ui/react-separator';
 import { Textarea } from '../ui/textarea';
-const ContactField = ({form, name, label, placeholder,idx }: {form: UseFormReturn<any>, name: string, label: string, placeholder: string, idx:number}) => {
+import { z} from 'zod'
+import { contactFormSchema } from '@/lib/consts';
+const ContactField = ({form, name, label, placeholder,idx }: {form: UseFormReturn<z.infer<typeof contactFormSchema>>, name: "name" | "email" | "company" | "msg", label: string, placeholder: string, idx:number}) => {
     const [hasValue, setHasValue] = useState(false);
     if(name === "msg") {
             
