@@ -55,7 +55,7 @@ export const contactFields = [
   },
   {
     name: 'company',
-    label: 'Company / Organization',
+    label: 'Organization',
     placeholder: 'acme inc*',
     type: 'text',
   },
