@@ -10,7 +10,7 @@ const Contact = () => {
         <div className=' flex flex-col justify-center items-center mx-10'>
             <div className=' md:mt-32 mt-36 md:w-3/4 flex md:flex-row flex-col justify-center '>
                 <div className='md:w-[75%] items-start md:mx-20'>
-                    <h1 className='text-start text-7xl'>Let's work together</h1>
+                    <h1 className='text-start text-7xl'>{"Let's work together"}</h1>
                     <ContactForm/>
                 </div>
                 <div className='md:w-[25%] items-start text-lg text-beige space-y-6'>

@@ -11,7 +11,7 @@ import {
 import Link from "next/link"
 import { NavBarDetails } from "@/lib/types"
 import { cn } from "@/lib/utils"
-import { Navigation, SquareTerminalIcon, WebhookIcon } from "lucide-react"
+import { SquareTerminalIcon, WebhookIcon } from "lucide-react"
 import NavigationLink from "../ui/navLink"
 
 
