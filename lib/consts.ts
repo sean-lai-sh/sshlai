@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { CardStackDetails, ProjectDetails } from "./types";
+import { CardStackDetails, ProjectDetails, CommunityExp } from "./types";
 
 export const top3Featured: number[] = [0, 1, 2]; // Indexes of the top 3 featured projects
 export const allProjects: ProjectDetails[] = [
@@ -7,7 +7,7 @@ export const allProjects: ProjectDetails[] = [
         ProjName: "AI Chatbot",
         TechStack:"Python, FastAPI, OpenAI, React",
         Liner:"An AI-powered chatbot for customer support",
-        frontImg:"https://images.unsplash.com/photo-1742943679521-f4736500a471?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        frontImg:"./bpimg.jpg",
         backImg:"https://images.unsplash.com/photo-1742993493624-ac0f22810eb6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         CTA:"Learn More",
         CTA_link:"https://example.com/design-report-ai-chatbot",
@@ -66,8 +66,6 @@ export const contactFields = [
     type: 'textarea', // 👈 for multiline message
   },
 ] as const;
-
-
 export const expConsts: CardStackDetails[] = [
     {
       title: "AI4CE",
@@ -160,3 +158,34 @@ export const contactFormSchema = z.object({
     .min(10, { message: 'Message must be at least 10 characters' })
     .max(1000, { message: 'Message must be under 1000 characters' }),
 });
+
+export const communities: CommunityExp[] = [
+  {
+    title: "HOF Hacks",
+    tagline: "Assisting a rising VC spread its name at NYU",
+    img: '/hofhack.png',
+    maskedContent: null,
+    shadowCol: 'hover:bg-[#2563eb]'
+  },
+  {
+    title: "Tech@NYU StartupWeek",
+    tagline: "NYU's premier student entrepreneurship festival",
+    img: '/sw2025.png',
+    maskedContent: null,
+    shadowCol: 'hover:bg-blue-500'
+  },
+  {
+    title: "Startup Week Buildathon",
+    tagline: "Hiring hackathon to connect startups with students",
+    img: '/swbuildathon.png',
+    maskedContent: null,
+    shadowCol: 'hover:bg-[#2563eb]'
+  },
+  {
+    title: "Mentor & Meet w Supermomos",
+    tagline: "Exposing Startups to NYU students",
+    img: '/mnm.png',
+    maskedContent: null,
+    shadowCol: 'hover:bg-[#2563eb]'
+  }
+]

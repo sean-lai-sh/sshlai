@@ -64,7 +64,7 @@ const ContactForm = () => {
                             idx={index}
                         />
             ))}
-            <Button type="submit" className='w-[30%] h-12 rounded-full border-2 hover:bg-beige hover:border-charcoal-light hover:shadow-md hover:shadow-offwhite hover:text-black focus:bg-beige focus:border-charcoal-light focus:shadow-md focus:shadow-offwhite focus:text-black text-2xl'>Submit</Button>
+            <Button type="submit" className='lg:w-[30%] w-[50%] h-12 rounded-full border-2 hover:bg-beige hover:border-charcoal-light hover:shadow-md hover:shadow-offwhite hover:text-black focus:bg-beige focus:border-charcoal-light focus:shadow-md focus:shadow-offwhite focus:text-black text-2xl'>Submit</Button>
         </form>
     </Form>
   )
