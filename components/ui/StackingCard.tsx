@@ -71,6 +71,7 @@ const StackingCard = ({cardDetail, targetScale, progress, range} : {
                         src={cardDetail.src}
                         alt={cardDetail.title}
                         className='object-cover'
+                        style={{ imageRendering: "auto" }}
                         fill
                         />
                     </motion.div>

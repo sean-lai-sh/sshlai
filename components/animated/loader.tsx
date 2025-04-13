@@ -78,8 +78,8 @@ export default function Loader() {
       const width = window.innerWidth;
       const calculatedPanelCount = width < 640 ? 1 : width < 1024 ? 2 : 5;
       setPanelCount(calculatedPanelCount);
-      const textOutTime = 1.5; // seconds before text fades
-      const totalTime = textOutTime + (panelCount * 0.1) + 0.3; // total animation time in seconds
+      const textOutTime = 1.3; // seconds before text fades
+      const totalTime = textOutTime + (panelCount * 0.1) + 0.5; // total animation time in seconds
   
       // Begin text fade-out
       const textTimer = setTimeout(() => setShowText(false), textOutTime * 1000);

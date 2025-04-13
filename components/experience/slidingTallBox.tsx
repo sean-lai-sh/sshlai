@@ -6,7 +6,7 @@ const SlidingBox = ({comm}:{comm:CommunityExp}) => {
     const transitionRef = useRef<HTMLDivElement>(null);
     const [hoverRef, isHovered] = useHover()
     return (
-        <div ref={hoverRef} className='w-[300px] sm:w-[600px] sm:h-[800px] h-[400px] mt-10'>
+        <div ref={hoverRef} className='w-[300px] sm:w-[600px] sm:h-[800px] md:w-[660px] md:h-[880px] h-[400px] mt-10 p-2 bg-black rounded-3xl'>
             {/* <div className='relative w-full h-[400px] md:h-[800px]'>
                 <Image src={comm.img} alt={comm.title} fill className='object-cover z-10' />
             </div>
@@ -15,12 +15,8 @@ const SlidingBox = ({comm}:{comm:CommunityExp}) => {
                 {comm.tagline}
             </h3>
             </div> */}
-            <Transition3D transition={isHovered} ref={transitionRef} frontImg={comm.img}>
-            <div className='absolute inset-0 bg-offwhite flex justify-center items-center'>
-                <h3 className='text-charcoal lg:text-2xl text-center font-serif'>
-                {comm.tagline}
-                </h3>
-            </div>
+            <Transition3D transition={isHovered} ref={transitionRef} frontImg={comm.img} tag={comm.tagline}>
+                {comm.maskedContent !== null ? <comm.maskedContent /> : <></>}
             </Transition3D>
         </div>
   )

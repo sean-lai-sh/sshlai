@@ -40,6 +40,6 @@ export type CommunityExp = {
     title: string;
     img: string;
     tagline:string;
-    maskedContent: HTMLDivElement | null; // what our mask will reveal slowly upon our learn more
+    maskedContent: React.FC | null; // what our mask will reveal slowly upon our learn more
     shadowCol: string; // Determine shadow color :)
 }
