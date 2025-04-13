@@ -2,7 +2,6 @@
 import { motion } from 'framer-motion';
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import Image from 'next/image';
-import { AspectRatio } from '@radix-ui/react-aspect-ratio';
 const Transition3D = forwardRef<
   HTMLDivElement,
   {
@@ -24,7 +23,7 @@ const Transition3D = forwardRef<
       <div className="absolute inset-5 z-0 text-offwhite">
         {children ? children :
         <>
-            <h1 className='text-4xl font-serif leading-relaxed'>HOF Hacks</h1>
+            {/* <h1 className='text-4xl font-serif leading-relaxed'>HOF Hacks</h1>
             <h2 className='text-2xl italic'>Building Tomorrow</h2>
             <p>To be honest, this was pulled off in under a month. From a warm intro to Tahseen and HOF thanks to Baylor at ZFelllows, it was non-stop fun. While there were many late night calling  and meetings, it was only possible by the graceful words that came out when negotiating the terms, 
             <br/>
@@ -45,7 +44,7 @@ const Transition3D = forwardRef<
                     className='object-cover  rounded-2xl'
                     />
                 </AspectRatio>
-            </div>
+            </div> */}
         </>}
       </div>
 
