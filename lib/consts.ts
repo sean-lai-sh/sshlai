@@ -28,7 +28,7 @@ export const allProjects: ProjectDetails[] = [
         TechStack:"Python, FastAPI, OpenAI, React",
         Liner:"An AI-powered chatbot for customer support",
         frontImg:"./bpimg.jpg",
-        backImg:"https://images.unsplash.com/photo-1742993493624-ac0f22810eb6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        backImg:"/chatbot.png",
         CTA:"Learn More",
         CTA_link:"http://13.211.144.173/",
     },
@@ -38,7 +38,7 @@ export const allProjects: ProjectDetails[] = [
         TechStack:"Python, PyTorch, Sklearn, SLAM",
         Liner:"Maze Puzzle Navigator with SLAM",
         frontImg:"https://images.unsplash.com/photo-1742943679521-f4736500a471?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        backImg:"https://images.unsplash.com/photo-1742993493624-ac0f22810eb6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        backImg:"https://images.unsplash.com/photo-1659823449893-c1e106e10a98?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         CTA:"Learn More",
         CTA_link:"https://github.com/sean-lai-sh/embodied_ai_navigation",
     }
