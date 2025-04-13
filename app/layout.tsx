@@ -7,7 +7,7 @@ import localFont from 'next/font/local'
 import { AnimationProvider } from '@/components/animated/AnimContext';
 import Loader from '@/components/animated/loader';
 import { Toaster } from '@/components/ui/toaster';
-
+import { Analytics } from '@vercel/analytics/next';
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
@@ -52,6 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Loader/>
           {children}
           <Toaster/>
+          <Analytics/>
         </AnimationProvider>
       </body>
     </html>

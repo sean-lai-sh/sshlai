@@ -85,9 +85,9 @@ const XLVar = () => {
         </motion.h1>
         <motion.h1
           className="text-[30vw] leading-tight font-bold tracking-widest text-right -mt-6 italic bottom-0"
-          initial={{ opacity: 0, x:"10vw", y:"-20vh",  color: '#f5f5dc' }}
-          animate={{ opacity: 1, x:"10vw", y:"-20vh", color: '#f5f5dc' }}
-          exit={{ opacity: 0, x:"10vw", y:"-20vh",color: '#f5f5dc00' }} // transparent beige
+          initial={{ opacity: 0, x:"10vw", y:"-25vh",  color: '#f5f5dc' }}
+          animate={{ opacity: 1, x:"10vw", y:"-25vh", color: '#f5f5dc' }}
+          exit={{ opacity: 0, x:"10vw", y:"-25vh",color: '#f5f5dc00' }} // transparent beige
           transition={{ delay: 0.3, duration: 1.2, ease: 'easeOut' }}
         >
           LAI

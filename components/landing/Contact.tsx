@@ -31,8 +31,8 @@ const Contact = () => {
             </motion.svg> */}
         </div>
         <Separator className='w-full bg-beige h-1 mt-5 mb-10'/>
-        <div className='md:space-x-14 space-y-12 md:space-y-0'>
-            <Link href="mailto:seanlai221@gmail.com" className='mb-10'>
+        <div className='flex flex-col md:flex-row md:space-x-14 space-y-4 md:space-y-0'>
+            <Link href="mailto:seanlai221@gmail.com" className='mb-0'>
                 <Button className='
                 bg-beige text-charcoal hover:bg-charcoal hover:text-beige hover:shadow-sm 
                 hover:shadow-beige transition-all duration-600 rounded-lg underline
