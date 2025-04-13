@@ -38,21 +38,18 @@ const ProjPages = () => {
                     </div>
 
                     <Separator></Separator>
-                    <div className='space-y-5'>
-                        <h3>
+                    <div className=''>
+                        <h3 className='text-xl font-bold font-sans tracking-wide leading-relaxed'>
                             Skills:
                         </h3>
-                        <div className='flex flex-wrap'>
-                        {
-                            tempSkill.map((skill,idx) => {
-                                return(
-                                    <p key={idx}>
-                                        {skill}
-                                        *
-                                    </p>
-                                )
-                            })
-                        }
+                        <Separator className='h-[1px] w-full rounded-2xl bg-beige/80 mt-1 mb-2'/>
+                        <div className='flex flex-wrap space-x-3'>
+                        {tempSkill.flatMap((skill, index) =>
+                            index < tempSkill.length - 1
+                            ? [<span key={skill}>{skill}</span>, <span key={`dot-${index}`}>&nbsp;·&nbsp;</span>]
+                            : [<span key={skill}>{skill}</span>]
+                        )}
+                        
                         </div>                    
                     </div>
                     

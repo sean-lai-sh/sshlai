@@ -11,7 +11,7 @@ import {
 import Link from "next/link"
 import { NavBarDetails } from "@/lib/types"
 import { cn } from "@/lib/utils"
-import { SquareTerminalIcon, WebhookIcon } from "lucide-react"
+import { Send, SquareTerminalIcon, WebhookIcon } from "lucide-react"
 import NavigationLink from "../ui/navLink"
 
 
@@ -36,8 +36,8 @@ export default function Navbar()  {
         },
     ]
     return (
-        <NavigationMenu className="fixed top-0 justify-center items-center mt-2 z-30">
-            <NavigationMenuList className=" items-center justify-center w-full flex gap-6 bg-charcoal text-beige text-xl px-6 py-3 rounded-xl border dark:border-white/[0.2] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+        <NavigationMenu className="fixed top-0 justify-center items-center sm:mt-2 z-30">
+            <NavigationMenuList className=" items-center justify-center w-full flex sm:gap-6 gap-2 bg-charcoal text-beige text-xl px-6 py-3 rounded-xl border dark:border-white/[0.2] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
                 <NavigationMenuItem className=" transition duration-300 ease-in-out rounded-md border-lg">
                 <NavigationLink
                     href="/"
@@ -54,8 +54,7 @@ export default function Navbar()  {
                         </span>
                     </Link>
                     <NavigationMenuTrigger className="sm:inline-flex hidden">
-                       <p className="">Projects</p> 
-                        
+                       <p className="">Projects</p>  
                     </NavigationMenuTrigger>
                     <NavigationMenuContent className="bg-charcoal-light/50 shadow-lg shadow-charcoal-darker rounded-md duration-300">
                     <ul className="gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] grid">
@@ -98,9 +97,9 @@ export default function Navbar()  {
                 <NavigationMenuItem>
                     
                         <div className={`${navigationMenuTriggerStyle()} inline-flex sm:hidden items-center justify-center`}>
-                            <Link href="/experience"className="sm:hidden" passHref>
+                            <NavigationLink href="/experience"className="sm:hidden">
                                 <SquareTerminalIcon className="w-7 h-7" />
-                            </Link>
+                            </NavigationLink>
                         </div>
                     
                     <NavigationMenuTrigger className="sm:inline-flex hidden">
@@ -145,6 +144,11 @@ export default function Navbar()  {
                     </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
+                    <div className={`${navigationMenuTriggerStyle()} inline-flex sm:hidden items-center justify-center`}>
+                        <NavigationLink href="/contact"className="sm:hidden">
+                            <Send className="w-7 h-7" />
+                        </NavigationLink>
+                    </div>
                     <NavigationLink href="/contact"  className={`${navigationMenuTriggerStyle()} sm:inline-flex hidden cursor-pointer`}>
                         Contact
                     </NavigationLink>

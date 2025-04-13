@@ -1,43 +1,46 @@
 import { z } from 'zod'
-import { CardStackDetails, ProjectDetails } from "./types";
+import { CardStackDetails, ProjectDetails, CommunityExp } from "./types";
+import { HofHackCommCard, MnM, SW2025Card, SWBuildathon } from './const_comp';
 
 export const top3Featured: number[] = [0, 1, 2]; // Indexes of the top 3 featured projects
 export const allProjects: ProjectDetails[] = [
-    {
-        ProjName: "AI Chatbot",
-        TechStack:"Python, FastAPI, OpenAI, React",
-        Liner:"An AI-powered chatbot for customer support",
-        frontImg:"https://images.unsplash.com/photo-1742943679521-f4736500a471?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        backImg:"https://images.unsplash.com/photo-1742993493624-ac0f22810eb6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    
+     {
+        ProjName: "Plugma",
+        TechStack:"Node.js, Express, Next.js, Supabase, PostGreSQL, AWS",
+        Liner:"An event platform built to grow communities",
+        frontImg:"/plugmafront.png",
+        backImg:"/plugmaback.png",
         CTA:"Learn More",
-        CTA_link:"https://example.com/design-report-ai-chatbot",
+        CTA_link:"https://github.com/sean-lai-sh/plugma",
     },
     {
         ProjName: "AutoGo",
         TechStack:"Python, TensorFlow, OpenCV, Arduino",
         Liner:"Self-playing Chinese chess board with ML",
-        frontImg:"https://images.unsplash.com/photo-1742943679521-f4736500a471?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        backImg:"https://images.unsplash.com/photo-1742993493624-ac0f22810eb6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        frontImg:"/ago.png",
+        backImg:"/autoGoBack.jpg",
         CTA:"Learn More",
-        CTA_link:"https://example.com/design-report-autogo",
+        CTA_link:"https://github.com/sean-lai-sh/AutoGo",
     },
     {
-        ProjName: "Plugma",
-        TechStack:"Node.js, Express, Next.js, Supabase, PostGreSQL, AWS",
-        Liner:"An event platform built to grow communities",
-        frontImg:"https://images.unsplash.com/photo-1742943679521-f4736500a471?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        backImg:"https://images.unsplash.com/photo-1742993493624-ac0f22810eb6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        ProjName: "AI Chatbot",
+        TechStack:"Python, FastAPI, OpenAI, React",
+        Liner:"An AI-powered chatbot for customer support",
+        frontImg:"./bpimg.jpg",
+        backImg:"/chatbot.png",
         CTA:"Learn More",
-        CTA_link:"https://example.com/design-report-plugma",
+        CTA_link:"http://13.211.144.173/",
     },
+   
     {
         ProjName: "Embodied AI Navigation",
         TechStack:"Python, PyTorch, Sklearn, SLAM",
         Liner:"Maze Puzzle Navigator with SLAM",
         frontImg:"https://images.unsplash.com/photo-1742943679521-f4736500a471?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        backImg:"https://images.unsplash.com/photo-1742993493624-ac0f22810eb6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        backImg:"https://images.unsplash.com/photo-1659823449893-c1e106e10a98?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         CTA:"Learn More",
-        CTA_link:"https://example.com/design-report-embodied-ai-navigation",
+        CTA_link:"https://github.com/sean-lai-sh/embodied_ai_navigation",
     }
 ]
 export const contactFields = [
@@ -66,8 +69,6 @@ export const contactFields = [
     type: 'textarea', // 👈 for multiline message
   },
 ] as const;
-
-
 export const expConsts: CardStackDetails[] = [
     {
       title: "AI4CE",
@@ -99,7 +100,7 @@ export const expConsts: CardStackDetails[] = [
         { name: "Plugin POC", link: "https://www.example.com/networking/plugin-growth" },
         { name: "PR: Implementation", link: "https://www.example.com/networking/jitter" },
       ],
-      src: "/ai4ce_new_block_trans.png",
+      src: "/hsrn.jpeg",
       link: "https://linkedin.com/in/sean-sh-lai",
       boxColor: "bg-charcoal"
     },
@@ -118,7 +119,7 @@ export const expConsts: CardStackDetails[] = [
         { name: "Startup Connections", link: "https://www.example.com/startup/hackathon" },
         { name: "Member Tooling", link: "https://www.example.com/startup/members" }
       ],
-      src: "/ai4ce_new_block_trans.png",
+      src: "/techatnyulogo.png",
       link: "https://linkedin.com/in/sean-sh-lai",
       boxColor: "bg-charcoal"
     },
@@ -133,7 +134,7 @@ export const expConsts: CardStackDetails[] = [
   - Implemented sentiment analysis and data aggregation for 300+ student responses`,
       skills: ["NLP", "Data Processing", "Python", "Numpy"],
       workProof: [],
-      src: "/ai4ce_new_block_trans.png",
+      src: "/test2.png",
       link: "https://linkedin.com/in/sean-sh-lai",
       boxColor: "bg-charcoal"
     },
@@ -160,3 +161,34 @@ export const contactFormSchema = z.object({
     .min(10, { message: 'Message must be at least 10 characters' })
     .max(1000, { message: 'Message must be under 1000 characters' }),
 });
+
+export const communities: CommunityExp[] = [
+  {
+    title: "HOF Hacks",
+    tagline: "Assisting a rising VC spread its name at NYU",
+    img: '/hofhack.png',
+    maskedContent: HofHackCommCard,
+    shadowCol: 'hover:bg-[#2563eb]'
+  },
+  {
+    title: "Tech@NYU StartupWeek",
+    tagline: "NYU's premier student entrepreneurship festival",
+    img: '/sw2025.png',
+    maskedContent: SW2025Card,
+    shadowCol: 'hover:bg-blue-500'
+  },
+  {
+    title: "Startup Week Buildathon",
+    tagline: "Hiring hackathon to connect startups with students",
+    img: '/swbuildathon.png',
+    maskedContent: SWBuildathon,
+    shadowCol: 'hover:bg-[#2563eb]'
+  },
+  {
+    title: "Mentor & Meet w Supermomos",
+    tagline: "Exposing Startups to NYU students",
+    img: '/mnm.png',
+    maskedContent: MnM,
+    shadowCol: 'hover:bg-[#2563eb]'
+  }
+]
