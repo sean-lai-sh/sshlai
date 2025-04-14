@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import styles from './style.module.css';
 import gsap from 'gsap';
+import Link from 'next/link';
 
 const scaleAnimation = {
 
@@ -72,7 +73,7 @@ return (
             </div>
         </motion.div>
         <motion.div ref={cursor} className={styles.cursor} variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"}></motion.div>
-        <motion.div ref={cursorLabel} className={`${styles.cursorLabel} text-lg font-medium`} variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"}>View</motion.div>
+        <Link href={projects[index].CTA_link}><motion.div ref={cursorLabel} className={`${styles.cursorLabel} text-lg font-medium`} variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"}>View</motion.div></Link>
     </>
   )
 }
