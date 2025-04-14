@@ -14,6 +14,7 @@ export interface ProjectDetails {
     CTA: string;
     CTA_link: string;
     tag?:string; // for landing page
+    src?:string;
 }
 
 export interface CardStackDetails {

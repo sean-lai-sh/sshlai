@@ -13,6 +13,8 @@ export const allProjects: ProjectDetails[] = [
         backImg:"/plugmaback.png",
         CTA:"Learn More",
         CTA_link:"https://github.com/sean-lai-sh/plugma",
+        tag:"bg-offwhite",
+        src:"/plugmafront.png",
     },
     {
         ProjName: "AutoGo",
@@ -22,6 +24,8 @@ export const allProjects: ProjectDetails[] = [
         backImg:"/autoGoBack.jpg",
         CTA:"Learn More",
         CTA_link:"https://github.com/sean-lai-sh/AutoGo",
+        tag:"bg-charcoal-darker",
+        src:"/ago.png",
     },
     {
         ProjName: "AI Chatbot",
@@ -31,6 +35,8 @@ export const allProjects: ProjectDetails[] = [
         backImg:"/chatbot.png",
         CTA:"Learn More",
         CTA_link:"http://13.211.144.173/",
+        tag:"bg-offwhite/80",
+        src:"/chatbot.png",
     },
    
     {
