@@ -1,8 +1,9 @@
 'use client';
-import {HeroSection, RecentWork} from "@/components/landing";
+import {HeroSection} from "@/components/landing";
 import { useEffect } from "react";
 import Lenis from "lenis";
 import Contact from "@/components/landing/Contact";
+import Work from "@/components/landing/Work";
 
 
 // components/Hero.tsx
@@ -27,7 +28,7 @@ export default function Hero() {
   return (
     <main className="w-full scroll-hidden overflow-y-scroll z-0">
       <HeroSection/>
-      <RecentWork />
+      <Work />
       <Contact />
     </main>
   );

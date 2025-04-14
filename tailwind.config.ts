@@ -19,7 +19,8 @@ const config: Config = {
   				darker: '#0d0d0d'
   			},
   			beige: {
-  				DEFAULT: '#eae4d3'
+  				DEFAULT: '#f3f0e8',
+				alt: '#f4f1eb',
   			},
   			white: '#ffffff',
   			offwhite: '#f5f5f5',

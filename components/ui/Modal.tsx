@@ -1,8 +1,10 @@
+/* eslint-disable prefer-const */
 import { ProjectDetails } from '@/lib/types'
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import styles from './style.module.css';
+import gsap from 'gsap';
 
 const scaleAnimation = {
 
@@ -51,17 +53,15 @@ export default function Modal({modal, projects}:{modal:ModalStates, projects:Pro
 
 
 return (
-
   <>
-
       <motion.div ref={modalContainer} variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"} className={styles.modalContainer}>
             <div style={{top: index * -100 + "%"}} className={styles.modalSlider}>
             {
                 projects.map( (project, index) => {
-                const { src, tag:color } = project
-                return <div className={styles.modal} style={{backgroundColor: color}} key={`modal_${index}`}>
+                const { src, tag } = project
+                return <div className={`${styles.modal} ${tag}`} key={`modal_${index}`}>
                     <Image 
-                    src={`/images/${src}`}
+                    src={`${src}`}
                     width={300}
                     height={0}
                     alt="image"
@@ -72,7 +72,7 @@ return (
             </div>
         </motion.div>
         <motion.div ref={cursor} className={styles.cursor} variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"}></motion.div>
-        <motion.div ref={cursorLabel} className={styles.cursorLabel} variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"}>View</motion.div>
+        <motion.div ref={cursorLabel} className={`${styles.cursorLabel} text-lg font-medium`} variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"}>View</motion.div>
     </>
   )
 }

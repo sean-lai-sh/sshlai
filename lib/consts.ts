@@ -13,7 +13,7 @@ export const allProjects: ProjectDetails[] = [
         backImg:"/plugmaback.png",
         CTA:"Learn More",
         CTA_link:"https://github.com/sean-lai-sh/plugma",
-        tag:"bg-offwhite",
+        tag:"bg-offwhite/80",
         src:"/plugmafront.png",
     },
     {
@@ -24,7 +24,7 @@ export const allProjects: ProjectDetails[] = [
         backImg:"/autoGoBack.jpg",
         CTA:"Learn More",
         CTA_link:"https://github.com/sean-lai-sh/AutoGo",
-        tag:"bg-charcoal-darker",
+        tag:"bg-black",
         src:"/ago.png",
     },
     {
