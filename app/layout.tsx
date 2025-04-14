@@ -41,6 +41,9 @@ const shareTechMono = Share_Tech_Mono({
 export const metadata = {
   title: 'Sean Lai Portfolio',
   description: 'Full Stack & AI Engineer Portfolio',
+  icons: {
+    icon: '/seanlai.ico',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

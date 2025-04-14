@@ -13,6 +13,7 @@ import { NavBarDetails } from "@/lib/types"
 import { cn } from "@/lib/utils"
 import { Send, SquareTerminalIcon, WebhookIcon } from "lucide-react"
 import NavigationLink from "../ui/navLink"
+import Image from "next/image"
 
 
 export default function Navbar()  {
@@ -31,19 +32,24 @@ export default function Navbar()  {
         { name: "Jobs" , href: "/experience",
             shortDescript: "Everything I've done in the past"
         },
-        { name: "Community", href: "/community",
+        { name: "Community", href: "/experience",
             shortDescript: "Alittle bit of everything"
         },
     ]
     return (
         <NavigationMenu className="fixed top-0 justify-center items-center sm:mt-2 z-30">
-            <NavigationMenuList className=" items-center justify-center w-full flex sm:gap-6 gap-2 bg-charcoal text-beige text-xl px-6 py-3 rounded-xl border dark:border-white/[0.2] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+            <NavigationMenuList className=" items-center justify-center w-full flex sm:gap-6 gap-2 bg-charcoal text-white text-xl px-6 py-3 rounded-xl border dark:border-white/[0.2] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
                 <NavigationMenuItem className=" transition duration-300 ease-in-out rounded-md border-lg">
-                <NavigationLink
-                    href="/"
-                >
-                    <span className="block px-3 py-1 rounded-md hover:bg-charcoal-light hover:text-white text-beige text-3xl">
-                    SL
+                <NavigationLink href="/">
+                    <span className="inline-flex items-center justify-center rounded-md hover:bg-charcoal-light hover:text-white text-beige w-12 h-12 mt-2">
+                    <Image 
+                        src={"/sl_logo_transparent.png"}
+                        alt={"SL"}
+                        width={100}
+                        height={100}
+                        className="object-contain w-full h-full"
+                        priority
+                    />
                     </span>
                 </NavigationLink>
                 </NavigationMenuItem>
