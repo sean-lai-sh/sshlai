@@ -1,6 +1,7 @@
 import React from 'react'
 import { Separator } from './separator'
 import { ProjectDetails } from '@/lib/types'
+import Link from 'next/link';
 
 type ModalStates = {
   active:boolean;
@@ -10,7 +11,7 @@ type ModalStates = {
 
 const ModalProject = ({proj, index, setModal}:{proj:ProjectDetails, index:number, setModal:React.Dispatch<React.SetStateAction<ModalStates>>;}) => {
   return (
-    <div className='
+    <Link href={proj.CTA_link} className='
     xl:text-5xl lg:text-4xl text-2xl
     hover:text-gray-500 text-charcoal-darker hover:cursor-pointer w-full items-center justify-center transition-colors duration-200 ease-in-out font-medium flex flex-col' onMouseEnter={() => {setModal({active: true, index})}} onMouseLeave={() => {setModal({active: false, index})}}>
         
@@ -20,7 +21,7 @@ const ModalProject = ({proj, index, setModal}:{proj:ProjectDetails, index:number
             </span>
             {/* <h2>{proj.tag ? proj.tag : ""}</h2> */}
             <Separator className='w-full rounded-2xl bg-charcoal-darker mt-5'/>
-    </div>
+    </Link>
   )
 }
 

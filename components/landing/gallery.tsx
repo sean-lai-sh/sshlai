@@ -6,6 +6,7 @@ import Modal from '../ui/Modal'
 import { Separator } from '../ui/separator';
 const Gallery = ({projects}:{projects : ProjectDetails[]}) => {
   const [modal, setModal] = useState({active: false, index: 0})
+  const islarge = window.innerWidth > 1024
   return (
     <section className='flex flex-col justify-center top-0 bg-offwhite sm:px-10 px-5 xl:px-16'>
        <div className='w-full'>
@@ -18,7 +19,8 @@ const Gallery = ({projects}:{projects : ProjectDetails[]}) => {
               return <ModalProject key={idx} proj={proj} index={idx} setModal={setModal}/>
           })
       }
-      <Modal modal={modal} projects={projects}/>
+
+      {islarge && <Modal modal={modal} projects={projects}/>}
       </div>
     </section>
   )

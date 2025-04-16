@@ -5,6 +5,7 @@ import {motion, useScroll, useTransform } from 'motion/react'
 import Contact from '../landing/Contact'
 import { communities } from '@/lib/consts'
 import SlidingBox from './slidingTallBox'
+import VertBox from './smallBox'
 const CommunitySection = () => {
   useEffect( () => {
 
@@ -26,7 +27,7 @@ const CommunitySection = () => {
   return (
     <div className='w-screen min-h-screen bg-offwhite'>
       <div className='w-full text-black'>
-          <div className='pt-20 px-20'>
+          <div className='pt-20 md:px-20 px-10'>
           <h1 className='text-4xl lg:text-7xl font-sans font-semibold text-charcoall leading-relaxed mb-2'>
             Community:
           </h1>
@@ -45,10 +46,10 @@ const CommunitySection = () => {
           </div>
         </div>
         <div>
-          <div className='w-full flex justify-center items-center overflow-hidden md:hidden'>
+          <div className='w-full min-h-[200vh] flex justify-center items-center md:hidden mb-20'>
             <div className='flex flex-col gap-4 lg:gap-12'>
               {communities.map((comm, idx) => { 
-                return (<SlidingBox key={idx} comm={comm} />) 
+                return (<VertBox key={idx} comm={comm} />) 
               })}
             </div>
           </div>

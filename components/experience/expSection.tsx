@@ -25,9 +25,10 @@ export default function StackedExperience() {
       offset: ['start start', 'end end']
   
     })
+    const bg = "bg-[fafafa]"
     return (
         
-      <section className="pt-[20vh] pb-[5vh] block bg-[#fafafa]">
+      <section className="pt-[20vh] pb-[5vh] block bg-offwhite ">
         <h1 className="md:text-7xl text-5xl text-charcoal font-bold text-center">Work Experience</h1>
         {
             expConsts.map( (exp, index) => {

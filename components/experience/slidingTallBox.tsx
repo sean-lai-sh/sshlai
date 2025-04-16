@@ -6,7 +6,7 @@ const SlidingBox = ({comm}:{comm:CommunityExp}) => {
     const transitionRef = useRef<HTMLDivElement>(null);
     const [hoverRef, isHovered] = useHover()
     return (
-        <div ref={hoverRef} className='w-[300px] sm:w-[600px] sm:h-[800px] md:w-[660px] md:h-[880px] h-[400px] mt-10 p-2 bg-black rounded-3xl'>
+        <div ref={hoverRef} className='w-[300px] sm:w-[620px] sm:h-[860px] md:w-[660px] md:h-[880px] h-[400px] mt-10 p-2 bg-black rounded-3xl'>
             {/* <div className='relative w-full h-[400px] md:h-[800px]'>
                 <Image src={comm.img} alt={comm.title} fill className='object-cover z-10' />
             </div>
