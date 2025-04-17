@@ -88,9 +88,9 @@ export const expConsts: CardStackDetails[] = [
       skills: ["PyTorch", "Linux", "SimplerEnv", "ManiSkill3"],
       workProof: [
       ],
-      src: "/ai4ce_new_block_trans.png",
+      src: "/ai4cewide.png",
       link: "https://linkedin.com/in/sean-sh-lai",
-      boxColor: "bg-charcoal"
+      boxColor: "bg-charcoal "
     },
     {
       title: "High Speed Research Network",

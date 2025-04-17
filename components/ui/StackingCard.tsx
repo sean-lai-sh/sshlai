@@ -19,14 +19,14 @@ const StackingCard = ({cardDetail, targetScale, progress, range} : {
     const scale = useTransform(progress, range, [1, targetScale]);
   return (
     <div className='h-screen flex justify-center items-center sticky lg:top-[-5%] top-[0%]'>
-       <motion.div className={`md:w-[80vw] lg:[70vw] w-[90vw] sm:h-[60vh] md:h-[80vh] h-[70vh] ${cardDetail.boxColor || 'bg-charcoal'} text-charcoal rounded-xl border-charcoal-light border-4 flex flex-col relative p-5 shadow-xl shadow-charcoal-darker`}
+       <motion.div className={`md:w-[80vw] lg:[70vw] w-[90vw] sm:max-h-[60vh] md:max-h-[80vh] max-h-[50vh] min-h-fit ${cardDetail.boxColor || 'bg-charcoal'} text-charcoal rounded-xl border-charcoal-light border-4 flex flex-col relative p-5 shadow-xl shadow-charcoal-darker`}
         style={{scale}}       
        >
             <h2 className={`lg:text-5xl md:text-3xl text-2xl font-bold my-3 text-center ${cardDetail.titleCSS}`}>{cardDetail.title}</h2>
             <Separator className={`w-full bg-beige/75 sm:h-[0.1rem] rounded-xl sm:mb-4 h-1`}/>
             <div className='flex flex-col lg:flex-row h-full justify-center relative mx-auto w-full mb-auto'>
                 <div className={`relative block lg:hidden w-full h-full rounded-xl  mt-2 bg-offwhite`}>
-                    <motion.div className='w-full h-full min-h-[40vw]'>
+                    <motion.div className='w-full h-full min-h-[40vw] aspect-[2/1]'>
                         <Image
                         src={cardDetail.src === "/ai4ce_new_block_trans.png" ? "/ai4cewide.png" : cardDetail.src === "/test2.png" ? "/nyulong.png" : cardDetail.src}
                         alt={cardDetail.title}
@@ -65,7 +65,7 @@ const StackingCard = ({cardDetail, targetScale, progress, range} : {
                     
                 </div>
                 <Separator className='h-full w-[0.1rem] bg-beige/75 opacity-55 lg:block hidden rounded-xl mx-2'/>
-                <div className='relative lg:inline lg:w-[70%] hidden h-full rounded-xl overflow-hidden'>
+                <div className='relative lg:inline lg:w-[70%] hidden aspect-[16/9] rounded-xl overflow-hidden'>
                     <motion.div className='w-full h-full overflow-hidden text-white'>
                         <Image
                         src={cardDetail.src}
