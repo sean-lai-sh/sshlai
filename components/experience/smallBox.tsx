@@ -1,13 +1,10 @@
-import React,{useRef} from 'react'
-import { useHover } from '@uidotdev/usehooks'
+import React from 'react'
 import { CommunityExp } from '@/lib/types';
 import Image from 'next/image';
 
 const VertBox = ({comm}:{comm:CommunityExp}) => {
-    const transitionRef = useRef<HTMLDivElement>(null);
-    const [hoverRef, isHovered] = useHover()
     return (
-        <div ref={hoverRef} className='w-[90vw] mt-10 p-4 bg-black rounded-3xl group'>
+        <div className='w-[90vw] mt-10 p-4 bg-black rounded-3xl group'>
             {/* <div className='relative w-full h-[400px] md:h-[800px]'>
                 <Image src={comm.img} alt={comm.title} fill className='object-cover z-10' />
             </div>
