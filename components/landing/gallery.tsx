@@ -1,12 +1,24 @@
 'use client';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ProjectDetails } from '@/lib/types'
 import ModalProject from '../ui/modalProject'
 import Modal from '../ui/Modal'
 import { Separator } from '../ui/separator';
 const Gallery = ({projects}:{projects : ProjectDetails[]}) => {
   const [modal, setModal] = useState({active: false, index: 0})
-  const islarge = window.innerWidth > 1024
+  const [isLarge , setIsLarge] = useState(false)
+
+  useEffect(() => {
+      // Only run on client
+      const handleResize = () => {
+        setIsLarge(window.innerWidth > 1024)
+      }
+  
+      handleResize() // initial check
+      window.addEventListener('resize', handleResize)
+  
+      return () => window.removeEventListener('resize', handleResize)
+    }, [])
   return (
     <section className='flex flex-col justify-center top-0 bg-offwhite sm:px-10 px-5 xl:px-16'>
        <div className='w-full'>
@@ -20,7 +32,7 @@ const Gallery = ({projects}:{projects : ProjectDetails[]}) => {
           })
       }
 
-      {islarge && <Modal modal={modal} projects={projects}/>}
+      {isLarge && <Modal modal={modal} projects={projects}/>}
       </div>
     </section>
   )
