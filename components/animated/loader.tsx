@@ -124,6 +124,7 @@ export default function Loader() {
   const renderAnim =  () => {
     let pname = pathname.split('/')[1]
     if(pname === '') pname = "home"
+    if(pathname.includes("/projects/")) pname = pathname.split("/projects/")[1]
     return <>
       {preLoadAnim && !maskState &&  <Stair
       showText={showText}

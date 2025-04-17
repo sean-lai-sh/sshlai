@@ -25,7 +25,6 @@ export default function StackedExperience() {
       offset: ['start start', 'end end']
   
     })
-    const bg = "bg-[fafafa]"
     return (
         
       <section className="pt-[20vh] pb-[5vh] block bg-offwhite ">
