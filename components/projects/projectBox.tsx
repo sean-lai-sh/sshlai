@@ -13,7 +13,7 @@ const ProjBox = ({project}:{project: ProjectDetails}) => {
     ref={hoverRef}
     role="button"
     aria-label={`Project: ${project.ProjName}`}
-    className="w-full h-full flex flex-col justify-between bg-charcoal-light group relative overflow-hidden hover:scale-[1.02] transition-transform duration-600 ease-in-out rounded-lg p-4 cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent hover:shadow-lg hover:shadow-beige"
+    className="w-full h-full flex flex-col justify-between bg-charcoal-light group relative overflow-hidden hover:scale-[1.02] transition-transform duration-600 ease-in-out rounded-lg p-4  focus:outline-none focus:ring-2 focus:ring-accent hover:shadow-lg hover:shadow-beige"
     tabIndex={0}
     >
         <div className="aspect-video overflow-hidden rounded-md">
