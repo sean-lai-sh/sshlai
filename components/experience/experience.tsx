@@ -32,12 +32,12 @@ const Experience = () => {
                     {/* <a className='px-20 py-5 rounded-2xl border-[2px] border-offwhite'>
                         Resume
                     </a> */}
-                    <Anim_Button content="Resume" href="/resume" funcAct={() => {}}/>
+                    <Anim_Button content="Resume" href="/Sean%20Lai%20Resume.pdf" funcAct={() => {}}/>
                 </div>
             </div>
         </div>
         <div className='w-full flex flex-row min-h-[100vh] pb-40 md:pb-0 '>
-            <div id='modal-container' className='hidden h-[60vh] lg:block w-[50vw] sticky top-0 overflow-hidden mt-20 py-20'>
+            <div id='modal-container' className='hidden h-[60vh] lg:block w-[50vw] sticky top-10 overflow-hidden mt-20 py-20'>
                 <AnimatePresence mode='sync'>
                     {/* <motion.div
                         key={currModal}

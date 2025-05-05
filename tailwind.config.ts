@@ -22,6 +22,7 @@ const config: Config = {
   				DEFAULT: '#f3f0e8',
 				alt: '#f4f1eb',
   			},
+			vantablack:' #000000',
   			white: '#ffffff',
   			offwhite: '#f5f5f5',
   			accent: {

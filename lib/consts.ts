@@ -227,7 +227,7 @@ export const workExp: workExpDetails[] = [
     ],
     skills: ["PyTorch", "Linux", "SimplerEnv", "ManiSkill3"],
     logo_img_src: "/ai4ce_new_block_trans.png",
-    img_tag: "/ai4cewide.png",
+    img_tag: "bg-vantablack",
     company_link: "https://ai4ce.org/"
   },
   {
@@ -241,8 +241,8 @@ export const workExp: workExpDetails[] = [
       "Collaborated with faculty to enhance the entrepreneurship program"
     ],
     skills: ["Curriculum Development", "Event Planning", "Student Outreach"],
-    logo_img_src: "/nyu_elab.png",
-    img_tag: "bg-white text-black",
+    logo_img_src: "/nyu_elab2.png",
+    img_tag: "bg-offwhite text-black",
     company_link: "https://entrepreneur.nyu.edu/"
   },
   {
@@ -257,7 +257,7 @@ export const workExp: workExpDetails[] = [
     ],
     skills: ["C++", "Python", "WebSocket", "Unreal Engine"],
     logo_img_src: "/nyu_hsrn.png",
-    img_tag: "bg-[#000000]",
+    img_tag: "bg-vantablack",
     company_link: "https://vip.hsrn.nyu.edu/"
   },
   {
@@ -288,7 +288,7 @@ export const workExp: workExpDetails[] = [
     ],
     skills: ["Django", "NextJS", "Pandas", "Event Management"],
     logo_img_src: "/techatnyulogo.png",
-    img_tag: "bg-[#000000] ",
+    img_tag: "bg-vantablack",
     company_link: "https://techatnyu.org/"
   }
 ]
