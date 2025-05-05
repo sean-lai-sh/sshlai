@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { CardStackDetails, ProjectDetails, CommunityExp, workExpDetails } from "./types";
 import { HofHackCommCard, MnM, SW2025Card, SWBuildathon } from './const_comp';
-
+export const searching: boolean = false; // Set to true when searching for a job
 export const top3Featured: number[] = [0, 1, 2]; // Indexes of the top 3 featured projects
 export const allProjects: ProjectDetails[] = [
     
@@ -211,7 +211,7 @@ export const workExp: workExpDetails[] = [
       "Collaborated with cross-functional teams to gather requirements and deliver solutions"
     ],
     skills: ["Python", "AWS", "Data Pipeline", "SQL"],
-    logo_img_src: "/Boost_logo.png",
+    logo_img_src: "/boost_logo.png",
     img_tag: "bg-white text-black",
     company_link: "https://www.boostb2b.com/"
   },

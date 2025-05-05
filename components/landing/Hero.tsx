@@ -1,5 +1,6 @@
 import React from 'react'
 import MarqueeBanner from '../Navigation/marquee'
+import { searching } from '@/lib/consts'
 
 const HeroSection = () => {
   return (
@@ -16,7 +17,7 @@ const HeroSection = () => {
         >
           View My Work
         </a>
-        <MarqueeBanner />
+        {searching && <MarqueeBanner />}
     </section>
   )
 }
