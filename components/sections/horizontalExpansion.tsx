@@ -1,57 +1,85 @@
-'use client'
-import React, { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import HorizontalExpand from './horizontalExpand';
+'use client';
+
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const HorizontalExpansion = () => {
-  const containerRef = useRef(null);
-  const scrollRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const horizontalRef = useRef<HTMLDivElement | null>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: scrollRef,
-    offset: ['start start', 'end end'] // Changed to start when component fully enters viewport
-  });
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const container = containerRef.current;
+      const horizontal = horizontalRef.current;
+      if (!container || !horizontal) return;
+       // pin the section during scroll
+      ScrollTrigger.create({
+        trigger: container,
+        start: "top top",
+        end: "+=2000",
+        scrub: true,
+        pin: true,
+        anticipatePin: 1,
+      });
 
-  // Calculate the total width of all components with overlap
-  // For 4 components with 20vw overlap, we need 4*100vw - 3*20vw = 340vw
-  const totalWidth = 380;
-  
-  // Transform scrollYProgress to move horizontally
-  // We want to start at 0% (no movement) and end at -(totalWidth - 100)% to show the last component fully
-  const x = useTransform(scrollYProgress, [0, 4], ['0%', `-${totalWidth - 100}%`]);
+      // reveal panel 2
+      gsap.to(".panel-2", {
+        x: "0%",
+        scrollTrigger: {
+          trigger: container,
+          start: "top top",
+          end: "+=1000",
+          scrub: true,
+        },
+      });
+
+      // reveal panel 3
+      gsap.to(".panel-3", {
+        x: "0%",
+        scrollTrigger: {
+          trigger: container,
+          start: "+=1000",
+          end: "+=2000",
+          scrub: true,
+        },
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section className='w-screen min-h-screen'>
-      <div 
-        className='w-screen h-[300vh] relative' 
-        ref={scrollRef}
-      >
-        <div 
-          className='w-screen h-screen overflow-hidden snap-mandatory snap-x sticky top-0 flex bg-black' 
-          ref={containerRef}
+    <section ref={containerRef} className="relative h-[400vh] bg-black overflow-hidden">
+      <div className="sticky top-0 h-screen w-screen flex items-center">
+        <div
+          ref={horizontalRef}
+          className="horizontal-inner overflow-hidden flex w-[400vw] h-screen"
         >
-          <motion.div 
-            style={{ x }} 
-            className='flex items-start justify-start relative'
-          >
-            {/* Each component has width 100vw, but we position them with 80vw gaps (20vw overlap) */}
-            <div className='w-[100vw] flex-shrink-0 snap-start'>
-              <HorizontalExpand index={0} img_src={''} style={'bg-red-500'} content={undefined} />
+          <div className="panel absolute w-screen h-screen top-0 left-0 bg-blue-400  flex items-center justify-center text-white text-6xl">
+            <div className='content w-screen h-screen  flex items-center justify-center text-white text-6xl'>
+              Color 1
             </div>
-            <div className='w-[100vw] flex-shrink-0 ml-[-20vw] shadow-xl snap-start'>
-              <HorizontalExpand index={1} img_src={''} style={'bg-yellow-500'} content={undefined} />
+          </div>
+          <div style={{transform: "translate3D(80%,0,0 )"}}className="panel-2 absolute w-screen h-screen top-0  bg-white  flex items-center justify-center text-white text-6xl">
+            <div className='content w-screen h-screen bg-red-500 flex items-center justify-center text-white text-6xl'>
+              Color 2
             </div>
-            <div className='w-[100vw] flex-shrink-0 ml-[-20vw]'>
-              <HorizontalExpand index={2} img_src={''} style={'bg-blue-500'} content={undefined} />
-            </div>
-            <div className='w-[100vw] flex-shrink-0 ml-[-20vw]'>
-              <HorizontalExpand index={3} img_src={''} style={'bg-green-500'} content={undefined} />
-            </div>
-          </motion.div>
+          </div>
+          <div  style={{transform: "translate3D(95%,0,0 )"}} className="panel-3 absolute w-screen h-screen top-0  bg-white  flex items-center justify-center text-white text-6xl">
+            <div className='content w-screen h-screen bg-green-500 flex items-center justify-center text-white text-6xl'>
+              Color 3
+            </div> 
+          </div>
+          {/* <div className="panel absolute w-screen h-screen bg-red-300 flex items-center justify-center text-6xl">Panel 2</div>
+          <div className="panel absolute w-screen h-screen bg-purple-300 flex items-center justify-center text-6xl">Panel 3</div>
+          <div className="panel absolute w-screen h-screen bg-yellow-300 flex items-center justify-center text-6xl">Panel 4</div> */}
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default HorizontalExpansion
+export default HorizontalExpansion;

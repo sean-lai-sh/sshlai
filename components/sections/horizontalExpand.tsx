@@ -8,7 +8,7 @@ const HorizontalExpand = (
     const ref = useRef<HTMLDivElement | null>(null);
     const { scrollYProgress } = useScroll({
         container: ref,
-        offset: ['start start', 'end end']
+        offset: ['start end', 'end end']
     })
     const img_scale = useTransform(scrollYProgress, [0, 0.5], [0.2 , 1]);
     const translateX = useTransform(scrollYProgress, [0, 1], ["50%" , "0%"]);
@@ -17,7 +17,7 @@ const HorizontalExpand = (
     // const inView = true
     return (
         <motion.div 
-        className={`w-screen h-screen ${scrollYProgress.get() === 0.95 ? 'fixed top-0 left-0 ' : 'relative'} ${style} bg-blue-400`} 
+        className={`w-screen h-screen ${style} bg-blue-400`} 
         style={{zIndex:index,
             x:x,
         }}
