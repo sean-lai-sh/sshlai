@@ -1,12 +1,16 @@
+
+import Stair from '@/components/animated/Stair'
 import CommunitySection from '@/components/experience/communitySection'
-import StackedExperience from '@/components/experience/expSection'
+import Experience from '@/components/experience/experience'
 import React from 'react'
 
 const page = () => {
   return (
-    <div className='bg-beige w-screen '>
-        <StackedExperience/>
+    <div className='bg-beige w-screen'>
+      <Stair>
+        <Experience/>
         <CommunitySection/>
+      </Stair>
     </div>
   )
 }

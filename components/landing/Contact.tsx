@@ -7,7 +7,7 @@ import { motion } from 'motion/react'
 import NavigationLink from '../ui/navLink'
 const Contact = () => {
   return (
-    <div className='w-full bg-charcoal min-h-[60vh] px-10 pt-32 sticky'>
+    <div className='w-full bg-charcoal min-h-screen  md:min-h-[60vh] px-10 pt-16 md:pt-32 sticky'>
         <div className='flex md:flex-row flex-col justify-between h-[50%] items-center md:items-start'>
             <h2 className='md:text-7xl text-5xl text-offwhite font-bold mb-5 md:mb-0'>
                 {"Let's Work Together!"}

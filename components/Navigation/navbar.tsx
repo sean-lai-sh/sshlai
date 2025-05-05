@@ -37,11 +37,11 @@ export default function Navbar()  {
         },
     ]
     return (
-        <NavigationMenu className="fixed top-0 justify-center items-center sm:mt-2 z-30">
-            <NavigationMenuList className=" items-center justify-center w-full flex sm:gap-6 gap-2 bg-charcoal text-white text-xl px-6 py-3 rounded-xl border dark:border-white/[0.2] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+        <NavigationMenu className="fixed top-0 justify-center items-center sm:mt-2 z-10">
+            <NavigationMenuList className=" items-center justify-center w-full flex sm:gap-6 gap-2 bg-charcoal text-white text-xl px-4 py-1 rounded-xl border dark:border-white/[0.2] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
                 <NavigationMenuItem className=" transition duration-300 ease-in-out rounded-md border-lg">
                 <NavigationLink href="/">
-                    <span className="inline-flex items-center justify-center rounded-md hover:bg-charcoal-light hover:text-white text-beige w-12 h-12 mt-2">
+                    <span className="inline-flex items-center justify-center rounded-md hover:bg-charcoal-light hover:text-white text-beige w-10 h-10 mt-2">
                     <Image 
                         src={"/sl_logo_transparent.png"}
                         alt={"SL"}

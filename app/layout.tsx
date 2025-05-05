@@ -4,10 +4,10 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { Share_Tech_Mono } from 'next/font/google';
 import localFont from 'next/font/local'
-import { AnimationProvider } from '@/components/animated/AnimContext';
-import Loader from '@/components/animated/loader';
 import { Toaster } from '@/components/ui/toaster';
 import { Analytics } from '@vercel/analytics/next';
+import PageTransitionWrapper from '@/components/animated/AnimContext';
+
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
@@ -49,14 +49,15 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`dark ${inter.variable} ${jetbrainsMono.variable} ${shareTechMono.variable}`}>
-      <body className="font-sans text-beige flex items-center justify-center w-screen overflow-x-hidden">
-        <AnimationProvider>
+      <body className="font-sans text-beige flex items-center justify-center w-screen overflow-x-hidden ">
           <Navbar />
-          <Loader/>
-          {children}
-          <Toaster/>
-          <Analytics/>
-        </AnimationProvider>
+          <PageTransitionWrapper>
+            
+                
+              {children}
+            <Toaster/>
+            <Analytics/>
+          </PageTransitionWrapper>
       </body>
     </html>
   )

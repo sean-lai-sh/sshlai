@@ -44,3 +44,15 @@ export type CommunityExp = {
     maskedContent: React.FC | null; // what our mask will reveal slowly upon our learn more
     shadowCol: string; // Determine shadow color :)
 }
+
+export type workExpDetails = {
+    company_name: string;
+    job_title: string;
+    duration: string;
+    description: string;
+    achievements: string[];
+    skills: string[];
+    logo_img_src: string;
+    img_tag: string;
+    company_link: string;
+}

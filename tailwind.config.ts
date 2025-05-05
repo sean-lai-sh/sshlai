@@ -65,6 +65,13 @@ const config: Config = {
   				'5': 'hsl(var(--chart-5))'
   			}
   		},
+		backgroundImage: {
+		'charcoal-gradient': 'linear-gradient(215deg, #0d0d0d, #0d0d0d, #f3f0e8, #0d0d0d)',
+		},
+		backgroundSize: {
+		'400': '400% 400%',
+		},
+	
   		fontFamily: {
   			sans: [
   				'Inter',
@@ -82,15 +89,21 @@ const config: Config = {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
-		  animation: {
+		animation: {
 			marquee: 'marquee 60s linear infinite',
-		  },
-		  keyframes: {
-			marquee: {
-			  '0%': { transform: 'translateX(0%)' },
-			  '100%': { transform: 'translateX(-100%)' },
-			},
-		  },
+			'gradient-shift': 'gradient-shift 7s cubic-bezier(0.76, 0, 0.24, 1) infinite',
+		},
+		keyframes: {
+		marquee: {
+			'0%': { transform: 'translateX(0%)' },
+			'100%': { transform: 'translateX(-100%)' },
+		},
+		'gradient-shift': {
+			'0%': { backgroundPosition: '60% 50%' },
+			'50%': { backgroundPosition: '80% 50%' },
+			'100%': { backgroundPosition: '60% 50%' },
+		},
+		},
   },
   plugins: [tailwindcssAnimate]
 },

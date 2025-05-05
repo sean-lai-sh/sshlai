@@ -6,6 +6,7 @@ import Contact from '../landing/Contact'
 import { communities } from '@/lib/consts'
 import SlidingBox from './slidingTallBox'
 import VertBox from './smallBox'
+import StickyFooter from '../ui/stickyfooter'
 const CommunitySection = () => {
   useEffect( () => {
 
@@ -54,7 +55,11 @@ const CommunitySection = () => {
             </div>
           </div>
         </div>
-      <Contact/>
+      <StickyFooter>
+        <div className='md:h-screen md:pt-[30vh] bg-charcoal'>
+        <Contact/>
+        </div>
+      </StickyFooter>
     </div>
   )
 }

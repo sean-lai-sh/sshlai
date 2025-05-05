@@ -20,7 +20,7 @@ const Transition = forwardRef<
       <motion.img
         src={frontImg || 'fallback.jpg'}
         alt="Project preview"
-        className="absolute inset-0 w-full h-full object-cover z-10"
+        className="absolute inset-0 w-full h-full object-cover z-[5]"
         initial={false} // Disable initial animation to prevent flicker
         style={{
             maskImage: 'linear-gradient(135deg, black 40%, transparent 60%)',

@@ -1,43 +1,18 @@
 'use client';
-import { createContext, useContext, useState, Dispatch, SetStateAction } from 'react';
 
-type AnimationStateContextType = {
-  preLoadAnim: boolean;
-  setPreLoadAnim: Dispatch<SetStateAction<boolean>>;
-  transitioning: boolean;
-  setTransitioning: Dispatch<SetStateAction<boolean>>;
-  maskState: boolean;
-  setMaskState: Dispatch<SetStateAction<boolean>>;
-};
+import { usePathname } from 'next/navigation';
+import { AnimatePresence } from 'framer-motion';
 
-// Provide a default fallback value just to satisfy TS, but this should never be used directly
-const AnimationStateContext = createContext<AnimationStateContextType>({
-  preLoadAnim: true,
-  setPreLoadAnim: () => {}, // fallback no-op function
-  transitioning: true,
-  setTransitioning: () => {}, // fallback no-op function
-  maskState: false,
-  setMaskState: () => {}, // fallback no-op function
-});
+export default function PageTransitionWrapper({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
 
-export const AnimationProvider = ({ children }: { children: React.ReactNode }) => {
-  const [preLoadAnim, setPreLoadAnim] = useState(true);
-  const [transitioning, setTransitioning] = useState(true);
-  const [maskState, setMaskState] = useState(false)
   return (
-    <AnimationStateContext.Provider 
-      value={{ 
-        preLoadAnim, 
-        setPreLoadAnim, 
-        transitioning, 
-        setTransitioning,
-        maskState,
-        setMaskState,
-      }}
-    >
-      {children}
-    </AnimationStateContext.Provider>
+    <div className="main font-sans ">
+      <AnimatePresence mode="wait">
+        <div key={pathname} className=''>
+          {children}
+        </div>
+      </AnimatePresence>
+    </div>
   );
-};
-
-export const useAnimationState = () => useContext(AnimationStateContext);
+}

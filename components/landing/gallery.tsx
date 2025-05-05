@@ -20,7 +20,7 @@ const Gallery = ({projects}:{projects : ProjectDetails[]}) => {
       return () => window.removeEventListener('resize', handleResize)
     }, [])
   return (
-    <section className='flex flex-col justify-center top-0 bg-offwhite sm:px-10 px-5 xl:px-16'>
+    <section className='flex flex-col justify-center top-0 bg-offwhite sm:px-10 px-5 xl:px-16 w-screen'>
        <div className='w-full'>
           <h2 className='text-left md:text-8xl text-6xl text-charcoal font-extrabold'>Recent Work</h2>
           <Separator className='w-full rounded-xl bg-charcoal-darker'/>

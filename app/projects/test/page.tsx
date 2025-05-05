@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { Separator } from '@radix-ui/react-separator'
 import Lenis from "lenis"
 import StickyFooter from '@/components/ui/stickyfooter';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
 const ProjPages = () => {
     useEffect(() => {
         const lenis = new Lenis();
@@ -61,17 +60,17 @@ const ProjPages = () => {
                         
                     </div>
                 </div>
-            <div className='h-[30vw] w-[30vw] relative'>
-                <Image
-                    src={"/ai4ce_new_block_trans.png"}
-                    alt={"fancy img"
-                    }
-                    fill
-                    className='object-cover'
-                />
+                <div className='h-[30vw] w-[30vw] relative'>
+                    <Image
+                        src={"/ai4ce_new_block_trans.png"}
+                        alt={"fancy img"
+                        }
+                        fill
+                        className='object-cover'
+                    />
+                </div>
             </div>
-            </div>
-            <div className='space-y-3'>
+            <div className='space-y-3 mt-12'>
                 <h2 className='text-4xl font-medium'>
                     Design process
                 </h2>
@@ -79,16 +78,16 @@ const ProjPages = () => {
                 {/* First option here is if there is an image for the mermaid diagram or smth else */}
                 <div className="w-full">
                 {/* Diagram box floated left */}
-                <div className=" relative m-4 flex items-center justify-center flex-col max-h-[35vw]">
-                    <AspectRatio ratio={16 / 9} className="w-full h-full">
+                <div className=" relative m-4 flex items-center justify-center flex-col w-full h-fit">
+                    <div className='relative h-[50vh] w-[50vw]'>
                         <Image
                             src={"/diagram.jpg"}
                             alt="Maze graph visualization"
                             fill
-                            className="object-cover"
+                            className="object-contain"
                         />
-                    </AspectRatio>
-                    <p className="text-sm mt-2">Figure 1: Maze graph visualization</p>
+                    </div>
+                    <p className="text-sm mt-2 z-40">Figure 1: Maze graph visualization</p>
                 </div>
 
                 {/* Wrapped text content */}
@@ -109,13 +108,13 @@ const ProjPages = () => {
             </div>
         </div>
         <StickyFooter>
-        <div className='w-full h-full overflow-hidden bg-charcoal'>
+        <div className='w-full h-full flex justify-center items-center overflow-hidden bg-beige'>
             
-            <div>
+            <div className='mt-40'>
                 <div className='w-full justify-center flex flex-col items-center group'>
-                    <h1>Nxt Case Name</h1>
-                    <div className='relative w-[400px] h-[400px] overflow-hidden'>
-                        <div className={`w-full h-full flex justify-center items-center bg-charcoal-light/80 group-hover:translate-y-[200px] translate-y-[300px] transition-transform duration-700 ease-in-out`}>
+                    <h1>Next Case Name</h1>
+                    <div className='relative w-[400px] h-[300px] overflow-hidden'>
+                        <div className={`w-full h-full flex justify-center items-center bg-charcoal-light/80 group-hover:translate-y-[50px] translate-y-[100px] transition-transform duration-700 ease-in-out`}>
                                 <Image 
                                 src={`/chatbot.png`}
                                 width={300}
@@ -124,7 +123,7 @@ const ProjPages = () => {
                                 />
                         </div>  
                     </div>
-                    <Separator className='bg-beige w-[75%] h-[1px]'/>
+                    <Separator className='bg-black w-[50vw] h-[1px]'/>
                 </div>
             </div>
         </div>
