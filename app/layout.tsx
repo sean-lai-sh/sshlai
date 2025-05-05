@@ -52,8 +52,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans text-beige flex items-center justify-center w-screen overflow-x-hidden ">
           <Navbar />
           <PageTransitionWrapper>
-            
-                
               {children}
             <Toaster/>
             <Analytics/>

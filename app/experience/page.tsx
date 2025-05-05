@@ -2,6 +2,7 @@
 import Stair from '@/components/animated/Stair'
 import CommunitySection from '@/components/experience/communitySection'
 import Experience from '@/components/experience/experience'
+import HorizontalExpansion from '@/components/sections/horizontalExpansion'
 import React from 'react'
 
 const page = () => {
@@ -9,7 +10,8 @@ const page = () => {
     <div className='bg-beige w-screen'>
       <Stair>
         <Experience/>
-        <CommunitySection/>
+        <HorizontalExpansion/>
+        {/* <CommunitySection/> */}
       </Stair>
     </div>
   )
