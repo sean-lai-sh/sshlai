@@ -9,6 +9,7 @@ const config: Config = {
     './components/**/*.{ts,tsx}',
     './pages/**/*.{ts,tsx}',
   ],
+  safelist: ['bg-vantablack'],
   darkMode: ['class', 'class'],
   theme: {
   	extend: {

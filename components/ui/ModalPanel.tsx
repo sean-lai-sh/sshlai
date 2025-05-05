@@ -23,8 +23,8 @@ return (
             }} className={`min-h-full w-full absolute flex justify-center flex-col items-center `}>
             {
                 experiences.map( (exp, index) => {
-                const { logo_img_src, img_tag } = exp
-                return <div className={`flex items-center justify-center w-1/2 flex-col h-[60vh] ${img_tag} text-start rounded-xl border-[4px] gap-10 border-offwhite shadow-lg shadow-beige p-5`} key={`modal_${index}`}>
+                const { logo_img_src } = exp
+                return <div className={`flex items-center justify-center w-1/2 flex-col h-[60vh] ${exp.img_tag} text-start rounded-xl border-[4px] gap-10 border-offwhite shadow-lg shadow-beige p-5`} key={`modal_${index}`}>
                     <div className='w-[300px] h-[300px] relative min-h-[300px]'>
                         <Image 
                         src={`${logo_img_src}`}
