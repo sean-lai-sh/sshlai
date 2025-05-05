@@ -200,21 +200,21 @@ export const communities: CommunityExp[] = [
 ]
 
 export const workExp: workExpDetails[] = [
-  {
-    company_name: "Boost Payment Solutions",
-    job_title: "Data Engineer Intern",
-    duration: "June 2025 — Present",
-    description: "Data Warehousing to store >$23B in annual transactions",
-    achievements: [
-      "Developed a data pipeline using Python and AWS to process transaction data",
-      "Implemented data validation checks to ensure data integrity",
-      "Collaborated with cross-functional teams to gather requirements and deliver solutions"
-    ],
-    skills: ["Python", "AWS", "Data Pipeline", "SQL"],
-    logo_img_src: "/boost_logo.png",
-    img_tag: "bg-white text-black",
-    company_link: "https://www.boostb2b.com/"
-  },
+  // {
+  //   company_name: "Boost Payment Solutions",
+  //   job_title: "Data Engineer Intern",
+  //   duration: "June 2025 — Present",
+  //   description: "Data Warehousing to store >$23B in annual transactions",
+  //   achievements: [
+  //     "Developed a data pipeline using Python and AWS to process transaction data",
+  //     "Implemented data validation checks to ensure data integrity",
+  //     "Collaborated with cross-functional teams to gather requirements and deliver solutions"
+  //   ],
+  //   skills: ["Python", "AWS", "Data Pipeline", "SQL"],
+  //   logo_img_src: "/boost_logo.png",
+  //   img_tag: "bg-white text-black",
+  //   company_link: "https://www.boostb2b.com/"
+  // },
   {
     company_name: "AI4CE",
     job_title: "AI Research Assistant",
