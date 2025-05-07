@@ -235,7 +235,7 @@ export const commPanel: PanelData[] = [
     ],
     ctaText: "Visit Event",
     ctaLink: "#",
-    image: "/mnm.png",
+    image: "/sw24.png",
     bgColor: "#f5f5f5"
   }
 ];
@@ -312,7 +312,7 @@ export const workExp: workExpDetails[] = [
     ],
     skills: ["NLP", "Data Processing", "Python", "Numpy"],
     logo_img_src: "/test2.png",
-    img_tag: "bg-white text-black",
+    img_tag: "bg-offwhite text-black",
     company_link: "https://www.engineering.nyu.edu/"
   },
   {

@@ -18,7 +18,7 @@ const HorizontalExpansion = () => {
       const horizontal = horizontalRef.current;
       if (!container || !horizontal) return;
       ScrollTrigger.matchMedia({
-        "(min-width: 1068px)":() => {
+        "(min-width: 1024px)":() => {
           const tl = gsap.timeline({
             defaults: { ease: "sine.inOut" },
             scrollTrigger: {
@@ -53,7 +53,7 @@ const HorizontalExpansion = () => {
     <section ref={containerRef} className="relative w-screen bg-black">
         <div
           ref={horizontalRef}
-          className="horizontal-inner lg:flex block lg:w-[400vw] w-screen min-h-[500vh] gap-0 "
+          className="horizontal-inner lg:flex block lg:w-[400vw] w-screen min-h-[500vh] lg:min-h-[100vh] gap-0 "
         >
           <div className='absolute w-screen h-screen top-0 left-0 hidden lg:block'>
             <div className=' w-full pl-[16rem] pt-[15svh] relative z-[5]'>
@@ -70,6 +70,20 @@ const HorizontalExpansion = () => {
             })
           }
         </div>
+        {/* <motion.div style={{height}} className={`relative mt-[100px]`}>
+            <div className={`
+                absolute
+                z-[1]
+                h-[1550%]
+                w-[120%]
+                left-[-10%]
+                rounded-b-[50%]
+                bg-darker
+                shadow-darker/40
+                shadow-[0px_50px_40px_rgba(0,0,0,0.748)]
+                overflow-clip
+            `}></div>
+        </motion.div> */}
     </section>
   );
 };
@@ -167,10 +181,10 @@ const Panel: React.FC<{
       <span className='lg:hidden text-lg left-[4rem] absolute top-[5rem] font-semibold text-charcoal-darker'>
         {data.number}
       </span>
-      <h1 className='lg:text-[2vw] md:text-5xl text-3xl lg:mt-[5rem] leading-relaxed text-charcoal-darker w-full'>
+      <h1 className='lg:text-[3vw] md:text-5xl text-3xl lg:mt-[5rem] leading-relaxed text-charcoal-darker w-full'>
         {data.title}
       </h1>
-      <h2 className='lg:text-[1.25vw] md:text-2xl text-lg mt-[1.5rem] lg:mt-[3rem] leading-relaxed text-charcoal-darker w-full'>
+      <h2 className='lg:text-[1.5vw] md:text-2xl text-lg mt-[1.5rem] lg:mt-[3rem] leading-relaxed text-charcoal-darker w-full'>
         {data.description.map((line, i) => (
           <React.Fragment key={i}>
             {line}
@@ -191,7 +205,7 @@ const Panel: React.FC<{
         w-[50%] pt-[2rem] min-h-[300px]
         relative h-full
         lg:block lg:static lg:w-[20vw]
-        lg:min-h-[90vh] lg:pt-[20vh] lg:mx-0
+        lg:min-h-[90vh] lg:pt-[30vh] lg:mx-0
         md:mx-[4rem] md:h-fit md:min-h-[400px]
         md:w-[40%]
        
