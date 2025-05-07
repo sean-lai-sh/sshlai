@@ -7,12 +7,14 @@ import Lenis from 'lenis';
 import HorizontalExpand from './horizontalExpand';
 import Image from 'next/image';
 import styles from './style.module.scss';
+import { create } from 'domain';
+import { PanelData } from '@/lib/types';
+import { commPanel } from '@/lib/consts';
 gsap.registerPlugin(ScrollTrigger);
 
 const HorizontalExpansion = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const horizontalRef = useRef<HTMLDivElement | null>(null);
-
   useEffect(() => {
     const ctx = gsap.context(() => {
       const container = containerRef.current;
@@ -33,36 +35,37 @@ const HorizontalExpansion = () => {
               
             }
           });
-          tl.add("initial", 0)
-          //tl.to(".content", { x: "100%", duration: 0.9}, "initial");
-          tl.fromTo(".panel-2", {x:"80%"},{ x: "0%", duration: 1}, "initial");
-          tl.fromTo(".panel-3", { x: "95%" }, { x: "80%", duration:1}, "initial");
-          tl.fromTo(".panel-4", { x: "100%" }, { x: "95%", duration:1}, "initial");
-          tl.fromTo(".image-panel", { x: "100%" }, { x: "-25%", scale: 0.25, top:"20%", duration: 1}, "initial");
-          tl.fromTo(".image-panel-2", { x: "-225%", scale:0.7 }, { x: "100%", scale:1, duration: 1}, "initial");
-          tl.fromTo(".image-panel-3", { x: "-270%", scale:0.3 }, { x: "-225%", scale:0.7, duration: 1}, "initial");
-          tl.fromTo(".content-2", { x: "-80%", clipPath: "inset(0 0 0 80%)"}, { x: "0%", clipPath: "inset(0 0 0 0%)", duration: 1}, "initial");
-          tl.add("first_overlay", 1)
-          tl.fromTo(".panel-3", {x:"80%"},{ x: "0%", duration: 1}, "first_overlay");
-          tl.fromTo(".panel-4", { x: "95%" }, { x: "80%", duration:1}, "first_overlay");
-          tl.fromTo(".panel-5", { x: "100%" }, { x: "95%", duration:1}, "first_overlay");
-          tl.fromTo(".image-panel-2", { x: "100%" }, { x: "-25%", scale: 0.25, top:"20%", duration: 1}, "first_overlay");
-          tl.fromTo(".image-panel-3", { x: "-225%", scale:0.7 }, { x: "100%", scale:1, duration: 1}, "first_overlay");
-          tl.fromTo(".image-panel-4", { x: "-270%", scale:0.3 }, { x: "-225%", scale:0.7, duration: 1}, "first_overlay");
-          tl.fromTo(".content-3", { x: "-80%", clipPath: "inset(0 0 0 80%)"}, { x: "0%", clipPath: "inset(0 0 0 0%)", duration: 1}, "first_overlay");
-          tl.add("second_overlay", 2)
-          tl.fromTo(".panel-4", {x:"80%"},{ x: "0%", duration: 1}, "second_overlay");
-          tl.fromTo(".panel-5", { x: "95%" }, { x: "80%", duration:1}, "second_overlay");
-          tl.fromTo(".image-panel-3", { x: "100%" }, { x: "-25%", scale: 0.25, top:"20%", duration: 1}, "second_overlay");
-          tl.fromTo(".image-panel-4", { x: "-225%", scale:0.7 }, { x: "100%", scale:1, duration: 1}, "second_overlay");
-          tl.fromTo(".image-panel-5", { x: "-270%", scale:0.3 }, { x: "-225%", scale:0.7, duration: 1}, "second_overlay");
-          tl.fromTo(".content-4", { x: "-80%", clipPath: "inset(0 0 0 80%)"}, { x: "0%", clipPath: "inset(0 0 0 0%)", duration: 1}, "second_overlay");
-          tl.add("third", 3)
-          tl.fromTo(".panel-5", {x:"80%"},{ x: "0%", duration: 1}, "third");
-          tl.fromTo(".image-panel-4", { x: "100%" }, { x: "-25%", scale: 0.25, top:"20%", duration: 1}, "third");
-          tl.fromTo(".image-panel-5", { x: "-225%", scale:0.7 }, { x: "100%", scale:1, duration: 1}, "third");
-          tl.fromTo(".content-5", { x: "-80%", clipPath: "inset(0 0 0 80%)"}, { x: "0%", clipPath: "inset(0 0 0 0%)", duration: 1}, "third");
-          tl.add("forth", 4)
+          // tl.add("initial", 0)
+          // tl.fromTo(".panel-2", {x:"80%"},{ x: "0%", duration: 1}, "initial");
+          // tl.fromTo(".panel-3", { x: "95%" }, { x: "80%", duration:1}, "initial");
+          // tl.fromTo(".panel-4", { x: "100%" }, { x: "95%", duration:1}, "initial");
+          // tl.fromTo(".image-panel", { x: "100%" }, { x: "-25%", scale: 0.25, top:"20%", duration: 1}, "initial");
+          // tl.fromTo(".image-panel-2", { x: "-225%", scale:0.7 }, { x: "100%", scale:1, duration: 1}, "initial");
+          // tl.fromTo(".image-panel-3", { x: "-270%", scale:0.3 }, { x: "-225%", scale:0.7, duration: 1}, "initial");
+          // tl.fromTo(".content-2", { x: "-80%", clipPath: "inset(0 0 0 80%)"}, { x: "0%", clipPath: "inset(0 0 0 0%)", duration: 1}, "initial");
+          // tl.add("first_overlay", 1)
+          // tl.fromTo(".panel-3", {x:"80%"},{ x: "0%", duration: 1}, "first_overlay");
+          // tl.fromTo(".panel-4", { x: "95%" }, { x: "80%", duration:1}, "first_overlay");
+          // tl.fromTo(".panel-5", { x: "100%" }, { x: "95%", duration:1}, "first_overlay");
+          // tl.fromTo(".image-panel-2", { x: "100%" }, { x: "-25%", scale: 0.25, top:"20%", duration: 1}, "first_overlay");
+          // tl.fromTo(".image-panel-3", { x: "-225%", scale:0.7 }, { x: "100%", scale:1, duration: 1}, "first_overlay");
+          // tl.fromTo(".image-panel-4", { x: "-270%", scale:0.3 }, { x: "-225%", scale:0.7, duration: 1}, "first_overlay");
+          // tl.fromTo(".content-3", { x: "-80%", clipPath: "inset(0 0 0 80%)"}, { x: "0%", clipPath: "inset(0 0 0 0%)", duration: 1}, "first_overlay");
+          // tl.add("second_overlay", 2)
+          // tl.fromTo(".panel-4", {x:"80%"},{ x: "0%", duration: 1}, "second_overlay");
+          // tl.fromTo(".panel-5", { x: "95%" }, { x: "80%", duration:1}, "second_overlay");
+          // tl.fromTo(".image-panel-3", { x: "100%" }, { x: "-25%", scale: 0.25, top:"20%", duration: 1}, "second_overlay");
+          // tl.fromTo(".image-panel-4", { x: "-225%", scale:0.7 }, { x: "100%", scale:1, duration: 1}, "second_overlay");
+          // tl.fromTo(".image-panel-5", { x: "-270%", scale:0.3 }, { x: "-225%", scale:0.7, duration: 1}, "second_overlay");
+          // tl.fromTo(".content-4", { x: "-80%", clipPath: "inset(0 0 0 80%)"}, { x: "0%", clipPath: "inset(0 0 0 0%)", duration: 1}, "second_overlay");
+          // tl.add("third", 3)
+          // tl.fromTo(".panel-5", {x:"80%"},{ x: "0%", duration: 1}, "third");
+          // tl.fromTo(".image-panel-4", { x: "100%" }, { x: "-25%", scale: 0.25, top:"20%", duration: 1}, "third");
+          // tl.fromTo(".image-panel-5", { x: "-225%", scale:0.7 }, { x: "100%", scale:1, duration: 1}, "third");
+          // tl.fromTo(".content-5", { x: "-80%", clipPath: "inset(0 0 0 80%)"}, { x: "0%", clipPath: "inset(0 0 0 0%)", duration: 1}, "third");
+          // tl.add("forth", 4)
+          createPanelAnimation(tl, commPanel.length);
+          
         }
       });
 
@@ -90,8 +93,15 @@ const HorizontalExpansion = () => {
               </h1>
             </div>
           </div>
-          <div className="panel bg-[#c44541] w-screen h-screen sticky top-0 flex flex-col-reverse items-center justify-center text-white text-6xl lg:absolute lg:left-0 ">
-            <div className='content lg:top-[15vh] lg:left-0 lg:pt-[15vh] lg:px-[16rem] py-[1rem] md:px-[5rem] lg:gap-13 lg:w-full w-[75%] h-full lg:fixed flex flex-col lg:items-start lg:justify-start justify-start items-start text-white text-6xl text-start'
+          {
+            commPanel.map((data, index) => {
+              return (
+                <Panel key={index} data={data} />
+              )
+            })
+          }
+          {/* <div className="panel-1 bg-[#c44541] w-screen h-screen sticky top-0 flex flex-col-reverse items-center justify-center text-white text-6xl lg:absolute lg:left-0 ">
+            <div className='content-1 lg:top-[15vh] lg:left-0 lg:pt-[15vh] lg:px-[16rem] py-[1rem] md:px-[5rem] lg:gap-13 lg:w-full w-[75%] h-full lg:fixed flex flex-col lg:items-start lg:justify-start justify-start items-start text-white text-6xl text-start'
             style={{ transform: "none" }}>
               <span className='lg:hidden text-lg left-4 absolute top-5 font-semibold text-charcoal-darker'>
                 01
@@ -106,7 +116,7 @@ const HorizontalExpansion = () => {
                 <a>View Event</a>
               </div>
             </div>
-            <div className={`image-panel origin-bottom-right flex items-end w-[50%] pt-[2rem] min-h-[300px] relative lg:block lg:static lg:w-[20vw] lg:min-h-[90vh] lg:pt-[10vh]`}>
+            <div className={`image-panel-1 origin-bottom-right flex items-end w-[50%] pt-[2rem] min-h-[300px] relative lg:block lg:static lg:w-[20vw] lg:min-h-[90vh] lg:pt-[10vh] `}>
               <Image
               src={"/hofhack.png"}
               alt={"panel_image"}
@@ -217,18 +227,129 @@ const HorizontalExpansion = () => {
               className='object-contain'
               />
             </div>
-          </div> 
-          {/* <div  style={{transform: "translate3D(100%,0,0 )"}} className="panel-3 absolute w-screen h-screen top-0 bg-white  flex items-center justify-center text-white text-6xl">
-            <div className='content w-screen h-screen bg-green-500 flex items-center justify-center text-white text-6xl'>
-              Color 3
-            </div> 
-          </div> */}
-          {/* <div className="panel absolute w-screen h-screen bg-red-300 flex items-center justify-center text-6xl">Panel 2</div>
-          <div className="panel absolute w-screen h-screen bg-purple-300 flex items-center justify-center text-6xl">Panel 3</div>
-          <div className="panel absolute w-screen h-screen bg-yellow-300 flex items-center justify-center text-6xl">Panel 4</div> */}
+          </div>  */}
         </div>
     </section>
   );
 };
 
 export default HorizontalExpansion;
+
+function createPanelAnimation(tl: any , numberOfPanels: number) {
+  // Validate input
+  if (!tl || numberOfPanels < 2) {
+    console.error("Invalid timeline or insufficient panels");
+    return;
+  }
+
+  // For each transition step (number of panels - 1)
+  for (let step = 0; step < numberOfPanels - 1; step++) {
+    // Add marker for this step
+    const markerName = step === 0 ? "initial" : `overlay_${step}`;
+    tl.add(markerName, step);
+
+    // Panel transitions
+    // Active panel moves from 80% to 0%
+    tl.fromTo(`.panel-${step + 2}`, 
+      { x: "80%" }, 
+      { x: "0%", duration: 1 }, 
+      markerName
+    );
+
+    // If there's a next panel, move it from 95% to 80%
+    if (step + 3 <= numberOfPanels) {
+      tl.fromTo(`.panel-${step + 3}`, 
+        { x: "95%" }, 
+        { x: "80%", duration: 1 }, 
+        markerName
+      );
+    }
+
+    // If there's a panel after next, move it from 100% to 95%
+    if (step + 4 <= numberOfPanels) {
+      tl.fromTo(`.panel-${step + 4}`, 
+        { x: "100%" }, 
+        { x: "95%", duration: 1 }, 
+        markerName
+      );
+    }
+
+    // Image panel transitions
+    // Active image panel moves from 100% to -25% and scales down
+    tl.fromTo(`.image-panel-${step + 1}`, 
+      { x: "100%" }, 
+      { x: "-25%", scale: 0.25, top: "20%", duration: 1 }, 
+      markerName
+    );
+
+    // If there's a next image panel, move it from -225% to 100%
+    if (step + 2 <= numberOfPanels) {
+      tl.fromTo(`.image-panel-${step + 2}`, 
+        { x: "-225%", scale: 0.7 }, 
+        { x: "100%", scale: 1, duration: 1 }, 
+        markerName
+      );
+    }
+
+    // If there's an image panel after next, move it from -270% to -225%
+    if (step + 3 <= numberOfPanels) {
+      tl.fromTo(`.image-panel-${step + 3}`, 
+        { x: "-270%", scale: 0.3 }, 
+        { x: "-225%", scale: 0.7, duration: 1 }, 
+        markerName
+      );
+    }
+
+    // Content transitions - reveal the content for the active panel
+    tl.fromTo(`.content-${step + 2}`, 
+      { x: "-80%", clipPath: "inset(0 0 0 80%)" }, 
+      { x: "0%", clipPath: "inset(0 0 0 0%)", duration: 1 }, 
+      markerName
+    );
+  }
+
+  // Add final marker after all transitions
+  tl.add("final", numberOfPanels - 1);
+}
+
+const Panel: React.FC<{
+  data: PanelData;
+  }> = ({ data}) => (
+  <div 
+  style={ {backgroundColor: data.bgColor}}
+    className={`panel-${data.id} w-screen h-screen sticky top-0 flex flex-col-reverse items-center justify-center text-white text-6xl lg:absolute lg:left-0`}
+  >
+    <div 
+      className={`content-${data.id} lg:top-[15vh] lg:left-0 lg:pt-[15vh] lg:px-[16rem] py-[1rem] md:px-[5rem] lg:gap-13 lg:w-full w-[75%] h-full lg:fixed flex flex-col lg:items-start lg:justify-start justify-start items-start text-white text-6xl text-start`}
+      style={{ transform: "none" }}
+    >
+      <span className='lg:hidden text-lg left-4 absolute top-5 font-semibold text-charcoal-darker'>
+        {data.number}
+      </span>
+      <h1 className='lg:text-[2vw] text-3xl lg:mt-[5rem] leading-relaxed text-charcoal-darker w-full'>
+        {data.title}
+      </h1>
+      <h2 className='lg:text-[1.25vw] text-lg mt-[1.5rem] lg:mt-[3rem] leading-relaxed text-charcoal-darker w-full'>
+        {data.description.map((line, i) => (
+          <React.Fragment key={i}>
+            {line}
+            <br />
+          </React.Fragment>
+        ))}
+      </h2>
+      <div className='w-fit border-[3px] rounded-full bg-black text-center h-fit p-3 mt-3 px-6 text-xl cursor-pointer'>
+        <a href={data.ctaLink}>{data.ctaText}</a>
+      </div>
+    </div>
+    <div 
+      className={`image-panel-${data.id} origin-bottom-right flex items-end w-[50%] pt-[2rem] min-h-[300px] relative lg:block lg:static lg:w-[20vw] lg:min-h-[90vh] lg:pt-[10vh] ${styles.responsive_shift || ''}`}
+    >
+      <Image
+        src={data.image}
+        alt={"panel_image"}
+        fill 
+        className='object-contain'
+      />
+    </div>
+  </div>
+);

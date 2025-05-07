@@ -56,3 +56,14 @@ export type workExpDetails = {
     img_tag: string;
     company_link: string;
 }
+export interface PanelData {
+    id: number;
+    number: string; // "01", "02", etc.
+    title: string;
+    description: string[];
+    ctaText: string;
+    ctaLink: string;
+    image: string;
+    bgColor: string;
+    textColor?: string; // Optional, defaults to charcoal-darker
+  }

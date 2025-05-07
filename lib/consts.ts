@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { CardStackDetails, ProjectDetails, CommunityExp, workExpDetails } from "./types";
+import { CardStackDetails, ProjectDetails, CommunityExp, workExpDetails, PanelData } from "./types";
 import { HofHackCommCard, MnM, SW2025Card, SWBuildathon } from './const_comp';
 export const searching: boolean = false; // Set to true when searching for a job
 export const top3Featured: number[] = [0, 1, 2]; // Indexes of the top 3 featured projects
@@ -168,37 +168,78 @@ export const contactFormSchema = z.object({
     .max(1000, { message: 'Message must be under 1000 characters' }),
 });
 
-export const communities: CommunityExp[] = [
+export const commPanel: PanelData[] = [
   {
+    id: 1,
+    number: "01",
     title: "HOF Hacks",
-    tagline: "Assisting a rising VC spread its name at NYU",
-    img: '/hofhack.png',
-    maskedContent: HofHackCommCard,
-    shadowCol: 'hover:bg-[#2563eb]'
+    description: [
+      "1 Month to Host. 230+ RSVPs.",
+      "Vercel, Figma, & HOF Capital.",
+      "Tons of Saratoga Water."
+    ],
+    ctaText: "View Event",
+    ctaLink: "#",
+    image: "/hofhack.png",
+    bgColor: "#c44541"
   },
   {
-    title: "Tech@NYU StartupWeek",
-    tagline: "NYU's premier student entrepreneurship festival",
-    img: '/sw2025.png',
-    maskedContent: SW2025Card,
-    shadowCol: 'hover:bg-blue-500'
+    id: 2,
+    number: "02",
+    title: "Startup Week 2025",
+    description: [
+      "New Events, Energy, and Team",
+      "Anthropic, Adobe, ZFellows, & Google Ventures",
+      "A better week for student entrepreneurs."
+    ],
+    ctaText: "View Event",
+    ctaLink: "#",
+    image: "/sw2025.png",
+    bgColor: "#f5f5f5"
   },
   {
+    id: 3,
+    number: "03",
     title: "Startup Week Buildathon",
-    tagline: "Hiring hackathon to connect startups with students",
-    img: '/swbuildathon.png',
-    maskedContent: SWBuildathon,
-    shadowCol: 'hover:bg-[#2563eb]'
+    description: [
+      "Inaugural Hiring Hackathon. 36Hrs, 10K Prize Pool",
+      "Hosted in under 4 months. 220 RSVPs and 10 final round offers",
+      "Hosted at Verci @ NYC"
+    ],
+    ctaText: "Learn the Story",
+    ctaLink: "#",
+    image: "/swbuildathon.png",
+    bgColor: "white"
   },
   {
-    title: "Mentor & Meet w Supermomos",
-    tagline: "Exposing Startups to NYU students",
-    img: '/mnm.png',
-    maskedContent: MnM,
-    shadowCol: 'hover:bg-[#2563eb]'
+    id: 4,
+    number: "04",
+    title: "Mentor & Meet",
+    description: [
+      "10 Mentors, Founders and Operators from Series A - C",
+      "1:4 Student Ratio. 1 night of networking",
+      "In collaboration with Supermomos"
+    ],
+    ctaText: "Visit Event",
+    ctaLink: "#",
+    image: "/mnm.png",
+    bgColor: "#C2DAFF"
+  },
+  {
+    id: 5,
+    number: "05",
+    title: "Startup Week 2024",
+    description: [
+      "1 Week, Over 40 founders, & YC",
+      "Students hungry for a chance",
+      "My first big event at NYU."
+    ],
+    ctaText: "Visit Event",
+    ctaLink: "#",
+    image: "/mnm.png",
+    bgColor: "#f5f5f5"
   }
-]
-
+];
 export const workExp: workExpDetails[] = [
   // {
   //   company_name: "Boost Payment Solutions",
