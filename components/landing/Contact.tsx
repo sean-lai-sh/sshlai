@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { ArrowDownLeft } from 'lucide-react'
 import { Separator } from '@radix-ui/react-separator'

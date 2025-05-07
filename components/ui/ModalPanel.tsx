@@ -24,7 +24,7 @@ return (
             {
                 experiences.map( (exp, index) => {
                 const { logo_img_src } = exp
-                return <div className={`flex items-center justify-center w-1/2 flex-col h-[60vh] ${exp.img_tag} text-start rounded-xl border-[4px] gap-10 border-offwhite shadow-lg shadow-beige p-5`} key={`modal_${index}`}>
+                return <div className={`flex items-center justify-center w-[40vw] min-w-[350px] flex-col h-[60vh] ${exp.img_tag} text-start rounded-xl border-[4px] gap-10 border-offwhite shadow-lg shadow-beige p-5`} key={`modal_${index}`}>
                     <div className='w-[300px] h-[300px] relative min-h-[300px]'>
                         <Image 
                         src={`${logo_img_src}`}
@@ -33,7 +33,7 @@ return (
                         className='object-contain'
                         />
                     </div>
-                    <div className='w-[375px]h-full'>
+                    <div className='w-[375px] h-full'>
                         <h1>{exp.job_title}</h1>
                         <h2>{exp.duration}</h2>
                         <p>
