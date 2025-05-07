@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import BgLister from '../animated/bglister'
 import { AnimatePresence} from 'framer-motion';
 import { Separator } from '@radix-ui/react-separator';
@@ -8,19 +8,7 @@ import ModalPanel from '../ui/ModalPanel';
 import Anim_Button from '../ui/animated_a';
 const Experience = () => {
   const [currModal, setCurrModal] = useState(0)
-  const [isLarge, setIsLarge] = useState(true)
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      setIsLarge(width > 1024);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }
-  , []);
+  
   
   return (
     <section className='w-full p-2 md:p-20 bg-charcoal-darker '>
@@ -39,19 +27,6 @@ const Experience = () => {
         <div className='w-full flex flex-row min-h-[100vh] pb-40 md:pb-0 '>
             <div id='modal-container' className='hidden h-[60vh] lg:block w-[50vw] sticky top-10 overflow-hidden mt-20 py-20'>
                 <AnimatePresence mode='sync'>
-                    {/* <motion.div
-                        key={currModal}
-                        variants={modalVariants}
-                        initial='initial'
-                        animate='animate'
-                        exit='exit'
-                        className='w-full h-[50vh] flex flex-col items-center'
-                    >
-                        <div className='w-[300px] h-[300px] relative bg-white p-4'>
-                            <Image src={"/Boost_logo.png"} fill className='object-contain inset-4 m-4' alt="testimg"/>
-                        </div>
-                        <p className='text-white'>{currModal}</p>
-                    </motion.div> */}
                     <ModalPanel modal={currModal} experiences={workExp}/>
                 </AnimatePresence>
             </div>
@@ -61,7 +36,7 @@ const Experience = () => {
                 {
                     workExp.map((exp, index) => {
                         return (
-                            <BgLister key={index} title={exp.company_name} role={exp.job_title} index={index} link={exp.company_link} isLarge={isLarge} setModal={setCurrModal}/>
+                            <BgLister key={index} title={exp.company_name} role={exp.job_title} index={index} link={exp.company_link} isLarge={false} setModal={setCurrModal}/>
                         )
                     })}
 

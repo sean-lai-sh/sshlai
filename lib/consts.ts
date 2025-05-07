@@ -1,6 +1,5 @@
 import { z } from 'zod'
-import { CardStackDetails, ProjectDetails, CommunityExp, workExpDetails, PanelData } from "./types";
-import { HofHackCommCard, MnM, SW2025Card, SWBuildathon } from './const_comp';
+import { CardStackDetails, ProjectDetails, workExpDetails, PanelData } from "./types";
 export const searching: boolean = false; // Set to true when searching for a job
 export const top3Featured: number[] = [0, 1, 2]; // Indexes of the top 3 featured projects
 export const allProjects: ProjectDetails[] = [
@@ -203,7 +202,7 @@ export const commPanel: PanelData[] = [
     title: "Startup Week Buildathon",
     description: [
       "Inaugural Hiring Hackathon. 36Hrs, 10K Prize Pool",
-      "Hosted in under 4 months. 220 RSVPs and 10 final round offers",
+      "Hosted in under 4 months. 220 RSVPs & 10 offers",
       "Hosted at Verci @ NYC"
     ],
     ctaText: "Learn the Story",
@@ -216,7 +215,7 @@ export const commPanel: PanelData[] = [
     number: "04",
     title: "Mentor & Meet",
     description: [
-      "10 Mentors, Founders and Operators from Series A - C",
+      "10 Founders and Operators from Series A - C",
       "1:4 Student Ratio. 1 night of networking",
       "In collaboration with Supermomos"
     ],
@@ -230,7 +229,7 @@ export const commPanel: PanelData[] = [
     number: "05",
     title: "Startup Week 2024",
     description: [
-      "1 Week, Over 40 founders, & YC",
+      "1 Week, 40+ founders, & YC",
       "Students hungry for a chance",
       "My first big event at NYU."
     ],
