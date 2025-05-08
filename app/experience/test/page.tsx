@@ -1,4 +1,4 @@
-import HorizontalExpansion from '@/components/sections/horizontalExpansion'
+import HorizontalExpansion from '@/components/landing/horizontalExpansion'
 import React from 'react'
 
 const page = () => {

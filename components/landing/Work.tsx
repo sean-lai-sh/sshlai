@@ -9,7 +9,7 @@ import RecentWork from './RecentWork';
 const Work = () => {
     const featuredProjects = allProjects.filter((_, index) => top3Featured.includes(index))
     return (
-        <div>
+        <div className='w-full bg-offwhite flex flex-col items-center justify-center pt-[20vh] md:pt-0'>
             <RecentWork/>
             <Gallery projects={featuredProjects} />
             <div className='w-full justify-center items-center flex pb-10 text-black bg-offwhite'>

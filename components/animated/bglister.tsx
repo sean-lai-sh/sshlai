@@ -41,7 +41,7 @@ const BgLister = ({title, role, index, link, isLarge, setModal} : {title:string,
                 variants={borderVariants}
                 initial="initial"
                 animate={inView ? "enter" : ""}
-                transition= {{duration: 1.25, ease: [0.22, 1, 0.36, 1], delay: index == 0 ? 1.1 : 0.4}} className='absolute inset-0 w-full h-full border-b-2 z-5 bg-transparent border-white'/>
+                transition= {{duration: 1.25, ease: [0.22, 1, 0.36, 1], delay: 0.4}} className='absolute inset-0 w-full h-full border-b-2 z-5 bg-transparent border-white'/>
                 {/* Foreground content */}
                 <div className="relative flex w-full z-5 items-center p-[1.7rem] h-full">
                     <MaskText style='md:w-[27rem] w-[20rem]' phrases={[title]}  duration={0.92} customDelay={condition ? 0.95 : 0}/>
