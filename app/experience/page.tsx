@@ -5,6 +5,7 @@ import Event from '@/components/sections/ExpHeader'
 import React, { useEffect } from 'react'
 import Skill from '@/components/sections/Skill'
 import Lenis from 'lenis'
+import Experiences from '@/components/sections/Experiences'
 
 const Page = () => {
   useEffect(() => {
@@ -29,6 +30,7 @@ const Page = () => {
       <Stair>
         <Event/>
         <Skill/>
+        <Experiences/>
       </Stair>
     </main>
   )
