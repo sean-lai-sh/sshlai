@@ -55,6 +55,7 @@ export type workExpDetails = {
     logo_img_src: string;
     img_tag: string;
     company_link: string;
+    bp_style?: string;
 }
 export interface PanelData {
     id: number;

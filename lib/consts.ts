@@ -265,10 +265,11 @@ export const workExp: workExpDetails[] = [
       "Optimized SimplerEnv for parallel benchmarks (~3x computational savings)",
       "Reduced VRAM usage on PI0 model training using advanced optimizers"
     ],
-    skills: ["PyTorch", "Linux", "SimplerEnv", "ManiSkill3"],
+    skills: ["PyTorch", "SimplerEnv", "ManiSkill3"],
     logo_img_src: "/ai4ce_new_block_trans.png",
     img_tag: "bg-vantablack",
-    company_link: "https://ai4ce.org/"
+    company_link: "https://ai4ce.org/",
+    bp_style: "bg-offwhite"
   },
   {
     company_name: "NYU Entrepreneurship Institute",
@@ -287,7 +288,7 @@ export const workExp: workExpDetails[] = [
   },
   {
     company_name: "NYU HSRN Lab",
-    job_title: "Undergraduate Team Lead",
+    job_title: "Research Engineer Lead",
     duration: "Jan 2024 — Present",
     description: "Working on creating a universal experimentation system that maintains performance and accessiblity",
     achievements: [
@@ -297,8 +298,9 @@ export const workExp: workExpDetails[] = [
     ],
     skills: ["C++", "Python", "WebSocket", "Unreal Engine"],
     logo_img_src: "/nyu_hsrn.png",
-    img_tag: "bg-vantablack",
-    company_link: "https://vip.hsrn.nyu.edu/"
+    img_tag: "bg-vantablack text-offwhite",
+    company_link: "https://vip.hsrn.nyu.edu/",
+    bp_style: "bg-offwhite"
   },
   {
     company_name: "NYU SEI",
@@ -329,6 +331,7 @@ export const workExp: workExpDetails[] = [
     skills: ["Django", "NextJS", "Pandas", "Event Management"],
     logo_img_src: "/techatnyulogo.png",
     img_tag: "bg-vantablack",
-    company_link: "https://techatnyu.org/"
+    company_link: "https://techatnyu.org/",
+    bp_style: "bg-offwhite"
   }
 ]

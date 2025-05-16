@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Image from 'next/image'
 const Skill = () => {
 
 
@@ -43,16 +43,44 @@ const Skill = () => {
     ]
 
   return (
-    <section className='w-screen min-h-screen bg-charcoal-darker '>
-        <div className='w-full min-h-[150vh]'>
-            Some images here
+    <section className='w-screen bg-charcoal-darker '>
+        <div className='w-full'>
+            <div className='w-full h-full flex flex-col pointer-events-none px-10'>
+                <div className='relative w-full min-h-[60vw] md:w-[30vw] md:min-h-[40vw] '>
+                        <Image
+                        src={'/sw_25_endpic.jpg'}
+                        alt='hhacks'
+                        fill
+                        className = 'object-contain object-center inset-4'
+                        />
+                </div>
+                <div className='w-full h-full flex flex-col md:flex-row md:items-end md:justify-end'>
+                    <div className='w-[60vw] min-h-[70vw] md:w-[30vw] md:min-h-[20vw] h-full  relative '>
+                    <Image
+                    src={'/techgp.jpg'}
+                    alt='techgp'
+                    fill
+                    className = 'object-contain object-center'
+                    />
+                    </div>
+                    <div className='relative w-full min-h-[50vw] md:w-[40vw] md:min-h-[20vw] '>
+                        <Image
+                        src={'/hhacks_pic.jpg'}
+                        alt='hhacks'
+                        fill
+                        className = 'object-contain object-center'
+                        />
+                    </div>
+                     
+                </div>
+            </div>
         </div>
         <div className='w-full h-fit flex items-start justify-start px-[2vw]'>
             <h1 className='text-6xl lg:text-[10vw] font-semibold text-white text-center mt-[5rem] mb-[2rem]'>
                 Skills
             </h1>
         </div>
-        <div className='w-full min-h-screen flex flex-col md:flex-row justify-between md:px-[3vw] px-[10vw] lg:px-[10vw] '>
+        <div className='w-full pb-[20vh] flex flex-col md:flex-row justify-between md:px-[3vw] px-[10vw] lg:px-[10vw] '>
             {
                 skills.map((skill, index) => {
                     return (

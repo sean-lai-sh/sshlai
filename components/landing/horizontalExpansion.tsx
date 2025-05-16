@@ -32,7 +32,6 @@ const HorizontalExpansion = () => {
               
             }
           });
-          
           createPanelAnimation(tl, commPanel.length);
           
         }
@@ -181,7 +180,7 @@ const Panel: React.FC<{
   }> = ({ data}) => (
   <div 
   style={ {backgroundColor: data.bgColor}}
-    className={`panel-${data.id} w-screen h-screen sticky top-0 flex flex-col-reverse md:flex-row items-center justify-center text-white text-6xl lg:absolute lg:left-0`}
+    className={`panel-${data.id} w-screen h-screen sticky top-0 flex flex-col-reverse md:flex-row items-center justify-center text-white text-6xl lg:absolute lg:left-0 lg:shadow-[5px_0_20px_rgba(0,0,0,0.7),10px_0_40px_rgba(0,0,0,0.5)]`}
   >
     <div 
       className={`content-${data.id} lg:top-[15vh] lg:left-0 md:pt-[15vh] lg:px-[16rem] py-[1rem] md:px-[3rem] lg:gap-13 lg:w-full w-[75%] md:w-[60%] h-full lg:fixed flex flex-col lg:items-start lg:justify-start md:items-start md:justify-center justify-start items-start text-white text-6xl text-start`}
