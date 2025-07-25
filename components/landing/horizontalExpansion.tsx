@@ -200,7 +200,7 @@ const Panel: React.FC<{
           </React.Fragment>
         ))}
       </h2>
-      <div className='w-fit border-[3px] rounded-full bg-black text-center h-fit p-3 mt-3 px-6 text-xl cursor-pointer'>
+      <div className={`w-fit border-[3px] ${data.itemColor ? 'border-charcoal-darker bg-transparent text-charcoal' : 'border-white bg-black'} rounded-full  text-center h-fit p-3 mt-3 px-6 text-xl cursor-pointer`}>
         <a href={data.ctaLink}>{data.ctaText}</a>
       </div>
     </div>

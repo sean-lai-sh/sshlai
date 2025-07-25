@@ -83,10 +83,6 @@ html.light {
   --input: #3a3a3a;
   --ring: #eae4d3;
 }
-
-
-
-
 @layer base {
   * {
     @apply border-border;
@@ -94,4 +90,17 @@ html.light {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes clipRevealLeftToRight {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+.animate-clip-reveal {
+  animation: clipRevealLeftToRight 1.4s ease-out 0.8s forwards;
 }

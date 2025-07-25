@@ -15,9 +15,9 @@ const ContactField = ({form, name, label, placeholder,idx }: {form: UseFormRetur
         name={name}
         render={({ field }) => (
             <div className='w-full space-y-6'>
-                <div className='flex items-start mb-20 w-full'>
-                    <h2 className={`transition-colors duration-300 md:text-2xl text-xl text-start top-0 relative ${hasValue ? 'text-gray-600': 'text-beige'} mt-[42px] sm:mt-[38px]`}>{(idx + 1).toString().padStart(2, '0')}</h2>
-                    <FormItem className='h-48 font-medium w-[90%]'>
+                <div className='flex items-start w-full'>
+                    <h2 className={`transition-colors duration-300 md:text-2xl text-xl text-start top-0 relative ${hasValue ? 'text-gray-600': 'text-beige'} mt-[24px] sm:mt-[24px]`}>{(idx + 1).toString().padStart(2, '0')}</h2>
+                    <FormItem className='h-32 font-medium w-[90%]'>
                         <FormLabel 
                         className={`${hasValue ? 'text-gray-600' :'text-beige'} transition-colors duration-300 md:text-2xl text-xl ml-3`}
                         
@@ -32,7 +32,7 @@ const ContactField = ({form, name, label, placeholder,idx }: {form: UseFormRetur
                             }}
                             className={`
                                 ${hasValue ? 'text-beige' : 'text-gray-600'}
-                                transition-colors duration-300 md:text-2xl text-xl h-32 border-none w-full text-start resize-none
+                                transition-colors duration-300 md:text-2xl text-xl h-16 border-none w-full text-start resize-none
                                 `}
                             
                             />

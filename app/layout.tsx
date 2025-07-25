@@ -1,5 +1,5 @@
 
-import Navbar from '@/components/Navigation/navbar'
+// import Navbar from '@/components/Navigation/navbar'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import { Share_Tech_Mono } from 'next/font/google';
@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`dark ${inter.variable} ${jetbrainsMono.variable} ${shareTechMono.variable}`}>
       <body className="font-sans text-beige flex items-center justify-center w-screen overflow-x-hidden ">
-          <Navbar />
+          {/* <Navbar /> */}
           <PageTransitionWrapper>
               {children}
             <Toaster/>

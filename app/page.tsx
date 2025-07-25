@@ -2,11 +2,8 @@
 import {HeroSection} from "@/components/landing";
 import { useEffect } from "react";
 import Lenis from "lenis";
-import Contact from "@/components/landing/Contact";
-import Work from "@/components/landing/Work";
 import Stair from "@/components/animated/Stair";
 import Experience from "@/components/landing/experience";
-import HorizontalExpansion from "@/components/landing/horizontalExpansion";
 
 
 // components/Hero.tsx
@@ -32,10 +29,10 @@ export default function Hero() {
     <main className="w-screen scroll-hidden">
       <Stair>
           <HeroSection/>
-          <Work />
+          {/* <Work /> */}
           <Experience/>
-          <HorizontalExpansion/> 
-          <Contact />
+          {/* <HorizontalExpansion/>  */}
+          {/* <Contact /> */}
       </Stair>  
     </main>
   );

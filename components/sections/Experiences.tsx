@@ -6,6 +6,7 @@ import { workExpDetails } from '@/lib/types'
 import { workExp } from '@/lib/consts'
 import Image from 'next/image'
 import { Separator } from '../ui/separator'
+import Link from 'next/link'
 gsap.registerPlugin(ScrollTrigger)
 
 const VertSection = () => {
@@ -37,31 +38,6 @@ const VertSection = () => {
             // markers: true, // For debugging
           }
         })
-        
-        // // Initialize panels to be off-screen at start
-        // gsap.set('.panel-1', { y: "100%" })
-        // gsap.set('.panel-2', { y: "100%" })        
-        // tl.add('step-1', 0)
-        // tl.fromTo('.panel-1', 
-        //   { y: "100%", opacity: 1 },
-        //   { y: "0%", duration:1 }, 
-        //   "step-1") // Bring in second panel
-        // tl.fromTo(`.content-1`, 
-        //   { y: "-100%", clipPath: "inset(100% 0 0%  0)" }, 
-        //   { y: "0%", clipPath: "inset(0% 0% 0% 0)", duration: 1 }, 
-        //   'step-1' // Optional: slightly offset for smoother timing
-        // );
-        // tl.add('step-2', 1) 
-        // //tl.to('.panel-1', { opacity: 0, duration: 1 }, "step-2") // Fade out second panel
-        // tl.fromTo('.panel-2', 
-        //   { y: "100%", opacity: 1 },
-        //   { y: "0%", duration:1 }, 
-        //   "step-2") // Bring in third panel
-        // tl.fromTo(`.content-2`, 
-        //   { y: "-100%", clipPath: "inset(100% 0 0%  0)" }, 
-        //   { y: "0%", clipPath: "inset(0% 0% 0% 0)", duration: 1 }, 
-        //   'step-2' // Optional: slightly offset for smoother timing
-        // );
         animatePanels({
           panelPrefix: 'panel',
           contentPrefix: 'content',
@@ -81,28 +57,6 @@ const VertSection = () => {
     <section ref={containerRef} className="w-full relative ">      
       {/* Panels container is pinned */}
       <div ref={panelsRef} className="panels-container w-screen h-screen ">
-        {/* Base panel already visible
-        {/* <div
-          className="panel-0 w-screen h-screen absolute top-0 left-0 flex items-center justify-center text-4xl font-bold bg-white text-black"
-        >
-          01
-        </div> 
-        <ExpSection
-          data={workExp[0]}
-          styles="bg-white text-black"
-          index={0}
-        />
-        
-        <ExpSection
-          data={workExp[1]}
-          styles="bg-offwhite text-charcoal-darker"
-          index={1}
-        />
-        <ExpSection
-          data={workExp[2]}
-          styles="bg-vantablack text-offwhite"
-          index={2}/> */}
-
           {
             workExp.map((item, index) => (
               <ExpSection
@@ -125,7 +79,7 @@ export default VertSection
 const ExpSection = ({data, styles, index}: {data: workExpDetails, styles:string, index:number}) => {
   return (
     <div
-      className={`panel panel-${index} ${styles} w-screen h-screen sticky top-0 lg:absolute  lg:left-0 flex items-center justify-center text-4xl font-bold ${index === 0 ? '' : 'lg:shadow-[0_-10px_10px_rgba(0,0,0,0.4)] backdrop-blur-md'}`}
+      className={`panel panel-${index} ${styles} w-screen h-screen sticky top-0 lg:absolute  lg:left-0 flex items-center justify-center text-4xl font-bold lg:shadow-[0_-10px_10px_rgba(${data.shadowColor ? data.shadowColor : '0,0,0'},0.4)] backdrop-blur-md'`}
     >
       <div className={`content content-${index} w-full h-full flex lg:fixed lg:top-0 lg:left-0`}>
         <div  className='w-[35vw] h-full flex items-center justify-center'>
@@ -136,9 +90,11 @@ const ExpSection = ({data, styles, index}: {data: workExpDetails, styles:string,
                 </h1>
               </div>
               <div className=''>
-                <h1 className='text-2xl font-light text-left'>
-                  {data.company_name}
-                </h1>
+                <Link href={data.company_link} target='_blank' rel='noopener noreferrer'>
+                  <h1 className='w-fit  leading-relaxed text-2xl font-light text-left underline-offset-[5px] underline decoration-2 decoration-offwhite/50 hover:decoration-offwhite/100 transition-all duration-300 ease-in-out'>
+                    {data.company_name}
+                  </h1>
+                </Link>
                 <h1 className='text-lg font-light text-left mt-[1vh]'>
                   {data.duration}
                 </h1>
@@ -158,7 +114,7 @@ const ExpSection = ({data, styles, index}: {data: workExpDetails, styles:string,
         </div>
         <div className='w-[40vw] h-full flex items-center justify-center'>
           <div className='w-[95%] flex items-center justify-center flex-col'>
-            <h2 className='text-lg font-normal text-left w-full h-[10vh] mt-[15vh]'>
+            <h2 className='text-base lg:text-lg font-normal text-left w-full h-[10vh] mt-[15vh]'>
               {data.description}
             </h2>
             <Separator className={`w-full h-[2px] ${data.bp_style ? data.bp_style : 'bg-black'} rounded-full my-5`}/>
@@ -166,7 +122,7 @@ const ExpSection = ({data, styles, index}: {data: workExpDetails, styles:string,
               {data.achievements.map((item, index) => (
                 <li
                   key={index}
-                  className="flex items-start gap-3 mb-3 text-lg font-light"
+                  className="flex items-start gap-3 mb-3 text-base lg:text-lg font-light"
                 >
                   <span className={`mt-[10px] w-2 h-2 ${data.bp_style ? data.bp_style : 'bg-black'} shrink-0`}></span>
                   <span>{item}</span>
@@ -178,7 +134,7 @@ const ExpSection = ({data, styles, index}: {data: workExpDetails, styles:string,
               {data.skills.map((item, index) => (
                 <li
                   key={index}
-                  className="flex items-start gap-3 mb-3 text-lg font-light"
+                  className="flex items-start gap-3 mb-3 text-base lg:text-lg font-extralight"
                 >
                   <span className={`mt-[10px] w-2 h-2 rounded-2xl ${data.bp_style ? data.bp_style : 'bg-black'} shrink-0`}></span>                    
                   <span>{item}</span>

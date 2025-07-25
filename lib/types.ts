@@ -56,6 +56,7 @@ export type workExpDetails = {
     img_tag: string;
     company_link: string;
     bp_style?: string;
+    shadowColor?: string;
 }
 export interface PanelData {
     id: number;
@@ -66,5 +67,5 @@ export interface PanelData {
     ctaLink: string;
     image: string;
     bgColor: string;
-    textColor?: string; // Optional, defaults to charcoal-darker
-  }
+    itemColor?: string; // Optional, defaults to charcoal-darker
+}

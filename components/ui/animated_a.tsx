@@ -5,18 +5,17 @@ import Link from 'next/link'
 
 const Anim_Button = ({
   content,
-  style = "px-20 py-5 rounded-2xl border-[2px] border-offwhite",
-  href = "/",
+  style = '',
+  href = '/',
   funcAct
 }: {
-  content: string,
-  style?: string,
-  href: string,
+  content: string
+  style?: string
+  href: string
   funcAct: () => void
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const backgroundRef = useRef<HTMLDivElement>(null)
-  
 
   useEffect(() => {
     const container = containerRef.current
@@ -40,14 +39,13 @@ const Anim_Button = ({
         duration: 0.35,
         ease: 'cubic-bezier(0.22, 1, 0.28, 1)',
         onComplete: () => {
-          gsap.set(bg, { clipPath: 'inset(100% 0% 0% 0%)' }) // Reset to initial
-        }
+          gsap.set(bg, { clipPath: 'inset(100% 0% 0% 0%)' })
+        },
       })
     }
 
     container.addEventListener('mouseenter', enter)
     container.addEventListener('mouseleave', exit)
-
     return () => {
       container.removeEventListener('mouseenter', enter)
       container.removeEventListener('mouseleave', exit)
@@ -58,7 +56,21 @@ const Anim_Button = ({
     <Link href={href} passHref className="w-fit">
       <div
         ref={containerRef}
-        className={`relative flex justify-between items-center font-semibold text-white overflow-hidden w-fit cursor-pointer hover:text-black ${style}`}
+        className={`
+          relative flex justify-center items-center
+          font-semibold text-white overflow-hidden cursor-pointer
+          hover:text-black ${style}
+          rounded-2xl border-[2px] border-offwhite
+
+          /* small: mobile */
+          px-4 py-2
+
+          /* medium: tablets */
+          md:px-10 md:py-3
+
+          /* large: desktop */
+          lg:px-20 lg:py-4
+        `}
       >
         {/* Background Layer */}
         <div
