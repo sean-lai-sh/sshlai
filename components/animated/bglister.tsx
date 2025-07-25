@@ -26,7 +26,7 @@ const BgLister = ({title, role, index, link, isLarge, setModal} : {title:string,
     return (
         <Link href={link} passHref className="w-full h-full" ref={ref}>
             <motion.li 
-            className="relative w-full sm:h-fit h-44 hover:text-black flex justify-between  items-center font-semibold text-white overflow-hidden"
+            className="relative w-full sm:h-fit h-16 md:h-20 hover:text-black flex justify-between  items-center font-semibold text-white overflow-hidden"
             initial="initial"
             whileHover="hover"
             whileFocus="hover"
@@ -41,12 +41,12 @@ const BgLister = ({title, role, index, link, isLarge, setModal} : {title:string,
                 variants={borderVariants}
                 initial="initial"
                 animate={inView ? "enter" : ""}
-                transition= {{duration: 1.25, ease: [0.22, 1, 0.36, 1], delay: index == 0 ? 1.1 : 0.4}} className='absolute inset-0 w-full h-full border-b-2 z-5 bg-transparent border-white'/>
+                transition= {{duration: 1.25, ease: [0.22, 1, 0.36, 1], delay: 0.4}} className='absolute inset-0 w-full h-full border-b-2 z-5 bg-transparent border-white'/>
                 {/* Foreground content */}
-                <div className="relative flex w-full z-5 items-center p-[1.7rem] h-full">
-                    <MaskText style='md:w-[27rem] w-[20rem]' phrases={[title]}  duration={0.92} customDelay={condition ? 0.95 : 0}/>
-                    <MaskText style='w-full' phrases={[role]} customDelay={condition ? 0.85 : 0.4} duration={0.92}/>
-                    <PopIcon Icon={<ArrowUpRight className='' />} style='absolute right-4' customDelay={condition ? 0.85 : 0.4}/>
+                <div className="relative flex w-full z-5 items-center px-2 py-[1rem] sm:p-[1.7rem] h-full">
+                    <MaskText style='md:w-[27rem] w-[10rem] text-sm md:text-normal lg:text-large' phrases={[title]}  duration={0.92} customDelay={condition ? 0.95 : 0}/>
+                    <MaskText style='w-full text-sm md:text-normal lg:text-large' phrases={[role]} customDelay={condition ? 0.85 : 0.4} duration={0.92}/>
+                    <PopIcon Icon={<ArrowUpRight className='' />} style='absolute right-2 sm:right-4' customDelay={condition ? 0.85 : 0.4}/>
                 </div>
             </motion.li>
         </Link>

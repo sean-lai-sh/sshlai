@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export default function PageTransitionWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -9,9 +9,9 @@ export default function PageTransitionWrapper({ children }: { children: React.Re
   return (
     <div className="main font-sans ">
       <AnimatePresence mode="wait">
-        <div key={pathname} className=''>
+        <motion.div key={pathname} className=''>
           {children}
-        </div>
+        </motion.div>
       </AnimatePresence>
     </div>
   );

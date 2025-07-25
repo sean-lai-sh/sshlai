@@ -194,7 +194,8 @@ export const commPanel: PanelData[] = [
     ctaText: "View Event",
     ctaLink: "#",
     image: "/sw2025.png",
-    bgColor: "#f5f5f5"
+    bgColor: "#f5f5f5",
+    itemColor: 'border-charcoal-darker'
   },
   {
     id: 3,
@@ -208,7 +209,8 @@ export const commPanel: PanelData[] = [
     ctaText: "Learn the Story",
     ctaLink: "#",
     image: "/swbuildathon.png",
-    bgColor: "white"
+    bgColor: "white",
+    itemColor: 'border-charcoal-darker'
   },
   {
     id: 4,
@@ -236,7 +238,8 @@ export const commPanel: PanelData[] = [
     ctaText: "Visit Event",
     ctaLink: "#",
     image: "/sw24.png",
-    bgColor: "#f5f5f5"
+    bgColor: "#f5f5f5",
+    itemColor: 'border-charcoal-darker'
   }
 ];
 export const workExp: workExpDetails[] = [
@@ -265,10 +268,12 @@ export const workExp: workExpDetails[] = [
       "Optimized SimplerEnv for parallel benchmarks (~3x computational savings)",
       "Reduced VRAM usage on PI0 model training using advanced optimizers"
     ],
-    skills: ["PyTorch", "Linux", "SimplerEnv", "ManiSkill3"],
+    skills: ["PyTorch", "SimplerEnv", "ManiSkill3"],
     logo_img_src: "/ai4ce_new_block_trans.png",
     img_tag: "bg-vantablack",
-    company_link: "https://ai4ce.org/"
+    company_link: "https://ai4ce.org/",
+    bp_style: "bg-offwhite",
+    shadowColor: "200,200,200"
   },
   {
     company_name: "NYU Entrepreneurship Institute",
@@ -287,7 +292,7 @@ export const workExp: workExpDetails[] = [
   },
   {
     company_name: "NYU HSRN Lab",
-    job_title: "Undergraduate Team Lead",
+    job_title: "Research Engineer Lead",
     duration: "Jan 2024 — Present",
     description: "Working on creating a universal experimentation system that maintains performance and accessiblity",
     achievements: [
@@ -297,8 +302,9 @@ export const workExp: workExpDetails[] = [
     ],
     skills: ["C++", "Python", "WebSocket", "Unreal Engine"],
     logo_img_src: "/nyu_hsrn.png",
-    img_tag: "bg-vantablack",
-    company_link: "https://vip.hsrn.nyu.edu/"
+    img_tag: "bg-vantablack text-offwhite",
+    company_link: "https://vip.hsrn.nyu.edu/",
+    bp_style: "bg-offwhite"
   },
   {
     company_name: "NYU SEI",
@@ -323,12 +329,111 @@ export const workExp: workExpDetails[] = [
     achievements: [
       "Hosted a hiring hackathon connecting 3 startups with 220 students",
       "Organized NYU’s student-run startup festival with 10 events and prominent speakers",
-      "Developed a backend framework using Django and pandas for event data analysis",
-      "Created internal tooling with NextJS to manage 300+ active members"
+      "Developed an admin platform using Django to handle 500+ active members",
     ],
     skills: ["Django", "NextJS", "Pandas", "Event Management"],
     logo_img_src: "/techatnyulogo.png",
     img_tag: "bg-vantablack",
-    company_link: "https://techatnyu.org/"
+    company_link: "https://techatnyu.org/",
+    bp_style: "bg-offwhite",
+    shadowColor: "255,255,255"
   }
+]
+
+export const projectList: workExpDetails[] = [
+  // {
+  //   company_name: "Boost Payment Solutions",
+  //   job_title: "Data Engineer Intern",
+  //   duration: "June 2025 — Present",
+  //   description: "Data Warehousing to store >$23B in annual transactions",
+  //   achievements: [
+  //     "Developed a data pipeline using Python and AWS to process transaction data",
+  //     "Implemented data validation checks to ensure data integrity",
+  //     "Collaborated with cross-functional teams to gather requirements and deliver solutions"
+  //   ],
+  //   skills: ["Python", "AWS", "Data Pipeline", "SQL"],
+  //   logo_img_src: "/boost_logo.png",
+  //   img_tag: "bg-white text-black",
+  //   company_link: "https://www.boostb2b.com/"
+  // },
+  {
+    company_name: "TBA",
+    job_title: "Real time Infra Deployment",
+    duration: "March 2025 — May 2025",
+    description: "Developing managed workflow deployments via web interface",
+    achievements: [
+      "Researched optimization techniques to reduce VLA/VLM model training time",
+      "Optimized SimplerEnv for parallel benchmarks (~3x computational savings)",
+      "Reduced VRAM usage on PI0 model training using advanced optimizers"
+    ],
+    skills: ["PyTorch", "SimplerEnv", "ManiSkill3"],
+    logo_img_src: "/ai4ce_new_block_trans.png",
+    img_tag: "bg-vantablack",
+    company_link: "https://ai4ce.org/",
+    bp_style: "bg-offwhite",
+    shadowColor: "200,200,200"
+  },
+  {
+    company_name: "Plugma",
+    job_title: "Luma at Home",
+    duration: "Nov 2024 — Present",
+    description: "Fund events that help student founders scale and get infront of VCs",
+    achievements: [
+      "Provided feedback on entrepreneurship curriculum for 1000+ students",
+      "Assisted in organizing events and workshops for aspiring entrepreneurs",
+      "Collaborated with faculty to enhance the entrepreneurship program"
+    ],
+    skills: ["Curriculum Development", "Event Planning", "Student Outreach"],
+    logo_img_src: "/nyu_elab2.png",
+    img_tag: "bg-offwhite text-black",
+    company_link: "https://entrepreneur.nyu.edu/"
+  },
+  {
+    company_name: "AutoGo",
+    job_title: "A Real Board for AlphaGo",
+    duration: "Jan 2024 — Present",
+    description: "Working on creating a universal experimentation system that maintains performance and accessiblity",
+    achievements: [
+      "Redeveloped an Unreal Engine 5 C++ plugin, increasing user base by 10%",
+      "Enhanced Python package documentation and reduced jitter by 20%",
+      "Authored white papers on low latency infrastructure for 100+ researchers"
+    ],
+    skills: ["C++", "Python", "WebSocket", "Unreal Engine"],
+    logo_img_src: "/nyu_hsrn.png",
+    img_tag: "bg-vantablack text-offwhite",
+    company_link: "https://vip.hsrn.nyu.edu/",
+    bp_style: "bg-offwhite"
+  },
+  {
+    company_name: "AI Navigator",
+    job_title: "Fast Racing Agent",
+    duration: "June 2024 — Sept 2024",
+    description: "Run NLP and collate data to support sustainable engineering curriculum implementation",
+    achievements: [
+      "Collaborated on a sustainable engineering curriculum impacting 1000+ students",
+      "Built NLP models for word cloud generation and embeddings, reducing processing times by 25%",
+      "Implemented sentiment analysis and data aggregation for 300+ student responses"
+    ],
+    skills: ["NLP", "Data Processing", "Python", "Numpy"],
+    logo_img_src: "/test2.png",
+    img_tag: "bg-offwhite text-black",
+    company_link: "https://www.engineering.nyu.edu/"
+  },
+  // {
+  //   company_name: "Tech@NYU",
+  //   job_title: "Vice President",
+  //   duration: "Sept 2023 — Present",
+  //   description: "Leading NYU's premier student led entrepreunership festival with speakers from YC, ZFellows, Forbes30u30 and more!",
+  //   achievements: [
+  //     "Hosted a hiring hackathon connecting 3 startups with 220 students",
+  //     "Organized NYU’s student-run startup festival with 10 events and prominent speakers",
+  //     "Developed an admin platform using Django to handle 500+ active members",
+  //   ],
+  //   skills: ["Django", "NextJS", "Pandas", "Event Management"],
+  //   logo_img_src: "/techatnyulogo.png",
+  //   img_tag: "bg-vantablack",
+  //   company_link: "https://techatnyu.org/",
+  //   bp_style: "bg-offwhite",
+  //   shadowColor: "255,255,255"
+  // }
 ]

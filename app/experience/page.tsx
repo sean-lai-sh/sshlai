@@ -1,20 +1,39 @@
 
+'use client'
 import Stair from '@/components/animated/Stair'
-import Experience from '@/components/experience/experience'
-import Contact from '@/components/landing/Contact'
-import HorizontalExpansion from '@/components/sections/horizontalExpansion'
-import React from 'react'
+import Event from '@/components/sections/ExpHeader'
+import React, { useEffect } from 'react'
+import Skill from '@/components/sections/Skill'
+import Lenis from 'lenis'
+import Experiences from '@/components/sections/Experiences'
 
-const page = () => {
+const Page = () => {
+  useEffect(() => {
+    const lenis = new Lenis();
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    // document.documentElement.classList.add('scroll-hidden') // 
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      lenis.scrollTo(0);
+    });
+    return () => {
+      // document.documentElement.classList.remove('scroll-hidden')
+      lenis.destroy();
+    };
+  }, []);
   return (
-    <div className='bg-beige w-screen'>
+    <main className='bg-beige w-screen'>
       <Stair>
-        <Experience/>
-        <HorizontalExpansion/>
-        <Contact/>
+        <Event/>
+        <Skill/>
+        <Experiences/>
       </Stair>
-    </div>
+    </main>
   )
 }
 
-export default page
+export default Page

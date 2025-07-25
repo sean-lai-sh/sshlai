@@ -2,7 +2,7 @@
 import styles from './style.module.css'
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-export function MaskText({phrases, style, customDelay  = 0, duration = 0.75}:{phrases: string[], style?:string, customDelay?: number, duration?: number}) {
+export function MaskText({phrases, style, customDelay  = 0, duration = 0.75, newLine=false}:{phrases: string[], style?:string, customDelay?: number, duration?: number, newLine?: boolean}) {
 
     const animation = {
       initial: {y: "100%"},
@@ -20,6 +20,7 @@ export function MaskText({phrases, style, customDelay  = 0, duration = 0.75}:{ph
           phrases.map( (phrase, index) => {
             return <div key={index} className={styles.lineMask}>
               <motion.p custom={index} variants={animation} initial="initial" animate={inView ? "enter" : ""}>{phrase}</motion.p>
+              {newLine && <><br /><br /></>}
             </div>
           })
         }

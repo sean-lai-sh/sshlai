@@ -32,7 +32,6 @@ const HorizontalExpansion = () => {
               
             }
           });
-          
           createPanelAnimation(tl, commPanel.length);
           
         }
@@ -53,7 +52,7 @@ const HorizontalExpansion = () => {
     <section ref={containerRef} className="relative w-screen bg-black">
         <div
           ref={horizontalRef}
-          className="horizontal-inner lg:flex block lg:w-[400vw] w-screen min-h-[500vh] lg:min-h-[100vh] gap-0 "
+          className="horizontal-inner overflow-visible lg:flex block lg:w-[400vw] w-screen min-h-[500vh] lg:min-h-[100vh] gap-0 "
         >
           <div className='absolute w-screen h-screen top-0 left-0 hidden lg:block'>
             <div className=' w-full pl-[16rem] pt-[15svh] relative z-[5]'>
@@ -121,13 +120,22 @@ function createPanelAnimation(tl: gsap.core.Timeline , numberOfPanels: number) {
     }
 
     // If there's a panel after next, move it from 100% to 95%
-    if (step + 4 <= numberOfPanels) {
+    if ( step + 4 <= numberOfPanels) {
       tl.fromTo(`.panel-${step + 4}`, 
         { x: "100%" }, 
         { x: "95%", duration: 1 }, 
         markerName
       );
     }
+    if (step + 5 <= numberOfPanels) {
+      tl.fromTo(`.panel-${step + 5}`, 
+        { x: "105%" }, 
+        { x: "100%", duration: 1 }, 
+        markerName
+      );
+    }
+
+    
 
     // Image panel transitions
     // Active image panel moves from 100% to -25% and scales down
@@ -172,7 +180,7 @@ const Panel: React.FC<{
   }> = ({ data}) => (
   <div 
   style={ {backgroundColor: data.bgColor}}
-    className={`panel-${data.id} w-screen h-screen sticky top-0 flex flex-col-reverse md:flex-row items-center justify-center text-white text-6xl lg:absolute lg:left-0`}
+    className={`panel-${data.id} w-screen h-screen sticky top-0 flex flex-col-reverse md:flex-row items-center justify-center text-white text-6xl lg:absolute lg:left-0 lg:shadow-[5px_0_20px_rgba(0,0,0,0.7),10px_0_40px_rgba(0,0,0,0.5)]`}
   >
     <div 
       className={`content-${data.id} lg:top-[15vh] lg:left-0 md:pt-[15vh] lg:px-[16rem] py-[1rem] md:px-[3rem] lg:gap-13 lg:w-full w-[75%] md:w-[60%] h-full lg:fixed flex flex-col lg:items-start lg:justify-start md:items-start md:justify-center justify-start items-start text-white text-6xl text-start`}
@@ -192,7 +200,7 @@ const Panel: React.FC<{
           </React.Fragment>
         ))}
       </h2>
-      <div className='w-fit border-[3px] rounded-full bg-black text-center h-fit p-3 mt-3 px-6 text-xl cursor-pointer'>
+      <div className={`w-fit border-[3px] ${data.itemColor ? 'border-charcoal-darker bg-transparent text-charcoal' : 'border-white bg-black'} rounded-full  text-center h-fit p-3 mt-3 px-6 text-xl cursor-pointer`}>
         <a href={data.ctaLink}>{data.ctaText}</a>
       </div>
     </div>
@@ -208,7 +216,6 @@ const Panel: React.FC<{
         lg:min-h-[90vh] lg:pt-[30vh] lg:mx-0
         md:mx-[4rem] md:h-fit md:min-h-[400px]
         md:w-[40%]
-       
       `}
     >
       <div className="md:shadow-lg md:shadow-charcoal-darker overflow-hidden h-fit ">
