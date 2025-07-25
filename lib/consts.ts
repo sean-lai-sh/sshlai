@@ -196,6 +196,8 @@ export const commPanel: PanelData[] = [
     image: "/sw2025.png",
     bgColor: "#f5f5f5",
     itemColor: 'border-charcoal-darker'
+    bgColor: "#f5f5f5",
+    itemColor: 'border-charcoal-darker'
   },
   {
     id: 3,
@@ -209,6 +211,8 @@ export const commPanel: PanelData[] = [
     ctaText: "Learn the Story",
     ctaLink: "#",
     image: "/swbuildathon.png",
+    bgColor: "white",
+    itemColor: 'border-charcoal-darker'
     bgColor: "white",
     itemColor: 'border-charcoal-darker'
   },
@@ -240,6 +244,8 @@ export const commPanel: PanelData[] = [
     image: "/sw24.png",
     bgColor: "#f5f5f5",
     itemColor: 'border-charcoal-darker'
+    bgColor: "#f5f5f5",
+    itemColor: 'border-charcoal-darker'
   }
 ];
 export const workExp: workExpDetails[] = [
@@ -269,8 +275,12 @@ export const workExp: workExpDetails[] = [
       "Reduced VRAM usage on PI0 model training using advanced optimizers"
     ],
     skills: ["PyTorch", "SimplerEnv", "ManiSkill3"],
+    skills: ["PyTorch", "SimplerEnv", "ManiSkill3"],
     logo_img_src: "/ai4ce_new_block_trans.png",
     img_tag: "bg-vantablack",
+    company_link: "https://ai4ce.org/",
+    bp_style: "bg-offwhite",
+    shadowColor: "200,200,200"
     company_link: "https://ai4ce.org/",
     bp_style: "bg-offwhite",
     shadowColor: "200,200,200"
@@ -293,6 +303,7 @@ export const workExp: workExpDetails[] = [
   {
     company_name: "NYU HSRN Lab",
     job_title: "Research Engineer Lead",
+    job_title: "Research Engineer Lead",
     duration: "Jan 2024 — Present",
     description: "Working on creating a universal experimentation system that maintains performance and accessiblity",
     achievements: [
@@ -302,6 +313,9 @@ export const workExp: workExpDetails[] = [
     ],
     skills: ["C++", "Python", "WebSocket", "Unreal Engine"],
     logo_img_src: "/nyu_hsrn.png",
+    img_tag: "bg-vantablack text-offwhite",
+    company_link: "https://vip.hsrn.nyu.edu/",
+    bp_style: "bg-offwhite"
     img_tag: "bg-vantablack text-offwhite",
     company_link: "https://vip.hsrn.nyu.edu/",
     bp_style: "bg-offwhite"
@@ -329,6 +343,7 @@ export const workExp: workExpDetails[] = [
     achievements: [
       "Hosted a hiring hackathon connecting 3 startups with 220 students",
       "Organized NYU’s student-run startup festival with 10 events and prominent speakers",
+      "Developed an admin platform using Django to handle 500+ active members",
       "Developed an admin platform using Django to handle 500+ active members",
     ],
     skills: ["Django", "NextJS", "Pandas", "Event Management"],
