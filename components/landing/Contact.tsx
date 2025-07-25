@@ -2,8 +2,6 @@
 import React from 'react'
 
 const ContactPage = () => {
-
-const ContactPage = () => {
   return (
     <div className="w-full flex items-center justify-center py-10 px-4">
       <div className="w-full max-w-3xl flex flex-col md:flex-row md:justify-between gap-6 text-center md:text-left ">
@@ -41,7 +39,5 @@ const ContactPage = () => {
     </div>
   )
 }
-
-export default ContactPage
 
 export default ContactPage
