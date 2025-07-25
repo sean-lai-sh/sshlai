@@ -97,6 +97,9 @@ function LandingInformation() {
         >
           NYU Sustainability Initiative
         </a>.
+        <br />
+        <br />
+        My Sidequest: Host events for founders x VCs, hiring hackathons, and creating spur-of-the-moment memories
       </p>
         
 
