@@ -15,7 +15,7 @@ const ContactPage = () => {
         </a>
         
         <a
-          href="/Resume.pdf"
+          href="/resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:underline duration-300 text-white"

@@ -3,7 +3,7 @@ import MarqueeBanner from '../Navigation/marquee'
 import { searching } from '@/lib/consts'
 import { MaskText } from '../ui/inlinemask/inlineMask'
 import { AsciiNoiseBackground } from './asciihero'
-import Anim_Button from '../ui/animated_a'
+// import Anim_Button from '../ui/animated_a'
 const HeroSection = () => {
   return (
     <section className="min-h-[50vh] lg:min-h-[80vh] w-full text-black flex flex-col justify-center md:px-6 bg-transparent scroll-hidden">
@@ -39,7 +39,7 @@ function LandingInformation() {
           />
         </div>
       </div>
-          <Anim_Button content="Resume" href="/Sean%20Lai%20Resume.pdf" funcAct={() => {}} style='mt-5 min-w-10 max-w-[10rem]'/>
+          {/* <Anim_Button content="Resume" href="/Sean%20Lai%20Resume.pdf" funcAct={() => {}} style='mt-5 min-w-10 max-w-[10rem]'/> */}
       </div>
     <div className="lg:bg-transparent lg:backdrop-blur-md p-2 py-4 sm:p-4 lg:p-10 w-full max-w-full md:w-1/2 h-full flex items-center justify-start md:items-start md:justify-start text-xs sm:text-base lg:text-base lg:leading-7 text-beige overflow-x-hidden">
       <p>
