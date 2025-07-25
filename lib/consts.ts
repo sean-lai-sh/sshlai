@@ -369,7 +369,7 @@ export const projectList: workExpDetails[] = [
     skills: ["PyTorch", "SimplerEnv", "ManiSkill3"],
     logo_img_src: "/ai4ce_new_block_trans.png",
     img_tag: "bg-vantablack",
-    company_link: "https://ai4ce.org/",
+    company_link: "https://github.com/sean-lai-sh/exp-orchestrator",
     bp_style: "bg-offwhite",
     shadowColor: "200,200,200"
   },
@@ -386,7 +386,7 @@ export const projectList: workExpDetails[] = [
     skills: ["Curriculum Development", "Event Planning", "Student Outreach"],
     logo_img_src: "/nyu_elab2.png",
     img_tag: "bg-offwhite text-black",
-    company_link: "https://entrepreneur.nyu.edu/"
+    company_link: "https://github.com/sean-lai-sh/plugma"
   },
   {
     company_name: "AutoGo",
@@ -401,7 +401,7 @@ export const projectList: workExpDetails[] = [
     skills: ["C++", "Python", "WebSocket", "Unreal Engine"],
     logo_img_src: "/nyu_hsrn.png",
     img_tag: "bg-vantablack text-offwhite",
-    company_link: "https://vip.hsrn.nyu.edu/",
+    company_link: "https://github.com/sean-lai-sh/AutoGo",
     bp_style: "bg-offwhite"
   },
   {
@@ -417,23 +417,6 @@ export const projectList: workExpDetails[] = [
     skills: ["NLP", "Data Processing", "Python", "Numpy"],
     logo_img_src: "/test2.png",
     img_tag: "bg-offwhite text-black",
-    company_link: "https://www.engineering.nyu.edu/"
+    company_link: "https://github.com/sean-lai-sh/embodied_ai_navigation"
   },
-  // {
-  //   company_name: "Tech@NYU",
-  //   job_title: "Vice President",
-  //   duration: "Sept 2023 — Present",
-  //   description: "Leading NYU's premier student led entrepreunership festival with speakers from YC, ZFellows, Forbes30u30 and more!",
-  //   achievements: [
-  //     "Hosted a hiring hackathon connecting 3 startups with 220 students",
-  //     "Organized NYU’s student-run startup festival with 10 events and prominent speakers",
-  //     "Developed an admin platform using Django to handle 500+ active members",
-  //   ],
-  //   skills: ["Django", "NextJS", "Pandas", "Event Management"],
-  //   logo_img_src: "/techatnyulogo.png",
-  //   img_tag: "bg-vantablack",
-  //   company_link: "https://techatnyu.org/",
-  //   bp_style: "bg-offwhite",
-  //   shadowColor: "255,255,255"
-  // }
 ]
