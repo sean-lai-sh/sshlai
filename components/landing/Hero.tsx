@@ -4,7 +4,6 @@ import { searching } from '@/lib/consts'
 import { MaskText } from '../ui/inlinemask/inlineMask'
 import { AsciiNoiseBackground } from './asciihero'
 import Anim_Button from '../ui/animated_a'
-import { ComponentMask } from '../ui/inlinemask/inlineCompmask'
 const HeroSection = () => {
   return (
     <section className="min-h-[50vh] lg:min-h-[80vh] w-full text-black flex flex-col justify-center md:px-6 bg-transparent scroll-hidden">
