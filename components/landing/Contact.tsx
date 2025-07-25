@@ -4,7 +4,7 @@ import React from 'react'
 const ContactPage = () => {
   return (
     <div className="w-full flex items-center justify-center py-10 px-4">
-      <div className="w-full max-w-3xl flex flex-col md:flex-row md:justify-between gap-6 text-center md:text-left ">
+      <div className="w-full max-w-3xl flex flex-col md:flex-row md:justify-between gap-6 text-center md:text-left text-sm ">
         <a
           href="https://www.linkedin.com/in/sean-sh-lai/"
           target="_blank"
@@ -13,13 +13,14 @@ const ContactPage = () => {
         >
           LinkedIn
         </a>
+        
         <a
-          href="https://x.com/seansecureshell"
+          href="/Resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:underline duration-300 text-white"
         >
-          Twitter/X
+          Resume
         </a>
         <a
           href="mailto:seanlai@nyu.edu"
@@ -34,6 +35,14 @@ const ContactPage = () => {
           className="hover:underline duration-300 text-white"
         >
           GitHub
+        </a>
+        <a
+          href="https://x.com/seansecureshell"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:underline duration-300 text-white"
+        >
+          Twitter/X
         </a>
       </div>
     </div>
