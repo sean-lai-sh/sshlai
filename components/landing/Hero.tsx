@@ -3,6 +3,7 @@ import MarqueeBanner from '../Navigation/marquee'
 import { searching } from '@/lib/consts'
 import { MaskText } from '../ui/inlinemask/inlineMask'
 import { AsciiNoiseBackground } from './asciihero'
+import AnimatedLink from '../ui/AnimatedLink'
 // import Anim_Button from '../ui/animated_a'
 const HeroSection = () => {
   return (
@@ -44,58 +45,33 @@ function LandingInformation() {
     <div className="lg:bg-transparent lg:backdrop-blur-md p-2 py-4 sm:p-4 lg:p-10 w-full max-w-full md:w-1/2 h-full flex items-center justify-start md:items-start md:justify-start text-xs sm:text-base lg:text-base lg:leading-7 text-beige overflow-x-hidden">
       <p>
         Building data infra at{' '}
-        <a
-          href="https://www.boostb2b.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 hover:underline transition-colors"
-        >
+        <AnimatedLink href="https://www.boostb2b.com">
           Boost Payment Solutions
-        </a>. 
+        </AnimatedLink>. 
         <br />
         <br />
         VP @{' '}
-        <a
-          href="https://www.techatnyu.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 hover:underline transition-colors"
-        >
+        <AnimatedLink href="https://www.techatnyu.org">
           Tech@NYU
-        </a>{' '}
+        </AnimatedLink>{' '}
         – run hiring hackathons and curated tech events.
         <br />
         <br />
         Research Eng Lead @{' '}
-        <a
-          href="https://vip.hsrn.nyu.edu"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 hover:underline transition-colors"
-        >
+        <AnimatedLink href="https://vip.hsrn.nyu.edu">
           NYU HSRN Lab
-        </a>{' '}
+        </AnimatedLink>{' '}
         – building low latency research workflows. 
         <br />
         <br />
         Prev: VLM Research @{' '}
-        <a
-          href="https://ai4ce.github.io/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 hover:underline transition-colors"
-        >
+        <AnimatedLink href="https://ai4ce.github.io/">
           NYU AI4CE Lab
-        </a>{' '}
+        </AnimatedLink>{' '}
         & Research Assistant @{' '}
-        <a
-          href="https://engineering.nyu.edu/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 hover:underline transition-colors"
-        >
+        <AnimatedLink href="https://engineering.nyu.edu/">
           NYU Sustainability Initiative
-        </a>.
+        </AnimatedLink>.
         <br />
         <br />
         My Sidequest: Host events for founders x VCs, hiring hackathons, and creating spur-of-the-moment memories
