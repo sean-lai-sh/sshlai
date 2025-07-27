@@ -54,7 +54,7 @@ function LandingInformation() {
         <AnimatedLink href="https://www.techatnyu.org">
           Tech@NYU
         </AnimatedLink>{' '}
-        – run hiring hackathons and curated tech events.
+        – the largest tech club @ NYU for builders & hackers.
         <br />
         <br />
         Research Eng Lead @{' '}
@@ -74,7 +74,7 @@ function LandingInformation() {
         </AnimatedLink>.
         <br />
         <br />
-        My Sidequest: Host events for founders x VCs, hiring hackathons, and creating spur-of-the-moment memories
+        Sidequest(s): Host events for founders x VCs, hiring hackathons, and creating spur-of-the-moment memories
       </p>
         
 

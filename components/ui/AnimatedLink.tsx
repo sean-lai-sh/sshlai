@@ -26,7 +26,7 @@ const AnimatedLink: React.FC<AnimatedLinkProps> = ({
         {children}
       </span>
       <motion.span
-        className="absolute bottom-0 left-0 h-[1px] bg-cyan-400 origin-left scale-x-0 group-hover:scale-x-100 duration-700 ease-in-out transition-all"
+        className="absolute bottom-0 left-0 h-[1px] bg-cyan-400 origin-left scale-x-0 group-hover:scale-x-100 duration-500 ease-in-out transition-all"
         // transition={{ 
         //   duration: 0.3, 
         //   ease: "easeInOut" 
