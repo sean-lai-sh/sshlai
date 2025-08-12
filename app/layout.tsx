@@ -49,7 +49,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`dark ${inter.variable} ${jetbrainsMono.variable} ${shareTechMono.variable}`}>
-      <body className="font-sans text-beige flex items-center justify-center w-screen overflow-x-hidden bg-vantablack">
+      <body className="font-sans text-beige flex items-center justify-center w-screen overflow-x-hidden bg-background">
           {/* <Navbar /> */}
           <PageTransitionWrapper>
               {children}
