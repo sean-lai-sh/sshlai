@@ -44,7 +44,7 @@ function LandingInformation() {
       </div>
     <div className="lg:bg-transparent lg:backdrop-blur-md p-2 py-4 sm:p-4 lg:p-10 w-full max-w-full md:w-1/2 h-full flex items-center justify-start md:items-start md:justify-start text-xs sm:text-base lg:text-base lg:leading-7 text-beige overflow-x-hidden">
       <p>
-        Building data infra at{' '}
+        Prev building data infra at{' '}
         <AnimatedLink href="https://www.boostb2b.com">
           Boost Payment Solutions
         </AnimatedLink>. 
@@ -74,7 +74,7 @@ function LandingInformation() {
         </AnimatedLink>.
         <br />
         <br />
-        Sidequest(s): Host events for founders x VCs, hiring hackathons, and creating spur-of-the-moment memories
+        Sidequest(s): Host events for founders x VCs, hiring hackathons, and creating spur-of-the-moment memories. Curr curating a collection of trench coats + crewnecks.
       </p>
         
 
