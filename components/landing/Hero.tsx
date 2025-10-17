@@ -41,8 +41,8 @@ function LandingInformation() {
         </div>
       </div>
           {/* <Anim_Button content="Resume" href="/Sean%20Lai%20Resume.pdf" funcAct={() => {}} style='mt-5 min-w-10 max-w-[10rem]'/> */}
-      </div>
-    <div className="lg:bg-transparent lg:backdrop-blur-md p-2 py-4 sm:p-4 lg:p-10 w-full max-w-full md:w-1/2 h-full flex items-center justify-start md:items-start md:justify-start text-xs sm:text-base lg:text-base lg:leading-7 text-beige overflow-x-hidden">
+    </div>
+    <div className="lg:bg-transparent lg:backdrop-blur-sm p-2 py-4 sm:p-4 lg:p-10 w-full max-w-full md:w-1/2 h-full flex items-center justify-start md:items-start md:justify-start text-xs sm:text-base lg:text-base lg:leading-7 text-beige overflow-x-hidden">
       <p>
         Prev building data infra at{' '}
         <AnimatedLink href="https://www.boostb2b.com">

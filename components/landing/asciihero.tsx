@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
+import { loadWasmPerlin, type WasmPerlinNoise } from "@/lib/wasm-loader";
 
-
-// --- Perlin Noise Implementation (self-contained) ---
+// --- Fallback JavaScript Perlin Noise Implementation ---
 class PerlinNoise {
     private p: number[] = [];
     constructor() {
@@ -50,7 +50,8 @@ class AsciiRenderer {
     private canvas: HTMLCanvasElement;
     private ctx: CanvasRenderingContext2D;
     private options: Required<AsciiRendererOptions>;
-    private noiseGen: PerlinNoise;
+    private noiseGen: PerlinNoise | WasmPerlinNoise;
+    private wasmLoaded = false;
     private charWidth = 0;
     private charHeight = 0;
     private cols = 0;
@@ -65,7 +66,7 @@ class AsciiRenderer {
         const context = canvas.getContext("2d", { willReadFrequently: true });
         if (!context) throw new Error("Could not get 2D context");
         this.ctx = context;
-        this.noiseGen = new PerlinNoise();
+        this.noiseGen = new PerlinNoise(); // Fallback to JS implementation initially
         this.options = {
             // Sparser, visually balanced ASCII chars: less noisy, more readable
             charRamp: [" ", ".", ",", ":", ";", "+", "*", "#", "@"].reverse(),
@@ -77,6 +78,23 @@ class AsciiRenderer {
             isLowRes: false,
             ...options
         };
+        
+        // Try to load WASM module
+        this.loadWasmModule();
+    }
+
+    private async loadWasmModule(): Promise<void> {
+        try {
+            const wasmNoise = await loadWasmPerlin();
+            if (wasmNoise) {
+                this.noiseGen = wasmNoise;
+                this.wasmLoaded = true;
+                console.log('WASM Perlin noise loaded successfully');
+            }
+        } catch (error) {
+            console.warn('Failed to load WASM module, falling back to JavaScript implementation:', error);
+            // Keep using the JavaScript fallback
+        }
     }
 
     private async measureCharSize(): Promise<void> {
@@ -188,7 +206,11 @@ export const AsciiNoiseBackground = () => {
         if (!isInitialized) return;
         let rafId: number;
         const animate = (timestamp: number) => {
+            const start = performance.now();
             if (rendererRef.current) rendererRef.current.render(timestamp);
+
+            const duration = performance.now() - start;
+            if (duration > 5.0) console.log(duration.toFixed(2), "ms/frame");
             rafId = requestAnimationFrame(animate);
             animationFrameId.current = rafId;
         };
