@@ -25,7 +25,7 @@ const Experience = () => {
                 {projectList &&
                     projectList.map((exp, index) => {
                         return (
-                            <BgLister key={index} title={exp.company_name} role={exp.job_title} index={index} link={exp.company_link} isLarge={false} setModal={() => {}}/>
+                            <BgLister key={index} title={exp.proj_name} role={exp.proj_liner} index={index} link={exp.proj_link} isLarge={false} setModal={() => {}}/>
                         )
                     })}
 

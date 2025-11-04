@@ -58,6 +58,13 @@ export type workExpDetails = {
     bp_style?: string;
     shadowColor?: string;
 }
+
+export type ProjectDetails_v2 = {
+    proj_name: string;
+    proj_liner: string;
+    proj_link: string;
+}
+
 export interface PanelData {
     id: number;
     number: string; // "01", "02", etc.
