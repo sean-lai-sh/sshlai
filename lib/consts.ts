@@ -349,7 +349,12 @@ export const projectList: ProjectDetails_v2[] = [
     proj_link: "https://github.com/sean-lai-sh/"
   },
   {
-    proj_name: "TBA",
+    proj_name: "Tech@NYU",
+    proj_liner: "Revamped Website",
+    proj_link: "https://techatnyu.org/"
+  },
+  {
+    proj_name: "Orches",
     proj_liner: "Real time Infra Deployment",
     proj_link: "https://github.com/sean-lai-sh/exp-orchestrator",
   },
