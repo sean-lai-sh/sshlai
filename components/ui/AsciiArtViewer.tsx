@@ -1,39 +1,58 @@
+'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import { cn } from "@/lib/utils";
 
 interface AsciiArtViewerProps {
-  filePath: string;
+  filePath?: string;
   colorFilePath?: string;
   colorMode?: boolean;
   className?: string;
+  preloadedData?: ColorData | null;
 }
 
-interface ColorPixel {
+export interface ColorPixel {
   c: string;
   h: string;
 }
 
-interface ColorData {
+export interface ColorData {
   width: number;
   height: number;
   data: ColorPixel[];
+}
+
+interface AsciiArtViewerProps {
+  filePath?: string;
+  colorFilePath?: string;
+  colorMode?: boolean;
+  className?: string;
+  preloadedData?: ColorData | null;
 }
 
 const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({ 
   filePath, 
   colorFilePath, 
   colorMode = false, 
-  className 
+  className,
+  preloadedData
 }) => {
   const [asciiArt, setAsciiArt] = useState<string>('');
-  const [colorData, setColorData] = useState<ColorData | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [colorData, setColorData] = useState<ColorData | null>(preloadedData || null);
+  const [loading, setLoading] = useState<boolean>(!preloadedData);
   const [error, setError] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  // Update state if preloadedData changes
+  useEffect(() => {
+    if (preloadedData) {
+      setColorData(preloadedData);
+      setLoading(false);
+    }
+  }, [preloadedData]);
+
   // Fetch Monochrome Data
   useEffect(() => {
-    if (colorMode) return;
+    if (colorMode || !filePath) return;
     
     setLoading(true);
     fetch(filePath)
@@ -54,7 +73,7 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
 
   // Fetch Color Data
   useEffect(() => {
-    if (!colorMode || !colorFilePath) return;
+    if (!colorMode || !colorFilePath || preloadedData) return;
 
     setLoading(true);
     fetch(colorFilePath)

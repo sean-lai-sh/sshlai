@@ -1,75 +1,23 @@
-'use client'
-import React, { useRef, useEffect } from 'react'
-import Link from 'next/link'
-import gsap from 'gsap'
-import AsciiArtViewer from '@/components/ui/AsciiArtViewer'
+import React from 'react'
+import AsciiArtViewer, { ColorData } from '@/components/ui/AsciiArtViewer'
+import EssayLink from '@/components/essays/EssayLink'
+import { promises as fs } from 'fs'
+import path from 'path'
 
-// Local AnimatedLink component with white styling to match "black white underline" request (assuming white text on dark bg)
-const EssayLink = ({ href, children }: { href: string, children: React.ReactNode }) => {
-  const isExternal = href.startsWith('http') || href.startsWith('mailto:')
-  const underlineRef = useRef<HTMLSpanElement>(null)
-  const containerRef = useRef<HTMLSpanElement>(null)
-
-  useEffect(() => {
-    const container = containerRef.current
-    const underline = underlineRef.current
-
-    if (!container || !underline) return
-
-    const handleMouseEnter = () => {
-      gsap.to(underline, {
-        scaleX: 1,
-        duration: 1,
-        ease: 'power3.inOut'
-      })
-    }
-
-    const handleMouseLeave = () => {
-      gsap.to(underline, {
-        scaleX: 0,
-        duration: 1,
-        ease: 'power3.inOut'
-      })
-    }
-
-    container.addEventListener('mouseenter', handleMouseEnter)
-    container.addEventListener('mouseleave', handleMouseLeave)
-
-    return () => {
-      container.removeEventListener('mouseenter', handleMouseEnter)
-      container.removeEventListener('mouseleave', handleMouseLeave)
-    }
-  }, [])
-
-  const linkContent = (
-    <span ref={containerRef} className="relative inline-block group w-full">
-      <span className="relative flex justify-between z-10 text-white group-hover:text-gray-300 transition-colors duration-200">
-        {children}
-      </span>
-      <span
-        ref={underlineRef}
-        className="absolute bottom-0 left-0 h-[1px] bg-white origin-left"
-        style={{ width: '100%', transform: 'scaleX(0)' }}
-      />
-    </span>
-  )
-
-  if (isExternal) {
-    return (
-      <a href={href} target="_blank" rel="noopener noreferrer">
-        {linkContent}
-      </a>
-    )
+async function getHeroData(): Promise<ColorData | null> {
+  try {
+    const filePath = path.join(process.cwd(), 'public', 'essay_hero.json')
+    const fileContents = await fs.readFile(filePath, 'utf8')
+    return JSON.parse(fileContents)
+  } catch (error) {
+    console.error('Error reading essay_hero.json:', error)
+    return null
   }
-
-  return (
-    <Link href={href}>
-      {linkContent}
-    </Link>
-  )
 }
 
-export default function EssaysPage() {
+export default async function EssaysPage() {
+  const heroData = await getHeroData()
+
   return (
     <main className="min-h-screen w-screen text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
@@ -87,9 +35,8 @@ export default function EssaysPage() {
           {/* Image Section */}
           <div className="w-full lg:w-1/2 flex justify-center items-start">
              <AsciiArtViewer 
-                filePath="" 
-                colorFilePath="/essay_hero.json" 
                 colorMode={true} 
+                preloadedData={heroData}
                 className="bg-transparent border-none shadow-none p-0"
               />
           </div>
