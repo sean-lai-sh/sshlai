@@ -279,6 +279,8 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
 
         // Render highlighted characters
         ctx.textBaseline = 'top';
+        const glitchChars = '█▓▒░@#%&?!<>/0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
         affectedPixels.forEach((age, pixelIndex) => {
             const pixel = colorData.data[pixelIndex];
             if (pixel) {
@@ -287,27 +289,41 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
                 const x = c * charWidth;
                 const y = r * lineHeight;
 
-                // Brightness logic: Boost the color towards white based on age
-                // Parse hex
-                const hex = pixel.h.replace('#', '');
-                const rVal = parseInt(hex.substring(0, 2), 16);
-                const gVal = parseInt(hex.substring(2, 4), 16);
-                const bVal = parseInt(hex.substring(4, 6), 16);
+                // Glitch Effect: Randomly corrupt character and color based on proximity (age)
+                // Reduced probability (strength) and frequency
+                if (Math.random() < age * 0.15) {
+                    // 1. Color Corruption
+                    const glitchType = Math.random();
+                    let fillStyle;
+                    
+                    // Retro Static Palette (CMYK + Phosphor + Noise)
+                    if (glitchType < 0.15) fillStyle = '#FFFFFF'; // White (Bright pop)
+                    else if (glitchType < 0.30) fillStyle = '#00FFFF'; // Cyan
+                    else if (glitchType < 0.45) fillStyle = '#FF00FF'; // Magenta
+                    else if (glitchType < 0.60) fillStyle = '#FFFF00'; // Yellow
+                    else if (glitchType < 0.75) fillStyle = '#00FF00'; // Green (Phosphor)
+                    else if (glitchType < 0.85) fillStyle = '#FF0000'; // Red
+                    else {
+                        // Grayscale static noise
+                        const gray = Math.floor(Math.random() * 200 + 55);
+                        fillStyle = `rgb(${gray},${gray},${gray})`;
+                    }
 
-                // Boost amount (reduced brightness as requested)
-                // Apply base brightness boost first if on mobile
-                const baseR = Math.min(255, rVal + brightnessBoost);
-                const baseG = Math.min(255, gVal + brightnessBoost);
-                const baseB = Math.min(255, bVal + brightnessBoost);
+                    ctx.fillStyle = fillStyle;
 
-                const boost = Math.floor(60 * age); 
-                
-                const newR = Math.min(255, baseR + boost);
-                const newG = Math.min(255, baseG + boost);
-                const newB = Math.min(255, baseB + boost);
-                
-                ctx.fillStyle = `rgb(${newR}, ${newG}, ${newB})`;
-                ctx.fillText(pixel.c, x, y);
+                    // 2. Character Replacement
+                    // Reduced replacement chance significantly
+                    const charToDraw = Math.random() < 0.1 
+                        ? glitchChars.charAt(Math.floor(Math.random() * glitchChars.length)) 
+                        : pixel.c;
+                    
+                    // 3. Position Jitter
+                    // Reduced jitter amplitude
+                    const jitterX = (Math.random() - 0.5) * 1.5;
+                    const jitterY = (Math.random() - 0.5) * 1.5;
+
+                    ctx.fillText(charToDraw, x + jitterX, y + jitterY);
+                }
             }
         });
       }
@@ -336,6 +352,28 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
     mouseRef.current = null;
   };
 
+  const handleContextMenu = () => {
+    // Clear trail immediately for clean copy
+    trailRef.current = [];
+    mouseRef.current = null;
+    
+    // Force immediate redraw of static content
+    if (canvasRef.current && offscreenCanvasRef.current) {
+        const ctx = canvasRef.current.getContext('2d');
+        if (ctx) {
+            // Use style width/height which matches the logical coordinate system (since context is scaled)
+            const width = parseFloat(canvasRef.current.style.width);
+            const height = parseFloat(canvasRef.current.style.height);
+            
+            if (!isNaN(width) && !isNaN(height)) {
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.clearRect(0, 0, width, height);
+                ctx.drawImage(offscreenCanvasRef.current, 0, 0, width, height);
+            }
+        }
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-[60vh] w-full text-muted-foreground animate-pulse">
@@ -360,6 +398,7 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
           className="select-none"
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
+          onContextMenu={handleContextMenu}
         />
       ) : (
         <pre
