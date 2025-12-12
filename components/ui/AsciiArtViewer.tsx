@@ -29,10 +29,10 @@ interface AsciiArtViewerProps {
   preloadedData?: ColorData | null;
 }
 
-const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({ 
-  filePath, 
-  colorFilePath, 
-  colorMode = false, 
+const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
+  filePath,
+  colorFilePath,
+  colorMode = false,
   className,
   preloadedData
 }) => {
@@ -40,7 +40,19 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
   const [colorData, setColorData] = useState<ColorData | null>(preloadedData || null);
   const [loading, setLoading] = useState<boolean>(!preloadedData);
   const [error, setError] = useState<string | null>(null);
+  
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  
+  // Refs for animation and interaction
+  const offscreenCanvasRef = useRef<HTMLCanvasElement | null>(null);
+  const requestRef = useRef<number>();
+  const mouseRef = useRef<{x: number, y: number} | null>(null);
+  const trailRef = useRef<{x: number, y: number, age: number}[]>([]);
+  
+  // Progressive loading refs
+  const currentRowRef = useRef(0);
+  const charWidthRef = useRef(0);
+  const frameRef = useRef(0);
 
   // Update state if preloadedData changes
   useEffect(() => {
@@ -92,7 +104,41 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
       });
   }, [colorFilePath, colorMode]);
 
-  // Render Color Mode to Canvas
+  // Prepare Offscreen Canvas (Static Render Setup)
+  useEffect(() => {
+    if (!colorMode || !colorData) return;
+
+    const offCanvas = document.createElement('canvas');
+    const ctx = offCanvas.getContext('2d');
+    if (!ctx) return;
+
+    // Font settings
+    const fontSize = 3;
+    const lineHeight = 3;
+    const fontFamily = '"Courier New", Courier, monospace';
+    
+    const dpr = window.devicePixelRatio || 1;
+    const width = colorData.width * (fontSize * 0.6);
+    const height = colorData.height * lineHeight;
+    
+    offCanvas.width = width * dpr;
+    offCanvas.height = height * dpr;
+    
+    ctx.scale(dpr, dpr);
+    ctx.font = `${fontSize}px ${fontFamily}`;
+    ctx.textBaseline = 'top';
+    
+    // Draw background
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, width, height);
+
+    charWidthRef.current = ctx.measureText('M').width;
+    currentRowRef.current = 0; // Reset loading progress
+
+    offscreenCanvasRef.current = offCanvas;
+  }, [colorData, colorMode]);
+
+  // Animation Loop
   useEffect(() => {
     if (!colorMode || !colorData || !canvasRef.current) return;
 
@@ -100,15 +146,11 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Font settings - must match the monochrome look
+    // Set canvas size (needs to match offscreen)
     const fontSize = 3;
     const lineHeight = 3;
-    const fontFamily = '"Courier New", Courier, monospace';
-    
-    // Set canvas size
-    // We need high resolution for crisp text
     const dpr = window.devicePixelRatio || 1;
-    const width = colorData.width * (fontSize * 0.6); // Approx char width
+    const width = colorData.width * (fontSize * 0.6);
     const height = colorData.height * lineHeight;
     
     canvas.width = width * dpr;
@@ -117,27 +159,162 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
     canvas.style.height = `${height}px`;
     
     ctx.scale(dpr, dpr);
-    ctx.font = `${fontSize}px ${fontFamily}`;
-    ctx.textBaseline = 'top';
+
+    const animate = () => {
+      if (!offscreenCanvasRef.current) return;
+
+      frameRef.current++;
+
+      // Progressive Loading Logic
+      if (colorData && currentRowRef.current < colorData.height) {
+         // Control speed: render 1 row every 2 frames
+         if (frameRef.current % 2 === 0) {
+             const offCtx = offscreenCanvasRef.current.getContext('2d');
+             if (offCtx) {
+                 const rowsToRender = 1; // Render one row at a time
+                 const startRow = currentRowRef.current;
+                 const endRow = Math.min(startRow + rowsToRender, colorData.height);
+                 const lineHeight = 3;
+                 const charWidth = charWidthRef.current;
     
-    // Clear canvas
-    ctx.fillStyle = '#000000'; // Black background for color mode usually looks best
-    ctx.fillRect(0, 0, width, height);
+                 for (let r = startRow; r < endRow; r++) {
+                     const rowOffset = r * colorData.width;
+                     for (let c = 0; c < colorData.width; c++) {
+                         const pixel = colorData.data[rowOffset + c];
+                         if (pixel) {
+                             const x = c * charWidth;
+                             const y = r * lineHeight;
+                             offCtx.fillStyle = pixel.h;
+                             offCtx.fillText(pixel.c, x, y);
+                         }
+                     }
+                 }
+                 currentRowRef.current = endRow;
+             }
+         }
+      }
 
-    // Render characters
-    // Char width is tricky in canvas. We'll assume a fixed advance for monospace.
-    // Measuring 'M' usually gives a good approximation for monospace width.
-    const charWidth = ctx.measureText('M').width;
-
-    colorData.data.forEach((pixel, index) => {
-      const x = (index % colorData.width) * charWidth;
-      const y = Math.floor(index / colorData.width) * lineHeight;
+      // 1. Clear and Draw Static Image
+      ctx.clearRect(0, 0, width, height);
       
-      ctx.fillStyle = pixel.h;
-      ctx.fillText(pixel.c, x, y);
-    });
+      // Draw the static image (which is being progressively updated)
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.drawImage(offscreenCanvasRef.current, 0, 0, width, height);
 
+      // 2. Update Trail
+      if (mouseRef.current) {
+        trailRef.current.push({
+          x: mouseRef.current.x,
+          y: mouseRef.current.y,
+          age: 1.0
+        });
+      }
+
+      // Remove old points
+      for (let i = trailRef.current.length - 1; i >= 0; i--) {
+        trailRef.current[i].age -= 0.04; // Faster fade for snappier feel
+        if (trailRef.current[i].age <= 0) {
+          trailRef.current.splice(i, 1);
+        }
+      }
+
+      // 3. Draw Trail (Pixelated/Voxelized Effect)
+      // We want to highlight specific characters based on the trail, not draw a smooth circle.
+      if (trailRef.current.length > 0) {
+        const lineHeight = 3;
+        const charWidth = charWidthRef.current;
+        const baseRadius = 20; // Base radius for the trail
+        
+        // Map to store max brightness for each affected character index
+        // Key: pixelIndex, Value: maxAge (brightness factor)
+        const affectedPixels = new Map<number, number>();
+
+        trailRef.current.forEach(point => {
+            // Dynamic radius: Main hover circle (age ~1) is 20% larger than the fading trail
+            const currentRadius = baseRadius * (1 + 0.2 * point.age);
+
+            // Calculate grid bounds for this point
+            const centerCol = Math.floor(point.x / charWidth);
+            const centerRow = Math.floor(point.y / lineHeight);
+            
+            const radiusInCols = Math.ceil(currentRadius / charWidth);
+            const radiusInRows = Math.ceil(currentRadius / lineHeight);
+
+            const minCol = Math.max(0, centerCol - radiusInCols);
+            const maxCol = Math.min(colorData.width - 1, centerCol + radiusInCols);
+            const minRow = Math.max(0, centerRow - radiusInRows);
+            const maxRow = Math.min(colorData.height - 1, centerRow + radiusInRows);
+
+            for (let r = minRow; r <= maxRow; r++) {
+                for (let c = minCol; c <= maxCol; c++) {
+                    // Check distance in pixels for "circle" shape
+                    const pixelX = c * charWidth + charWidth/2;
+                    const pixelY = r * lineHeight + lineHeight/2;
+                    const dx = pixelX - point.x;
+                    const dy = pixelY - point.y;
+                    
+                    if (dx*dx + dy*dy <= currentRadius*currentRadius) {
+                        const pixelIndex = r * colorData.width + c;
+                        const currentMax = affectedPixels.get(pixelIndex) || 0;
+                        affectedPixels.set(pixelIndex, Math.max(currentMax, point.age));
+                    }
+                }
+            }
+        });
+
+        // Render highlighted characters
+        ctx.textBaseline = 'top';
+        affectedPixels.forEach((age, pixelIndex) => {
+            const pixel = colorData.data[pixelIndex];
+            if (pixel) {
+                const r = Math.floor(pixelIndex / colorData.width);
+                const c = pixelIndex % colorData.width;
+                const x = c * charWidth;
+                const y = r * lineHeight;
+
+                // Brightness logic: Boost the color towards white based on age
+                // Parse hex
+                const hex = pixel.h.replace('#', '');
+                const rVal = parseInt(hex.substring(0, 2), 16);
+                const gVal = parseInt(hex.substring(2, 4), 16);
+                const bVal = parseInt(hex.substring(4, 6), 16);
+
+                // Boost amount (reduced brightness as requested)
+                const boost = Math.floor(60 * age); 
+                
+                const newR = Math.min(255, rVal + boost);
+                const newG = Math.min(255, gVal + boost);
+                const newB = Math.min(255, bVal + boost);
+                
+                ctx.fillStyle = `rgb(${newR}, ${newG}, ${newB})`;
+                ctx.fillText(pixel.c, x, y);
+            }
+        });
+      }
+
+      requestRef.current = requestAnimationFrame(animate);
+    };
+
+    requestRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
+    };
   }, [colorData, colorMode]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    const rect = canvasRef.current?.getBoundingClientRect();
+    if (rect) {
+      mouseRef.current = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
+    }
+  };
+
+  const handleMouseLeave = () => {
+    mouseRef.current = null;
+  };
 
   if (loading) {
     return (
@@ -158,9 +335,14 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
   return (
     <div className={cn("w-full flex justify-center bg-stone-900 p-8 rounded-lg shadow-inner border border-stone-800", className)}>
       {colorMode ? (
-        <canvas ref={canvasRef} className="select-none" />
+        <canvas 
+          ref={canvasRef} 
+          className="select-none"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+        />
       ) : (
-        <pre 
+        <pre
           className="font-mono text-[3px] leading-[3px] text-stone-300 whitespace-pre select-none"
           style={{ fontFamily: '"Courier New", Courier, monospace' }}
         >
