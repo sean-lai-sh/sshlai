@@ -43,7 +43,7 @@ export default async function EssaysPage() {
         <div className="flex flex-col lg:flex-row-reverse items-center sm:items-start gap-4 lg:gap-12">
 
           {/* Image Section */}
-          <div className="w-[60%] max-w-[60vw] sm:max-w-[100vw] lg:w-1/2 flex justify-center items-start">
+          <div className="w-[100%] sm:max-w-[100vw] lg:w-1/2 flex justify-center items-start">
              <ResponsiveAsciiArt
                 desktopData={heroData.desktop}
                 mobileData={heroData.mobile}

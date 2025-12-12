@@ -112,9 +112,10 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
     const ctx = offCanvas.getContext('2d');
     if (!ctx) return;
 
-    // Font settings
-    const fontSize = 3;
-    const lineHeight = 3;
+    // Responsive settings
+    const isMobile = window.innerWidth < 768;
+    const fontSize = isMobile ? 5 : 3;
+    const lineHeight = isMobile ? 5 : 3;
     const fontFamily = '"Courier New", Courier, monospace';
     
     const dpr = window.devicePixelRatio || 1;
@@ -146,9 +147,13 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // Responsive settings
+    const isMobile = window.innerWidth < 768;
+    const fontSize = isMobile ? 5 : 3;
+    const lineHeight = isMobile ? 5 : 3;
+    const brightnessBoost = isMobile ? 40 : 0;
+
     // Set canvas size (needs to match offscreen)
-    const fontSize = 3;
-    const lineHeight = 3;
     const dpr = window.devicePixelRatio || 1;
     const width = colorData.width * (fontSize * 0.6);
     const height = colorData.height * lineHeight;
@@ -159,6 +164,18 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
     canvas.style.height = `${height}px`;
     
     ctx.scale(dpr, dpr);
+
+    // Helper to boost brightness
+    const getBoostedColor = (hex: string, boost: number) => {
+        if (boost <= 0) return hex;
+        const r = parseInt(hex.substring(1, 3), 16);
+        const g = parseInt(hex.substring(3, 5), 16);
+        const b = parseInt(hex.substring(5, 7), 16);
+        const newR = Math.min(255, r + boost);
+        const newG = Math.min(255, g + boost);
+        const newB = Math.min(255, b + boost);
+        return `rgb(${newR}, ${newG}, ${newB})`;
+    };
 
     const animate = () => {
       if (!offscreenCanvasRef.current) return;
@@ -174,7 +191,6 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
                  const rowsToRender = 1; // Render one row at a time
                  const startRow = currentRowRef.current;
                  const endRow = Math.min(startRow + rowsToRender, colorData.height);
-                 const lineHeight = 3;
                  const charWidth = charWidthRef.current;
     
                  for (let r = startRow; r < endRow; r++) {
@@ -184,7 +200,7 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
                          if (pixel) {
                              const x = c * charWidth;
                              const y = r * lineHeight;
-                             offCtx.fillStyle = pixel.h;
+                             offCtx.fillStyle = getBoostedColor(pixel.h, brightnessBoost);
                              offCtx.fillText(pixel.c, x, y);
                          }
                      }
@@ -221,7 +237,6 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
       // 3. Draw Trail (Pixelated/Voxelized Effect)
       // We want to highlight specific characters based on the trail, not draw a smooth circle.
       if (trailRef.current.length > 0) {
-        const lineHeight = 3;
         const charWidth = charWidthRef.current;
         const baseRadius = 20; // Base radius for the trail
         
@@ -280,11 +295,16 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
                 const bVal = parseInt(hex.substring(4, 6), 16);
 
                 // Boost amount (reduced brightness as requested)
+                // Apply base brightness boost first if on mobile
+                const baseR = Math.min(255, rVal + brightnessBoost);
+                const baseG = Math.min(255, gVal + brightnessBoost);
+                const baseB = Math.min(255, bVal + brightnessBoost);
+
                 const boost = Math.floor(60 * age); 
                 
-                const newR = Math.min(255, rVal + boost);
-                const newG = Math.min(255, gVal + boost);
-                const newB = Math.min(255, bVal + boost);
+                const newR = Math.min(255, baseR + boost);
+                const newG = Math.min(255, baseG + boost);
+                const newB = Math.min(255, baseB + boost);
                 
                 ctx.fillStyle = `rgb(${newR}, ${newG}, ${newB})`;
                 ctx.fillText(pixel.c, x, y);
