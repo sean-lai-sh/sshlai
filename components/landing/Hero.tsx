@@ -44,37 +44,39 @@ function LandingInformation() {
     </div>
     <div className="lg:bg-transparent lg:backdrop-blur-sm p-2 py-4 sm:p-4 lg:p-10 w-full max-w-full md:w-1/2 h-full flex items-center justify-start md:items-start md:justify-start text-xs sm:text-base lg:text-base lg:leading-7 text-beige overflow-x-hidden">
       <p>
-        Prev building data infra at{' '}
-        <AnimatedLink href="https://www.boostb2b.com">
-          Boost Payment Solutions
-        </AnimatedLink>. 
-        <br />
-        <br />
-        VP @{' '}
+        President @{' '}
         <AnimatedLink href="https://www.techatnyu.org">
           Tech@NYU
         </AnimatedLink>{' '}
         – the largest tech club @ NYU for builders & hackers.
         <br />
         <br />
-        Research Eng Lead @{' '}
+        Program Lead @{' '}
         <AnimatedLink href="https://vip.hsrn.nyu.edu">
           NYU HSRN Lab
         </AnimatedLink>{' '}
         – building low latency research workflows. 
         <br />
         <br />
-        Prev: VLM Research @{' '}
+        <span className="">Previously:</span>
+        <br />
+        - Data Infra @{' '}
+        <AnimatedLink href="https://www.boostb2b.com">
+          Boost Payment Solutions
+        </AnimatedLink>
+        <br /> - VLA Research @{' '}
         <AnimatedLink href="https://ai4ce.github.io/">
           NYU AI4CE Lab
-        </AnimatedLink>{' '}
-        & Research Assistant @{' '}
+        </AnimatedLink>
+        <br /> - Research Assistant @{' '}
         <AnimatedLink href="https://engineering.nyu.edu/">
           NYU Sustainability Initiative
-        </AnimatedLink>.
+        </AnimatedLink>
+        .
         <br />
         <br />
-        Sidequest(s): Host events for founders x VCs, hiring hackathons, and creating spur-of-the-moment memories. Curr curating a collection of trench coats + crewnecks.
+        Sidequest(s):
+        <br />Events for VCs & Founders, and more recently <AnimatedLink href="/angels">Angel Investing</AnimatedLink>
       </p>
         
 
