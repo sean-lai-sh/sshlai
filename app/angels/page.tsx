@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Stair from '@/components/animated/Stair'
 import InvestmentLink from '@/components/angels/InvestmentLink'
+import AngelWingsBackground from '@/components/angels/AngelWingsBackground'
 
 const Page = () => {
   return (
@@ -37,6 +38,13 @@ const Page = () => {
             </p>
           </section>
 
+          {/* Angel Wings ASCII Art */}
+          {/* <section className="relative w-full flex justify-center items-center py-6 lg:py-8">
+            <div className="relative max-w-full overflow-hidden">
+              <AngelWingsBackground className="relative opacity-25" />
+            </div>
+          </section> */}
+
           {/* Two Column Layout */}
           <div className="flex flex-col-reverse lg:flex-1 lg:grid lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Left Column: What Angel Investing Is To Me */}
@@ -51,7 +59,7 @@ const Page = () => {
                     of wanting to see you succeed and also a sign of trust. At the point of check I&apos;ve known you a decent bit past a casual intro and want to continue helping past the initial help.
                 <br />
                 <br />
-                    This <strong> doesn&apos;t mean I wont help you if I don&apos;t invest</strong>, but wont have the capital or time to be your number 1 supporter - I am still in college fyi. I invest solely my own personal capital and do not manage or deploy money for others.
+                    This <strong> doesn&apos;t mean I wont help you if I don&apos;t invest</strong>, but wont have the capital or time to be your number 1 supporter - I am still in college and have other priorities fyi. Feel free to reach out regardless, always happy to meet interesting people. I invest solely my own personal capital and do not manage or deploy money for others.
                 </p>
                 <div className="pt-2">
                   <h3 className="text-base text-white font-medium mb-2">
@@ -60,19 +68,23 @@ const Page = () => {
                   <ul className="space-y-2 text-sm lg:text-base">
                     <li className="flex gap-2">
                       <span className="text-beige/60">•</span>
-                      <span>Investor intros (Bain, Menlo, Charge VC, etc.)</span>
+                      <span>Investor & angel intros</span>
                     </li>
                     <li className="flex gap-2">
                       <span className="text-beige/60">•</span>
-                      <span>Potential clientele and customer connections</span>
+                      <span>Client Intros</span>
                     </li>
                     <li className="flex gap-2">
                       <span className="text-beige/60">•</span>
-                      <span>Hiring talent, especially technical roles</span>
+                      <span>Sourcing talent, especially technical roles</span>
                     </li>
                     <li className="flex gap-2">
                       <span className="text-beige/60">•</span>
                       <span>Technical architecture advice</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="text-beige/60">•</span>
+                      <span>University growth intros</span>
                     </li>
                   </ul>
                 </div>
@@ -81,15 +93,15 @@ const Page = () => {
 
             {/* Right Column: Investments */}
             <section>
-              <h2 className="text-xl lg:text-2xl font-medium text-white mb-3">
-                Investments
+              <h2 className="text-2xl tracking-wide font-medium line-clamp-none text-white mb-3">
+                Select Investments
               </h2>
               <ul className="space-y-3">
                 <li>
                   <InvestmentLink
                     href="https://en.wikipedia.org/wiki/Stealth_startup"
                     name="Stealth"
-                    category="Agent Task Competency"
+                    category="Agent Task Competency Evals"
                   />
                 </li>
               </ul>

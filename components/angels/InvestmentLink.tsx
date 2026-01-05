@@ -51,7 +51,7 @@ const InvestmentLink = ({ href, name, category }: InvestmentLinkProps) => {
       rel="noopener noreferrer"
       className="group flex items-center gap-3 text-base cursor-pointer"
     >
-      <span className="relative inline-block text-lg font-medium text-beige group-hover:text-gray-400 transition-colors duration-800 ease-in-out">
+      <span className="relative inline-block text-lg font-medium text-beige/90 group-hover:text-gray-400 transition-colors duration-800 ease-in-out">
         {name}
         <span
           ref={underlineRef}
