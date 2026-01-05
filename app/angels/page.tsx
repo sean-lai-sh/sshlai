@@ -2,7 +2,6 @@ import React from 'react'
 import Link from 'next/link'
 import Stair from '@/components/animated/Stair'
 import InvestmentLink from '@/components/angels/InvestmentLink'
-import AngelWingsBackground from '@/components/angels/AngelWingsBackground'
 
 const Page = () => {
   return (
