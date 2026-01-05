@@ -54,13 +54,15 @@ const Page = () => {
               <div className="space-y-3 text-sm text-beige/90 leading-relaxed">
                 <p>
                     Angels are reserved for the friends I want to partner
-                    with for the long run. A check from me is not to be treated as capital but a form
-                    of wanting to see you succeed and also a sign of trust. At the point of check I&apos;ve known you a decent bit past a casual intro and want to continue helping past the initial help.
+                    with for the long run. I like to think of my check not as necessary capital but a sign of trust and desire to grow our partnership for years to come. As such, when writing these checks, it's almost always that I&apos;ve known you a decent bit past a casual intro and want to continue helping past the initial asks from you.
                 <br />
                 <br />
-                    This <strong> doesn&apos;t mean I wont help you if I don&apos;t invest</strong>, but wont have the capital or time to be your number 1 supporter - I am still in college and have other priorities fyi. Feel free to reach out regardless, always happy to meet interesting people. I invest solely my own personal capital and do not manage or deploy money for others.
+                    I am always happy to help even when I do not invest. <strong> The difference is simply depth. </strong> As a college student, my time and capital are limited, so I reserve my highest level of commitment for founders I back personally.
+                <br />
+                <br />  
+               Regardless of investment, feel free to reach out. I enjoy meeting builders who dare to pursue ambitious ideas and follow through on them. I invest solely my own personal capital and do not manage or deploy money for others.
                 </p>
-                <div className="pt-2">
+                {/* <div className="pt-2">
                   <h3 className="text-base text-white font-medium mb-2">
                     How I Can Help
                   </h3>
@@ -86,7 +88,7 @@ const Page = () => {
                       <span>University growth intros</span>
                     </li>
                   </ul>
-                </div>
+                </div> */}
               </div>
             </section>
 
@@ -100,7 +102,7 @@ const Page = () => {
                   <InvestmentLink
                     href="https://en.wikipedia.org/wiki/Stealth_startup"
                     name="Stealth"
-                    category="Agent Task Competency Evals"
+                    category="Agentic Task Competency Evals"
                   />
                 </li>
               </ul>
