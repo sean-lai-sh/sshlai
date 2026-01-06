@@ -17,7 +17,7 @@ const Page = () => {
               main
             </Link>
             <Link
-              href="/contact"
+              href="mailto:seanlai@nyu.edu"
               className="text-beige hover:text-white transition-colors duration-300 text-sm"
             >
               contact
