@@ -57,7 +57,7 @@ const Page = () => {
                     with for the long run. I like to think of my check not as necessary capital but a sign of trust and desire to grow our partnership for years to come. As such, when writing these checks, it&apos;s almost always that I&apos;ve known you a decent bit past a casual intro and want to continue helping past the initial asks from you.
                 <br />
                 <br />
-                    I am always happy to help even when I do not invest. <strong> The difference is simply depth. </strong> As a college student, my time and capital are limited, so I reserve my highest level of commitment for founders I back personally.
+                    I am always happy to help even when I do not invest. <strong> The difference is simply depth. </strong> As a college student, my time and capital are limited, so I reserve my highest level of commitment for founders I back personally. Also note that my check sizes are intentionally modest relative to traditional angel investments.
                 <br />
                 <br />  
                Regardless of investment, feel free to reach out. I enjoy meeting builders who dare to pursue ambitious ideas and follow through on them. I invest solely my own personal capital and do not manage or deploy money for others.
