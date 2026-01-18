@@ -7,7 +7,7 @@ import AnimatedLink from '../ui/AnimatedLink'
 // import Anim_Button from '../ui/animated_a'
 const HeroSection = () => {
   return (
-    <section className="min-h-[50vh] lg:min-h-[80vh] w-full text-black flex flex-col justify-center md:px-6 bg-transparent scroll-hidden">
+    <section className="min-h-[50vh] lg:min-h-[80vh] w-full text-black flex flex-col justify-center lg:px-6 bg-transparent scroll-hidden">
       <AsciiNoiseBackground />
       {LandingInformation()}
       {/* <ReachOut /> */}
@@ -20,7 +20,7 @@ export default HeroSection
 
 function LandingInformation() {
   return <div className="flex lg:flex-row flex-col lg:justify-between bg-charcoal/80 lg:bg-transparent #backdrop-blur-sm lg:backdrop-blur-none mt-[15rem] md:mt-[10rem] lg:mt-0">
-    <div className="w-full max-w-full md:w-fit p-2 py-4 sm:p-4 lg:p-10 text-white lg:bg-transparent lg:backdrop-blur-sm space-y-4">
+    <div className="w-full min-w-[40vw] max-w-full md:w-fit p-2 py-4 sm:p-4 lg:p-10 text-white lg:bg-transparent lg:backdrop-blur-sm space-y-4">
       <div>
         <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight">
           <MaskText
@@ -33,7 +33,7 @@ function LandingInformation() {
 
         <div className="mt-2 text-left text-sm sm:text-base md:text-lg max-w-sm sm:max-w-md md:max-w-xl text-beige">
           <MaskText
-            phrases={["Building Smarter Research Infra & Data Tools", "Trekking into the complexities of our world one data point at a time"]}
+            phrases={["Generating Entropy, Designing Systems"]}
             style="text-sm sm:text-base md:text-lg text-beige"
             customDelay={0.7}
             duration={0.9}
