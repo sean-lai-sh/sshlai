@@ -32,12 +32,6 @@ export default async function EssaysPage() {
     <main className="min-h-screen w-screen text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
 
-        {/* Hero Section */}
-        <div className="mb-4 md:mb-16">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-            Essays
-          </h1>
-        </div>
 
         {/* Content Section - Mobile: stacked, Desktop: side-by-side */}
         <div className="flex flex-col lg:flex-row-reverse items-center sm:items-start gap-4 lg:gap-12">
@@ -53,6 +47,12 @@ export default async function EssaysPage() {
 
           {/* Essays List Section */}
           <div className="w-full lg:w-1/2">
+            {/* Hero Section */}
+          <div className="mb-4">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+              Essays
+            </h1>
+          </div>
             <div className="flex flex-col gap-6 md:gap-8">
               <article className="group">
             
