@@ -83,7 +83,7 @@ function LandingInformation() {
         <br />
         <br />
         Sidequest(s):
-        <br />Events for VCs & Founders, and more recently <AnimatedLink href="/angels">Angel Investing</AnimatedLink>
+        <br />Events for VCs & Founders, and touching grass
       </p>
         
 
