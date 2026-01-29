@@ -344,9 +344,9 @@ export const workExp: workExpDetails[] = [
 
 export const projectList: ProjectDetails_v2[] = [
   {
-    proj_name: "TBA",
-    proj_liner: "MCP Observability",
-    proj_link: "https://github.com/sean-lai-sh/"
+    proj_name: "Observer",
+    proj_liner: "MCP Observability SDK",
+    proj_link: "https://github.com/sean-lai-sh/mcp-observer-sdk"
   },
   {
     proj_name: "Tech@NYU",
