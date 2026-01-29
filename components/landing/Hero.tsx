@@ -48,33 +48,33 @@ function LandingInformation() {
         <AnimatedLink href="https://withtandem.com">
           Tandem
         </AnimatedLink>{' '}
-        – Helping people get their meds fast with AI
+        – AI for Med Approval
         <br />
         <br />
         Youngest Fellow @ {' '}
         <AnimatedLink href="https://manus.im">
           Manus AI
         </AnimatedLink>{' '}
-        – Helped w API DevX & Community
+        – Community, API DevX
         <br />
         <br />
         President @{' '}
         <AnimatedLink href="https://www.techatnyu.org">
           Tech@NYU
         </AnimatedLink>{' '}
-        – the largest tech club @ NYU for builders & hackers.
+        – Hackathons, Talent Dev, Special Projs
         <br />
         <br />
         Program Lead @{' '}
         <AnimatedLink href="https://vip.hsrn.nyu.edu">
           NYU HSRN Lab
         </AnimatedLink>{' '}
-        – building low latency research workflows. 
+        – Research Workflows
         <br />
         <br />
-        <span className="">Previously:</span>
+        <span className="">Previous Work:</span>
         <br />
-        - Data Infra @{' '}
+        {/* - Data Infra @{' '}
         <AnimatedLink href="https://www.boostb2b.com">
           Boost Payment Solutions
         </AnimatedLink>
@@ -85,8 +85,8 @@ function LandingInformation() {
         <br /> - Research Assistant @{' '}
         <AnimatedLink href="https://engineering.nyu.edu/">
           NYU Sustainability Initiative
-        </AnimatedLink>
-        .
+        </AnimatedLink> */}
+        VLA evals, data infra, and research systems
         <br />
         <br />
         Sidequest(s):
