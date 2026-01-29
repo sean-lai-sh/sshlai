@@ -47,6 +47,7 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
   const offscreenCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const requestRef = useRef<number>();
   const mouseRef = useRef<{x: number, y: number} | null>(null);
+  const lastInteractionRef = useRef<number>(0);
   const trailRef = useRef<{x: number, y: number, age: number}[]>([]);
   
   // Progressive loading refs
@@ -218,61 +219,103 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
       ctx.drawImage(offscreenCanvasRef.current, 0, 0, width, height);
 
       // 2. Update Trail
-      if (mouseRef.current) {
-        trailRef.current.push({
-          x: mouseRef.current.x,
-          y: mouseRef.current.y,
-          age: 1.0
-        });
+      const timeSinceInteraction = Date.now() - lastInteractionRef.current;
+      const isInteracting = timeSinceInteraction < 1500; // Stop adding trail after 1.5s of no movement
+
+      if (!isMobile && mouseRef.current && isInteracting) {
+         // Grid settings
+         const gridCols = 8;
+         const gridRows = 4;
+         const gridW = charWidthRef.current * gridCols;
+         const gridH = lineHeight * gridRows;
+
+         const gridX = Math.floor(mouseRef.current.x / gridW);
+         const gridY = Math.floor(mouseRef.current.y / gridH);
+         
+         const centerX = gridX * gridW + gridW / 2;
+         const centerY = gridY * gridH + gridH / 2;
+
+         // Check if we already have a recent point for this grid
+         const existingPointIndex = trailRef.current.findIndex(p => 
+             Math.abs(p.x - centerX) < 1 && Math.abs(p.y - centerY) < 1
+         );
+
+         if (existingPointIndex !== -1) {
+             trailRef.current[existingPointIndex].age = 1.0;
+         } else {
+             trailRef.current.push({
+                 x: centerX,
+                 y: centerY,
+                 age: 1.0
+             });
+         }
       }
 
       // Remove old points
       for (let i = trailRef.current.length - 1; i >= 0; i--) {
-        trailRef.current[i].age -= 0.04; // Faster fade for snappier feel
+        trailRef.current[i].age -= 0.02; // Slower fade (approx 0.8s)
         if (trailRef.current[i].age <= 0) {
           trailRef.current.splice(i, 1);
         }
       }
 
-      // 3. Draw Trail (Pixelated/Voxelized Effect)
-      // We want to highlight specific characters based on the trail, not draw a smooth circle.
-      if (trailRef.current.length > 0) {
+      // 3. Draw Trail (Grid Effect)
+      if (!isMobile && trailRef.current.length > 0) {
         const charWidth = charWidthRef.current;
-        const baseRadius = 20; // Base radius for the trail
+        // Grid settings (must match update)
+        const gridCols = 5;
+        const gridRows = 3;
+        const gridW = charWidth * gridCols;
+        const gridH = lineHeight * gridRows;
         
-        // Map to store max brightness for each affected character index
-        // Key: pixelIndex, Value: maxAge (brightness factor)
         const affectedPixels = new Map<number, number>();
+        const radiusInCells = 4.5; // Blocky circle radius (in grid cells)
 
         trailRef.current.forEach(point => {
-            // Dynamic radius: Main hover circle (age ~1) is 20% larger than the fading trail
-            const currentRadius = baseRadius * (1 + 0.2 * point.age);
+            // Determine grid coordinates of the point
+            const centerGridCol = Math.floor(point.x / gridW);
+            const centerGridRow = Math.floor(point.y / gridH);
 
-            // Calculate grid bounds for this point
-            const centerCol = Math.floor(point.x / charWidth);
-            const centerRow = Math.floor(point.y / lineHeight);
-            
-            const radiusInCols = Math.ceil(currentRadius / charWidth);
-            const radiusInRows = Math.ceil(currentRadius / lineHeight);
+            // Iterate over potential neighbor grid cells
+            const startGCol = Math.floor(centerGridCol - radiusInCells);
+            const endGCol = Math.ceil(centerGridCol + radiusInCells);
+            const startGRow = Math.floor(centerGridRow - radiusInCells);
+            const endGRow = Math.ceil(centerGridRow + radiusInCells);
 
-            const minCol = Math.max(0, centerCol - radiusInCols);
-            const maxCol = Math.min(colorData.width - 1, centerCol + radiusInCols);
-            const minRow = Math.max(0, centerRow - radiusInRows);
-            const maxRow = Math.min(colorData.height - 1, centerRow + radiusInRows);
+            for (let gRow = startGRow; gRow <= endGRow; gRow++) {
+                for (let gCol = startGCol; gCol <= endGCol; gCol++) {
+                     // Check if this grid cell is within radius (Blocky Circle Logic)
+                     const dx = gCol - centerGridCol;
+                     const dy = gRow - centerGridRow;
+                     
+                     // Use a slightly permissive circle check for "blocky circle"
+                     if (dx*dx + dy*dy <= radiusInCells * radiusInCells) {
+                          // This grid cell is active.
+                          // Calculate pixel bounds for this grid cell (gRow, gCol)
+                          const cellMinX = gCol * gridW;
+                          const cellMaxX = (gCol + 1) * gridW;
+                          const cellMinY = gRow * gridH;
+                          const cellMaxY = (gRow + 1) * gridH;
 
-            for (let r = minRow; r <= maxRow; r++) {
-                for (let c = minCol; c <= maxCol; c++) {
-                    // Check distance in pixels for "circle" shape
-                    const pixelX = c * charWidth + charWidth/2;
-                    const pixelY = r * lineHeight + lineHeight/2;
-                    const dx = pixelX - point.x;
-                    const dy = pixelY - point.y;
-                    
-                    if (dx*dx + dy*dy <= currentRadius*currentRadius) {
-                        const pixelIndex = r * colorData.width + c;
-                        const currentMax = affectedPixels.get(pixelIndex) || 0;
-                        affectedPixels.set(pixelIndex, Math.max(currentMax, point.age));
-                    }
+                          const startCol = Math.floor(cellMinX / charWidth);
+                          const endCol = Math.ceil(cellMaxX / charWidth);
+                          const startRow = Math.floor(cellMinY / lineHeight);
+                          const endRow = Math.ceil(cellMaxY / lineHeight);
+
+                          // Clamp to image bounds
+                          const cMin = Math.max(0, startCol);
+                          const cMax = Math.min(colorData.width, endCol);
+                          const rMin = Math.max(0, startRow);
+                          const rMax = Math.min(colorData.height, endRow);
+
+                          for (let r = rMin; r < rMax; r++) {
+                              for (let c = cMin; c < cMax; c++) {
+                                  const pixelIndex = r * colorData.width + c;
+                                  const currentMax = affectedPixels.get(pixelIndex) || 0;
+                                  affectedPixels.set(pixelIndex, Math.max(currentMax, point.age));
+                              }
+                          }
+                     }
                 }
             }
         });
@@ -291,7 +334,7 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
 
                 // Glitch Effect: Randomly corrupt character and color based on proximity (age)
                 // Reduced probability (strength) and frequency
-                if (Math.random() < age * 0.15) {
+                if (Math.random() < age * 0.05) {
                     // 1. Color Corruption
                     const glitchType = Math.random();
                     let fillStyle;
@@ -309,6 +352,9 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
                         fillStyle = `rgb(${gray},${gray},${gray})`;
                     }
 
+                    // Apply easing to opacity
+                    ctx.save();
+                    ctx.globalAlpha = age; // Fade out based on age
                     ctx.fillStyle = fillStyle;
 
                     // 2. Character Replacement
@@ -323,6 +369,7 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
                     const jitterY = (Math.random() - 0.5) * 1.5;
 
                     ctx.fillText(charToDraw, x + jitterX, y + jitterY);
+                    ctx.restore();
                 }
             }
         });
@@ -339,6 +386,7 @@ const AsciiArtViewer: React.FC<AsciiArtViewerProps> = ({
   }, [colorData, colorMode]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    lastInteractionRef.current = Date.now();
     const rect = canvasRef.current?.getBoundingClientRect();
     if (rect) {
       mouseRef.current = {

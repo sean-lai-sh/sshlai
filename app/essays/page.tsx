@@ -4,6 +4,7 @@ import ResponsiveAsciiArt from '@/components/essays/ResponsiveAsciiArt'
 import EssayLink from '@/components/essays/EssayLink'
 import { promises as fs } from 'fs'
 import path from 'path'
+import Stair from '@/components/animated/Stair'
 
 async function getHeroData(): Promise<{ desktop: ColorData | null; mobile: ColorData | null }> {
   try {
@@ -30,6 +31,7 @@ export default async function EssaysPage() {
 
   return (
     <main className="min-h-screen w-screen text-white">
+      {/* <Stair> */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
 
         {/* Hero Section */}
@@ -37,6 +39,7 @@ export default async function EssaysPage() {
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
             Essays
           </h1>
+          <h3>A place for public thoughts</h3>
         </div>
 
         {/* Content Section - Mobile: stacked, Desktop: side-by-side */}
@@ -69,6 +72,7 @@ export default async function EssaysPage() {
 
         </div>
       </div>
+      {/* </Stair> */}
     </main>
   )
 }
