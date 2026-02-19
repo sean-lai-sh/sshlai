@@ -44,13 +44,13 @@ function LandingInformation() {
     </div>
     <div className="lg:bg-transparent lg:backdrop-blur-sm p-2 py-4 sm:p-4 lg:p-10 w-full max-w-full md:w-1/2 h-full flex items-center justify-start md:items-start md:justify-start text-xs sm:text-base lg:text-base lg:leading-7 text-beige overflow-x-hidden">
       <p>
-        Incoming SWE @ {' '}
+        {/* Incoming SWE @ {' '}
         <AnimatedLink href="https://withtandem.com">
           Tandem
         </AnimatedLink>{' '}
         – AI for Med Approval
         <br />
-        <br />
+        <br /> */}
         Youngest Fellow @ {' '}
         <AnimatedLink href="https://manus.im">
           Manus AI
