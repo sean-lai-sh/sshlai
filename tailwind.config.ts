@@ -85,6 +85,7 @@ const config: Config = {
   				'ui-monospace'
   			],
 			loader: ['var(--font-loader)', 'monospace'],
+			script: ['var(--font-script)', 'cursive'],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

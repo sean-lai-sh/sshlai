@@ -76,3 +76,9 @@ export interface PanelData {
     bgColor: string;
     itemColor?: string; // Optional, defaults to charcoal-darker
 }
+
+export interface DinnerTopic {
+    number: string; // "01", "02", etc.
+    title: string;  // the topic — no attendee names
+    blurb?: string; // optional one-liner
+}

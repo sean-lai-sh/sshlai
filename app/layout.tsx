@@ -2,7 +2,7 @@
 // import Navbar from '@/components/Navigation/navbar'
 import './globals.css'
 import { Inter } from 'next/font/google'
-import { Share_Tech_Mono } from 'next/font/google';
+import { Share_Tech_Mono, Cormorant_Garamond } from 'next/font/google';
 import localFont from 'next/font/local'
 import { Toaster } from '@/components/ui/toaster';
 import { Analytics } from '@vercel/analytics/next';
@@ -38,6 +38,14 @@ const shareTechMono = Share_Tech_Mono({
   variable: '--font-loader',
 });
 
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-script',
+  display: 'swap',
+});
+
 export const metadata = {
   title: 'Sean Lai Portfolio',
   description: 'Full Stack & AI Engineer Portfolio',
@@ -48,7 +56,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`dark ${inter.variable} ${jetbrainsMono.variable} ${shareTechMono.variable}`}>
+    <html lang="en" className={`dark ${inter.variable} ${jetbrainsMono.variable} ${shareTechMono.variable} ${cormorant.variable}`}>
       <body className="font-sans text-beige flex items-center justify-center w-screen overflow-x-hidden bg-vantablack">
           {/* <Navbar /> */}
           <PageTransitionWrapper>

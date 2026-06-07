@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { CardStackDetails, ProjectDetails, workExpDetails, PanelData, ProjectDetails_v2 } from "./types";
+import { CardStackDetails, ProjectDetails, workExpDetails, PanelData, ProjectDetails_v2, DinnerTopic } from "./types";
 export const searching: boolean = false; // Set to true when searching for a job
 export const top3Featured: number[] = [0, 1, 2]; // Indexes of the top 3 featured projects
 export const allProjects: ProjectDetails[] = [
@@ -374,3 +374,38 @@ export const projectList: ProjectDetails_v2[] = [
     proj_link: "https://github.com/sean-lai-sh/embodied_ai_navigation"
   },
 ]
+
+// ── Dinners ──────────────────────────────────────────────────────────────────
+// PLACEHOLDER COPY — Sean to replace with his own writing.
+// Lines below drive the /dinners page. The welcome sequence plays each line in
+// order, then fades into the page.
+export const dinnerCopy = {
+  // Full-screen intro — one line revealed at a time.
+  welcomeLines: [
+    "A seat at the table.",
+    "Welcome to the club.",
+  ],
+
+  // Page heading + tagline (under the welcome).
+  heading: "The Dinners",
+  tagline: "A dinner series where we help and learn each other to become better people",
+
+  // Anchor section — what it is + how I run it.
+  body: [
+    "These dinners borrow their bones from the purist Jeffersonian dinner: one table, targetted conversation starters, and accountability built after. Our goal is to actively discuss and leverage our unqiue backgrounds and perspectives to not only inform ourselves around a topic, but to get used to forming our own opinions after the matter in civil discussion",
+    "Currently, we lean away from discussing a paper and instead we will be discussing topics of interest followed by prompts to help us support one another.",
+    "Location, and timing will be shared personally in the email. Full guest list (max 8) will be hidden so you guys can candidly meet on the day."
+  ],
+
+  // Rendered as an italic note set apart from the body.
+  warning:
+    "It's the social contract of the table to have interesting view points and to have done the work. Those that do not honor this may not recieve an invite for following dinners.",
+
+  topicsHeading: "Previous Tables",
+  topicsNote: "A sample of where past nights.",
+} as const;
+
+// PLACEHOLDER topics — Sean to replace. No attendee names.
+export const dinnerTopics: DinnerTopic[] = [
+  { number: "01", title: "5 hard earned insights you cannot Google?" },
+];
