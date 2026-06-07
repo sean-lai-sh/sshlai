@@ -44,13 +44,19 @@ function LandingInformation() {
     </div>
     <div className="lg:bg-transparent lg:backdrop-blur-sm p-2 py-4 sm:p-4 lg:p-10 w-full max-w-full md:w-1/2 h-full flex items-center justify-start md:items-start md:justify-start text-xs sm:text-base lg:text-base lg:leading-7 text-beige overflow-x-hidden">
       <p>
-        {/* Incoming SWE @ {' '}
-        <AnimatedLink href="https://withtandem.com">
-          Tandem
+        Incoming Winter Software Engineer Intern @ {' '}
+        <AnimatedLink href="https://forus.com">
+          Forus
         </AnimatedLink>{' '}
         – AI for Med Approval
         <br />
-        <br /> */}
+        <br />
+        Applied AI Engineering Intern @ {' '}
+        <AnimatedLink href="https://www.geaerospace.com/">
+          GE Aerospace
+        </AnimatedLink>{' '}
+        <br />
+        <br />
         Youngest Fellow @ {' '}
         <AnimatedLink href="https://manus.im">
           Manus AI
@@ -70,6 +76,12 @@ function LandingInformation() {
           NYU HSRN Lab
         </AnimatedLink>{' '}
         – Research Workflows
+        <br />
+        <br />
+        Data Engineer Intern @{' '}
+        <AnimatedLink href="https://www.boostb2b.com">
+          Boost Payment Solutions
+        </AnimatedLink> - Payment Infra
         <br />
         <br />
         <span className="">Previous Work:</span>

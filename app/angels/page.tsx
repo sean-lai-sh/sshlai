@@ -61,34 +61,7 @@ const Page = () => {
                 <br />
                 <br />  
                Regardless of investment, feel free to reach out. I enjoy meeting builders who dare to pursue ambitious ideas and follow through on them. I invest solely my own personal capital and do not manage or deploy money for others.
-                </p>
-                {/* <div className="pt-2">
-                  <h3 className="text-base text-white font-medium mb-2">
-                    How I Can Help
-                  </h3>
-                  <ul className="space-y-2 text-sm lg:text-base">
-                    <li className="flex gap-2">
-                      <span className="text-beige/60">•</span>
-                      <span>Investor & angel intros</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="text-beige/60">•</span>
-                      <span>Client Intros</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="text-beige/60">•</span>
-                      <span>Sourcing talent, especially technical roles</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="text-beige/60">•</span>
-                      <span>Technical architecture advice</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="text-beige/60">•</span>
-                      <span>University growth intros</span>
-                    </li>
-                  </ul>
-                </div> */}
+                </p> 
               </div>
             </section>
 
@@ -100,9 +73,9 @@ const Page = () => {
               <ul className="space-y-3">
                 <li>
                   <InvestmentLink
-                    href="https://en.wikipedia.org/wiki/Stealth_startup"
-                    name="Stealth"
-                    category="Agentic Task Competency Evals"
+                    href="https://neo-human.ai"
+                    name="Neo-Human"
+                    category="Evaluating Agents on Task Competency"
                   />
                 </li>
               </ul>
