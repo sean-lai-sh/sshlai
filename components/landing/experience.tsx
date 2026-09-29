@@ -20,7 +20,7 @@ const Experience = () => {
         </div> */}
         <div className='w-full lg:w-screen flex lg:flex-row items-start justify-center md:justify-start md:pl-10 pb-20 md:pb-20 py-10 ' >
             <ul id='exp-container' className='w-[95%] lg:w-1/2 min-w-[40vw] justify-center flex flex-col'>
-                <div className='flex w-full justify-between items-end md:mb-4'><h1 className='text-center md:text-end text-4xl md:text-5xl leading-relaxed'>Projects</h1></div>
+                <div className='flex w-full justify-between items-end md:mb-4'><h1 className='text-center md:text-end text-4xl md:text-5xl font-bold leading-relaxed'>Projects</h1></div>
                 <Separator className='w-full bg-beige sm:h-[0.1rem] rounded-xl h-1'/>
                 {projectList &&
                     projectList.map((exp, index) => {

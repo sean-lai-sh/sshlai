@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'JetBrains Mono';
-  src: url('/fonts/static/JetBrainsMono-Regular.ttf') format('ttf');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;

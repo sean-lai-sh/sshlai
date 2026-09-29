@@ -70,8 +70,11 @@ class AsciiRenderer {
         this.options = {
             // Sparser, visually balanced ASCII chars: less noisy, more readable
             charRamp: [" ", ".", ",", ":", ";", "+", "*", "#", "@"].reverse(),
-            fontFamily: "var(--font-mono)",
-            fontSize: 12,
+            // Sans-serif's wide glyphs give the sparse grid we want. To try JetBrains Mono instead, use
+            // getComputedStyle(document.documentElement).getPropertyValue("--font-mono").trim()
+            // (canvas can't resolve CSS variables) and size cells with charWidth = fontSize.
+            fontFamily: "sans-serif",
+            fontSize: 10,
             lowResFontSize: 20,
             noiseScale: 4.5,
             speed: 0.1,
@@ -102,7 +105,7 @@ class AsciiRenderer {
         this.ctx.font = `${currentFontSize}px ${this.options.fontFamily}`;
         const metrics = this.ctx.measureText("@");
         this.charWidth = metrics.width;
-        this.charHeight = currentFontSize;
+        this.charHeight = currentFontSize * 1.2;
     }
 
     public async init(): Promise<void> {

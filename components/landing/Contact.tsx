@@ -13,15 +13,7 @@ const ContactPage = () => {
         >
           LinkedIn
         </a>
-        
-        <a
-          href="/resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:underline duration-300 text-white"
-        >
-          Resume
-        </a>
+
         <a
           href="mailto:seanlai@nyu.edu"
           className="hover:underline duration-300 text-white"

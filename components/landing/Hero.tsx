@@ -51,6 +51,12 @@ function LandingInformation() {
         – AI for Med Approval
         <br />
         <br />
+        Campus Lead @ {' '}
+        <AnimatedLink href="https://x.ai">
+          SpaceXAI
+        </AnimatedLink>
+        <br />
+        <br />
         Applied AI Engineering Intern @ {' '}
         <AnimatedLink href="https://www.geaerospace.com/">
           GE Aerospace

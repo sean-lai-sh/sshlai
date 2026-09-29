@@ -27,8 +27,6 @@ export default function Navbar()  {
         },
     ]
     const experience: NavBarDetails[] = [
-        { name: "Resume", href: "/Sean%20Lai%20Resume.pdf", shortDescript: "Simple Quick Easy" },
-        
         { name: "Jobs" , href: "/experience",
             shortDescript: "Everything I've done in the past"
         },
