@@ -51,59 +51,42 @@ function LandingInformation() {
         – AI for Med Approval
         <br />
         <br />
-        Campus Lead @ {' '}
+        Fellow @ {' '}
         <AnimatedLink href="https://x.ai">
           SpaceXAI
         </AnimatedLink>
         <br />
         <br />
-        Applied AI Engineering Intern @ {' '}
+        Previously:
+        <br />
+        AI @ {' '}
         <AnimatedLink href="https://www.geaerospace.com/">
           GE Aerospace
-        </AnimatedLink>{' '}
+        </AnimatedLink>
         <br />
+        Data @ {' '}
+        <AnimatedLink href="https://www.boostb2b.com">
+          Boost Payment Solutions
+        </AnimatedLink>
         <br />
         Youngest Fellow @ {' '}
         <AnimatedLink href="https://manus.im">
           Manus AI
-        </AnimatedLink>{' '}
-        – Community, API DevX
+        </AnimatedLink>
         <br />
+        Program Lead @ {' '}
+        <AnimatedLink href="https://vip.hsrn.nyu.edu">
+          NYU HSRN
+        </AnimatedLink>
         <br />
-        President @{' '}
+        President @ {' '}
         <AnimatedLink href="https://www.techatnyu.org">
           Tech@NYU
-        </AnimatedLink>{' '}
-        – Hackathons, Talent Dev, Special Projs
-        <br />
-        <br />
-        Program Lead @{' '}
-        <AnimatedLink href="https://vip.hsrn.nyu.edu">
-          NYU HSRN Lab
-        </AnimatedLink>{' '}
-        – Research Workflows
-        <br />
-        <br />
-        Data Engineer Intern @{' '}
-        <AnimatedLink href="https://www.boostb2b.com">
-          Boost Payment Solutions
-        </AnimatedLink> - Payment Infra
-        <br />
-        <br />
-        <span className="">Previous Work:</span>
-        <br />
-        {/* - Data Infra @{' '}
-        <AnimatedLink href="https://www.boostb2b.com">
-          Boost Payment Solutions
         </AnimatedLink>
-        <br /> - VLA Research @{' '}
-        <AnimatedLink href="https://ai4ce.github.io/">
-          NYU AI4CE Lab
-        </AnimatedLink>
-        <br /> - Research Assistant @{' '}
-        <AnimatedLink href="https://engineering.nyu.edu/">
-          NYU Sustainability Initiative
-        </AnimatedLink> */}
+        <br />
+        <br />
+        Worked On:
+        <br />
         VLA evals, data infra, and research systems
         <br />
         <br />
