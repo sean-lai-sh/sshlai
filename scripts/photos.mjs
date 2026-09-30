@@ -10,7 +10,6 @@ const ROOT = process.cwd();
 const SRC = path.join(ROOT, 'photos');
 const OUT = path.join(ROOT, 'public/photos');
 const MANIFEST = path.join(ROOT, 'lib/photos/manifest.json');
-const NOTES = path.join(ROOT, 'lib/photos/notes.ts');
 
 const SIZES = {
   thumb: { edge: 640, quality: 72 },
@@ -86,43 +85,60 @@ async function cropped(upright, crop) {
   });
 }
 
-const notesMtime = (await fs.stat(NOTES)).mtimeMs;
+// Last run's manifest doubles as the cache: a photo is reused when its outputs are newer
+// than the original and it was cut with the same crop.
+const previous = new Map(
+  (await fs.readFile(MANIFEST, 'utf8').then(JSON.parse).catch(() => [])).map((p) => [p.id, p]),
+);
+
+async function renderBlur(thumb) {
+  const buf = await sharp(thumb).resize(16, 16, { fit: 'inside' }).webp({ quality: 40 }).toBuffer();
+  return `data:image/webp;base64,${buf.toString('base64')}`;
+}
 
 async function processPhoto(name) {
   const file = path.join(SRC, name);
   const id = path.parse(name).name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  // Crops live in notes.ts, so editing it has to invalidate the outputs too.
-  const mtimeMs = Math.max((await fs.stat(file)).mtimeMs, notesMtime);
-  const upright = await sharp(file).rotate().toBuffer();
-  const source = () => cropped(upright, notes[id]?.crop);
+  const crop = notes[id]?.crop;
+  const { mtimeMs } = await fs.stat(file);
+  const outputs = Object.keys(SIZES).map((kind) => path.join(OUT, kind, `${id}.webp`));
+  const prev = previous.get(id);
+  const fresh =
+    prev !== undefined &&
+    JSON.stringify(prev.crop) === JSON.stringify(crop) &&
+    (await Promise.all(outputs.map((out) => isFresh(out, mtimeMs)))).every(Boolean);
 
-  for (const [kind, { edge, quality }] of Object.entries(SIZES)) {
-    const out = path.join(OUT, kind, `${id}.webp`);
-    if (await isFresh(out, mtimeMs)) continue;
-    await (await source())
-      .resize(edge, edge, { fit: 'inside', withoutEnlargement: true })
-      .webp({ quality })
-      .toFile(out);
+  if (!fresh) {
+    const upright = await sharp(file).rotate().toBuffer();
+    for (const [kind, { edge, quality }] of Object.entries(SIZES)) {
+      await (await cropped(upright, crop))
+        .resize(edge, edge, { fit: 'inside', withoutEnlargement: true })
+        .webp({ quality })
+        .toFile(path.join(OUT, kind, `${id}.webp`));
+    }
   }
 
   const { width, height } = await sharp(path.join(OUT, 'full', `${id}.webp`)).metadata();
-  const blur = await (await source()).resize(16, 16, { fit: 'inside' }).webp({ quality: 40 }).toBuffer();
 
   return {
     id,
     thumb: `/photos/thumb/${id}.webp`,
     full: `/photos/full/${id}.webp`,
-    blur: `data:image/webp;base64,${blur.toString('base64')}`,
+    blur: fresh ? prev.blur : await renderBlur(path.join(OUT, 'thumb', `${id}.webp`)),
     width,
     height,
+    crop,
     exif: await readExif(file),
+    fresh,
   };
 }
 
 const names = (await fs.readdir(SRC)).filter((n) => /\.(jpe?g|png|webp|tiff?|heic)$/i.test(n));
 await Promise.all(Object.keys(SIZES).map((k) => fs.mkdir(path.join(OUT, k), { recursive: true })));
 
-const photos = await Promise.all(names.map(processPhoto));
+const results = await Promise.all(names.map(processPhoto));
+const rebuilt = results.filter((p) => !p.fresh).map((p) => p.id);
+const photos = results.map(({ fresh: _, ...p }) => p);
 
 const keep = new Set(photos.map((p) => `${p.id}.webp`));
 for (const kind of Object.keys(SIZES)) {
@@ -134,4 +150,4 @@ photos.sort((a, b) => (a.exif.takenAt ?? '').localeCompare(b.exif.takenAt ?? '')
 
 await fs.mkdir(path.dirname(MANIFEST), { recursive: true });
 await fs.writeFile(MANIFEST, JSON.stringify(photos, null, 2) + '\n');
-console.log(`photos: ${photos.length} processed -> ${path.relative(ROOT, MANIFEST)}`);
+console.log(`photos: ${photos.length} total, rebuilt ${rebuilt.length ? rebuilt.join(', ') : 'none'}`);
