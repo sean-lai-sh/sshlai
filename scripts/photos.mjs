@@ -74,7 +74,7 @@ async function isFresh(out, srcMtime) {
 
 async function processPhoto(name) {
   const file = path.join(SRC, name);
-  const id = path.parse(name).name.toLowerCase();
+  const id = path.parse(name).name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
   const { mtimeMs } = await fs.stat(file);
 
   for (const [kind, { edge, quality }] of Object.entries(SIZES)) {
@@ -105,6 +105,13 @@ const names = (await fs.readdir(SRC)).filter((n) => /\.(jpe?g|png|webp|tiff?|hei
 await Promise.all(Object.keys(SIZES).map((k) => fs.mkdir(path.join(OUT, k), { recursive: true })));
 
 const photos = await Promise.all(names.map(processPhoto));
+
+const keep = new Set(photos.map((p) => `${p.id}.webp`));
+for (const kind of Object.keys(SIZES)) {
+  for (const file of await fs.readdir(path.join(OUT, kind))) {
+    if (!keep.has(file)) await fs.rm(path.join(OUT, kind, file));
+  }
+}
 photos.sort((a, b) => (a.exif.takenAt ?? '').localeCompare(b.exif.takenAt ?? ''));
 
 await fs.mkdir(path.dirname(MANIFEST), { recursive: true });
