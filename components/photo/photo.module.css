@@ -1,0 +1,111 @@
+.cork {
+  background-color: #b98a5c;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 15% 0%, rgba(255, 246, 224, 0.5), transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.32 0 0 0 0 0.19 0 0 0 0 0.08 0 0 0 -2.2 1.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='h'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='11'/%3E%3CfeColorMatrix values='0 0 0 0 0.96 0 0 0 0 0.84 0 0 0 0 0.62 0 0 0 -3 1.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23h)'/%3E%3C/svg%3E");
+}
+
+.cork::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 160px 40px rgba(70, 40, 15, 0.35);
+}
+
+.hand {
+  color: #2b2a33;
+}
+
+.paper {
+  background-color: #fbf9f3;
+  background-image: linear-gradient(170deg, rgba(255, 255, 255, 0.7), rgba(240, 234, 220, 0.4));
+}
+
+.frame {
+  composes: paper;
+  box-shadow:
+    0 1px 1px rgba(40, 25, 10, 0.18),
+    0 10px 22px -8px rgba(60, 35, 10, 0.5);
+  transition: box-shadow 250ms ease;
+}
+
+.card:hover .frame {
+  box-shadow:
+    0 2px 2px rgba(40, 25, 10, 0.16),
+    0 22px 36px -12px rgba(60, 35, 10, 0.55);
+}
+
+.photoWell {
+  background: #0c0b0a;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.pin,
+.pinBlue {
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin-left: -8px;
+  border-radius: 50%;
+  z-index: 2;
+  background: radial-gradient(circle at 35% 30%, #ff8a7a, #c2261b 55%, #7d130c);
+  box-shadow: 2px 5px 5px rgba(40, 20, 5, 0.45);
+}
+
+.pinBlue {
+  background: radial-gradient(circle at 35% 30%, #9cc4ff, #2c5fb8 55%, #173671);
+}
+
+.tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 84px;
+  height: 26px;
+  margin-left: -42px;
+  z-index: 2;
+  transform: rotate(-4deg);
+  background: rgba(238, 228, 196, 0.72);
+  box-shadow: 0 1px 2px rgba(60, 40, 10, 0.18);
+  clip-path: polygon(2% 8%, 98% 0, 100% 92%, 1% 100%);
+}
+
+.stamp {
+  color: #ff9a3c;
+  text-shadow:
+    0 0 4px rgba(255, 120, 30, 0.8),
+    0 0 1px rgba(255, 200, 120, 0.9);
+  letter-spacing: 0.08em;
+}
+
+.develop {
+  animation: develop 3.2s cubic-bezier(0.3, 0, 0.2, 1) forwards;
+}
+
+@keyframes develop {
+  0% {
+    opacity: 0;
+    filter: brightness(0.1) contrast(0.5) saturate(0) sepia(0.4) hue-rotate(170deg) blur(3px);
+  }
+  30% {
+    opacity: 1;
+    filter: brightness(0.45) contrast(0.65) saturate(0.35) sepia(0.6) hue-rotate(-20deg) blur(1px);
+  }
+  65% {
+    filter: brightness(0.85) contrast(0.85) saturate(0.75) sepia(0.2) hue-rotate(-6deg) blur(0);
+  }
+  100% {
+    opacity: 1;
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .develop {
+    animation-duration: 1ms;
+  }
+}

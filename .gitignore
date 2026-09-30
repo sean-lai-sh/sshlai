@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# photo originals (full-size, processed by `npm run photos`)
+/photos/
