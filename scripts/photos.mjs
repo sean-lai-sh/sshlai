@@ -4,11 +4,13 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
 import exifr from 'exifr';
+import { notes } from '../lib/photos/notes.ts';
 
 const ROOT = process.cwd();
 const SRC = path.join(ROOT, 'photos');
 const OUT = path.join(ROOT, 'public/photos');
 const MANIFEST = path.join(ROOT, 'lib/photos/manifest.json');
+const NOTES = path.join(ROOT, 'lib/photos/notes.ts');
 
 const SIZES = {
   thumb: { edge: 640, quality: 72 },
@@ -72,23 +74,39 @@ async function isFresh(out, srcMtime) {
   }
 }
 
+async function cropped(upright, crop) {
+  const img = sharp(upright);
+  if (!crop) return img;
+  const { width, height } = await img.metadata();
+  return img.extract({
+    left: Math.round(crop.x * width),
+    top: Math.round(crop.y * height),
+    width: Math.round(crop.width * width),
+    height: Math.round(crop.height * height),
+  });
+}
+
+const notesMtime = (await fs.stat(NOTES)).mtimeMs;
+
 async function processPhoto(name) {
   const file = path.join(SRC, name);
   const id = path.parse(name).name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  const { mtimeMs } = await fs.stat(file);
+  // Crops live in notes.ts, so editing it has to invalidate the outputs too.
+  const mtimeMs = Math.max((await fs.stat(file)).mtimeMs, notesMtime);
+  const upright = await sharp(file).rotate().toBuffer();
+  const source = () => cropped(upright, notes[id]?.crop);
 
   for (const [kind, { edge, quality }] of Object.entries(SIZES)) {
     const out = path.join(OUT, kind, `${id}.webp`);
     if (await isFresh(out, mtimeMs)) continue;
-    await sharp(file)
-      .rotate()
+    await (await source())
       .resize(edge, edge, { fit: 'inside', withoutEnlargement: true })
       .webp({ quality })
       .toFile(out);
   }
 
   const { width, height } = await sharp(path.join(OUT, 'full', `${id}.webp`)).metadata();
-  const blur = await sharp(file).rotate().resize(16, 16, { fit: 'inside' }).webp({ quality: 40 }).toBuffer();
+  const blur = await (await source()).resize(16, 16, { fit: 'inside' }).webp({ quality: 40 }).toBuffer();
 
   return {
     id,

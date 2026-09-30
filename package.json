@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "photos": "node scripts/photos.mjs"
+    "photos": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/photos.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
