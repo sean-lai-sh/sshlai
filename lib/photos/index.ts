@@ -27,15 +27,15 @@ export const photos: Photo[] = (manifest as Omit<Photo, 'note'>[])
   .map((p) => ({ ...p, note: notes[p.id] ?? {} }))
   .filter((p) => !p.note.hidden);
 
-export function settingsLine({ focalLength, aperture, shutter, iso }: PhotoExif) {
+export const isPortrait = (p: Photo) => p.height > p.width;
+
+export function settings({ focalLength, aperture, shutter, iso }: PhotoExif): string[] {
   return [
     focalLength && `${focalLength}mm`,
     aperture && `f/${aperture}`,
     shutter && `${shutter}s`,
     iso && `ISO ${iso}`,
-  ]
-    .filter(Boolean)
-    .join(' · ');
+  ].filter((s): s is string => Boolean(s));
 }
 
 // The orange date imprint film cameras burn into the corner: '26 9 12
@@ -54,6 +54,6 @@ export function scatter(id: string) {
     rotate: (rand(1) - 0.5) * 12,
     x: (rand(2) - 0.5) * 48,
     y: (rand(3) - 0.5) * 70,
-    fastener: (['pin', 'tape', 'pin', 'pin-blue', 'tape'] as const)[Math.floor(rand(4) * 5)],
+    fastener: (['tape', 'tape-sage', 'clip', 'tape', 'none'] as const)[Math.floor(rand(4) * 5)],
   };
 }
