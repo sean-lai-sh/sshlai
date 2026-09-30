@@ -87,7 +87,7 @@
     "id": "dscf1421",
     "thumb": "/photos/thumb/dscf1421.webp",
     "full": "/photos/full/dscf1421.webp",
-    "blur": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAACwAQCdASoQAAsAA4BaJZwAAm27MJYAAP7p6+itypL/5K6GNy6ZunaGJISkSF39/gUj9mZhf8k5XUPnlNRkPaOS7OBAAA==",
+    "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAQAgCdASoQAAsAA4BaJZwAAxblh3eyJWgAAP7lvw+KLOrMMa7tdqpMVV2d3Vfwok+HTE2Y4pDb35kLxD349+A2PldmQlwwIAA=",
     "width": 2400,
     "height": 1600,
     "exif": {
@@ -96,7 +96,6 @@
       "aperture": 16,
       "shutter": "1/125",
       "iso": 6400,
-      "film": "Classic Chrome",
       "takenAt": "2026-09-24T18:41"
     }
   },
