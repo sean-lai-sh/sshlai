@@ -1,10 +1,9 @@
-// Turns originals in /photos into board thumbnails, full-res darkroom prints,
+// Turns originals in /photos into board thumbnails, full-res prints,
 // and lib/photos/manifest.json (EXIF + dimensions). Captions live in lib/photos/notes.ts.
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
 import exifr from 'exifr';
-import { notes } from '../lib/photos/notes.ts';
 
 const ROOT = process.cwd();
 const SRC = path.join(ROOT, 'photos');
@@ -73,20 +72,8 @@ async function isFresh(out, srcMtime) {
   }
 }
 
-async function cropped(upright, crop) {
-  const img = sharp(upright);
-  if (!crop) return img;
-  const { width, height } = await img.metadata();
-  return img.extract({
-    left: Math.round(crop.x * width),
-    top: Math.round(crop.y * height),
-    width: Math.round(crop.width * width),
-    height: Math.round(crop.height * height),
-  });
-}
-
 // Last run's manifest doubles as the cache: a photo is reused when its outputs are newer
-// than the original and it was cut with the same crop.
+// than the original.
 const previous = new Map(
   (await fs.readFile(MANIFEST, 'utf8').then(JSON.parse).catch(() => [])).map((p) => [p.id, p]),
 );
@@ -99,19 +86,15 @@ async function renderBlur(thumb) {
 async function processPhoto(name) {
   const file = path.join(SRC, name);
   const id = path.parse(name).name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  const crop = notes[id]?.crop;
   const { mtimeMs } = await fs.stat(file);
   const outputs = Object.keys(SIZES).map((kind) => path.join(OUT, kind, `${id}.webp`));
   const prev = previous.get(id);
-  const fresh =
-    prev !== undefined &&
-    JSON.stringify(prev.crop) === JSON.stringify(crop) &&
-    (await Promise.all(outputs.map((out) => isFresh(out, mtimeMs)))).every(Boolean);
+  const fresh = prev !== undefined && (await Promise.all(outputs.map((out) => isFresh(out, mtimeMs)))).every(Boolean);
 
   if (!fresh) {
     const upright = await sharp(file).rotate().toBuffer();
     for (const [kind, { edge, quality }] of Object.entries(SIZES)) {
-      await (await cropped(upright, crop))
+      await sharp(upright)
         .resize(edge, edge, { fit: 'inside', withoutEnlargement: true })
         .webp({ quality })
         .toFile(path.join(OUT, kind, `${id}.webp`));
@@ -127,7 +110,6 @@ async function processPhoto(name) {
     blur: fresh ? prev.blur : await renderBlur(path.join(OUT, 'thumb', `${id}.webp`)),
     width,
     height,
-    crop,
     exif: await readExif(file),
     fresh,
   };
