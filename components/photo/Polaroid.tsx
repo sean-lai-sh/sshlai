@@ -1,12 +1,9 @@
 'use client';
 import { motion } from 'framer-motion';
-import { dateStamp, scatter, type Photo } from '@/lib/photos';
+import { dateStamp, isPortrait, scatter, type Photo } from '@/lib/photos';
 import styles from './photo.module.css';
 
-const FASTENER = { pin: styles.pin, 'pin-blue': styles.pinBlue, tape: styles.tape };
-
-// Board sizes: landscape prints read wider, portrait taller, like real 4x6s pinned side by side.
-const boardWidth = (p: Photo) => (p.width >= p.height ? 'w-[82vw] md:w-[300px]' : 'w-[68vw] md:w-[210px]');
+const FASTENER = { tape: styles.tape, 'tape-sage': styles.tapeSage, clip: styles.clip, none: undefined };
 
 export function Polaroid({
   photo,
@@ -23,8 +20,8 @@ export function Polaroid({
 
   return (
     <li
-      className={`${styles.card} sticky top-[calc(12vh+var(--i)*6px)] z-[var(--i)] md:relative md:hover:z-40 mb-[38vh] md:mb-0 last:mb-[20vh] md:last:mb-0 ${boardWidth(photo)}`}
-      style={{ '--i': index, translate: `${x}px ${y}px` } as React.CSSProperties}
+      className={`${styles.card} sticky top-[calc(12vh+var(--i)*6px)] z-[var(--i)] md:relative md:top-auto md:hover:z-40 mb-[38vh] md:mb-0 last:mb-[20vh] md:last:mb-0 w-[84vw] md:w-[290px]`}
+      style={{ '--i': index, translate: `${x}px ${y}px`, containerType: 'inline-size' } as React.CSSProperties}
     >
       {lifted ? (
         <div className="invisible" aria-hidden>
@@ -35,7 +32,7 @@ export function Polaroid({
           type="button"
           layoutId={`polaroid-${photo.id}`}
           onClick={onOpen}
-          className="relative block w-full text-left cursor-zoom-in"
+          className="relative block w-full cursor-pointer text-left"
           style={{ rotate }}
           whileHover={{ rotate: rotate * 0.4, y: -6, transition: { type: 'spring', stiffness: 300, damping: 20 } }}
           transition={{ type: 'spring', stiffness: 220, damping: 28 }}
@@ -49,13 +46,15 @@ export function Polaroid({
   );
 }
 
+// A polaroid only has one thick edge. Portrait shots turn the print sideways, so the
+// writing strip lands on the right instead of underneath.
 function Frame({ photo, ghost = false }: { photo: Photo; ghost?: boolean }) {
-  const stamp = dateStamp(photo.exif.takenAt);
+  const portrait = isPortrait(photo);
   return (
-    <div className={`${styles.frame} p-[5%] pb-0`}>
+    <div className={`${styles.frame} flex ${portrait ? 'flex-row p-[5cqw] pr-0' : 'flex-col p-[5cqw] pb-0'}`}>
       <motion.div
         layoutId={ghost ? undefined : `well-${photo.id}`}
-        className={`${styles.photoWell} relative overflow-hidden`}
+        className={`${styles.photoWell} relative shrink-0 overflow-hidden ${portrait ? 'w-[58cqw]' : 'w-full'}`}
         style={{ aspectRatio: `${photo.width} / ${photo.height}` }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -69,13 +68,21 @@ function Frame({ photo, ghost = false }: { photo: Photo; ghost?: boolean }) {
           className="absolute inset-0 h-full w-full object-cover"
           style={{ backgroundImage: `url(${photo.blur})`, backgroundSize: 'cover' }}
         />
-        {stamp && (
-          <span className={`${styles.stamp} font-loader absolute bottom-[4%] right-[5%] text-[10px]`}>{stamp}</span>
-        )}
+        <DateStamp takenAt={photo.exif.takenAt} className="text-[10px]" />
       </motion.div>
-      <p className={`${styles.hand} min-h-[3.5rem] px-1 pb-3 pt-2.5 text-2xl leading-[0.95] md:min-h-[3rem] md:text-[22px]`}>
-        <span className="line-clamp-2">{photo.note.caption}</span>
+      <p
+        className={`${styles.hand} text-2xl leading-[0.95] md:text-[22px] ${
+          portrait ? 'flex-1 px-3 pt-1' : 'min-h-[3.5rem] px-1 pb-3 pt-2.5 md:min-h-[3rem]'
+        }`}
+      >
+        <span className={portrait ? 'line-clamp-6' : 'line-clamp-2'}>{photo.note.caption}</span>
       </p>
     </div>
   );
+}
+
+export function DateStamp({ takenAt, className = '' }: { takenAt?: string; className?: string }) {
+  const stamp = dateStamp(takenAt);
+  if (!stamp) return null;
+  return <span className={`${styles.stamp} font-loader absolute bottom-[4%] right-[5%] ${className}`}>{stamp}</span>;
 }
