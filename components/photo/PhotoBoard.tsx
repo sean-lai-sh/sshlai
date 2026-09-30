@@ -34,8 +34,9 @@ export default function PhotoBoard({ photos }: { photos: Photo[] }) {
       </header>
 
       <TableMess />
+      <div aria-hidden className={styles.grain} />
       <LayoutGroup>
-        <ul className="relative mx-auto flex max-w-[1360px] flex-col items-center px-6 pb-32 pt-14 md:flex-row md:flex-wrap md:items-center md:justify-center md:gap-x-4 md:gap-y-6 md:px-12 md:pt-12">
+        <ul className="relative mx-auto flex max-w-[1360px] flex-col items-center px-6 pb-32 pt-14 md:flex-row md:flex-wrap md:items-center md:justify-center md:gap-x-16 md:gap-y-20 md:px-12 md:pt-12">
           {photos.map((photo, i) => (
             <Polaroid key={photo.id} photo={photo} index={i} lifted={photo.id === openId} onOpen={() => setOpenId(photo.id)} />
           ))}
