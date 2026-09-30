@@ -16,7 +16,7 @@ export const notes: Record<string, PhotoNote> = {
   dscf0454: { caption: 'afternoon sun across the dial' },
   dscf0702: { caption: 'out through the revolving door' },
   'iso12800-3': { caption: 'lights down at Ashe', place: 'Arthur Ashe, Queens' },
-  dscf1421: { caption: 'two ways down the block', place: 'Greenwich Village' },
+  dscf1421: { caption: 'two ways down the block', place: 'Greenwich Village', exif: { film: 'Classic Chrome' } },
   dscf1428: { caption: 'crossing, under the pines' },
   dscf0714: { caption: 'umbrellas at the plaza, golden hour', place: 'Rockefeller Center' },
 };
