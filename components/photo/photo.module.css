@@ -1,13 +1,14 @@
-.wall {
-  background-color: #f1eee8;
+.table {
+  background-color: #d8b88c;
   background-image:
-    radial-gradient(ellipse 70% 55% at 12% 0%, rgba(255, 252, 244, 0.95), transparent 70%),
-    radial-gradient(ellipse 60% 50% at 100% 100%, rgba(214, 206, 192, 0.45), transparent 70%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.4 0 0 0 0 0.33 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    radial-gradient(ellipse 75% 60% at 10% 0%, rgba(255, 244, 222, 0.55), transparent 70%),
+    radial-gradient(ellipse 90% 70% at 100% 100%, rgba(90, 55, 25, 0.22), transparent 70%),
+    repeating-linear-gradient(90deg, transparent 0 279px, rgba(80, 48, 20, 0.28) 279px 280px, rgba(255, 238, 210, 0.18) 280px 281px, transparent 281px 282px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='282' height='900'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.09 0.004' numOctaves='4' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.28 0 0 0 0 0.12 0 0 0 0.55 -0.05'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
 }
 
 .backdrop {
-  background: rgba(236, 231, 222, 0.45);
+  background: rgba(70, 45, 20, 0.3);
 }
 
 .hand {
@@ -22,65 +23,20 @@
 .frame {
   composes: paper;
   box-shadow:
-    0 1px 1px rgba(40, 30, 20, 0.12),
-    0 12px 24px -10px rgba(60, 45, 25, 0.35);
+    0 1px 1px rgba(50, 30, 10, 0.22),
+    0 6px 12px -6px rgba(60, 35, 10, 0.45);
   transition: box-shadow 250ms ease;
 }
 
 .card:hover .frame {
   box-shadow:
-    0 2px 2px rgba(40, 30, 20, 0.1),
-    0 24px 40px -14px rgba(60, 45, 25, 0.4);
+    0 2px 2px rgba(50, 30, 10, 0.14),
+    0 26px 40px -14px rgba(60, 35, 10, 0.5);
 }
 
 .photoWell {
   background: #0c0b0a;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
-}
-
-.tape,
-.tapeSage {
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  width: 84px;
-  height: 26px;
-  margin-left: -42px;
-  z-index: 2;
-  transform: rotate(-4deg);
-  background: rgba(236, 229, 208, 0.78);
-  box-shadow: 0 1px 2px rgba(60, 40, 10, 0.14);
-  clip-path: polygon(2% 8%, 98% 0, 100% 92%, 1% 100%);
-}
-
-.tapeSage {
-  transform: rotate(5deg);
-  background: rgba(196, 208, 186, 0.72);
-}
-
-.clip {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  width: 34px;
-  height: 20px;
-  margin-left: -17px;
-  z-index: 2;
-  border-radius: 3px 3px 5px 5px;
-  background: linear-gradient(180deg, #4a4a4c, #232325 60%, #3a3a3d);
-  box-shadow: 0 3px 4px rgba(30, 20, 10, 0.35);
-}
-
-.clip::before {
-  content: '';
-  position: absolute;
-  left: 7px;
-  right: 7px;
-  top: -9px;
-  height: 12px;
-  border: 2px solid #b9b9bd;
-  border-bottom: none;
-  border-radius: 6px 6px 0 0;
 }
 
 .stamp {

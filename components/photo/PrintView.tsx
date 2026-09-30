@@ -8,7 +8,7 @@ import styles from './photo.module.css';
 // Hold on black at least this long so a cached print still "develops" after the card lands.
 const MIN_DARK_MS = 750;
 
-export function Darkroom({ photo, onClose }: { photo: Photo; onClose: () => void }) {
+export function PrintView({ photo, onClose }: { photo: Photo; onClose: () => void }) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
     const { overflow } = document.documentElement.style;
@@ -21,7 +21,7 @@ export function Darkroom({ photo, onClose }: { photo: Photo; onClose: () => void
   }, [onClose]);
 
   const { exif, note } = photo;
-  const film = note.film ?? exif.film;
+  const { film } = exif;
   const aspect = photo.width / photo.height;
   const portrait = isPortrait(photo);
   const lipWidth = 'clamp(150px, 24vw, 320px)';

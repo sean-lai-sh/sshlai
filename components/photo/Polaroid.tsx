@@ -3,8 +3,6 @@ import { motion } from 'framer-motion';
 import { dateStamp, isPortrait, scatter, type Photo } from '@/lib/photos';
 import styles from './photo.module.css';
 
-const FASTENER = { tape: styles.tape, 'tape-sage': styles.tapeSage, clip: styles.clip, none: undefined };
-
 export function Polaroid({
   photo,
   index,
@@ -16,7 +14,7 @@ export function Polaroid({
   lifted: boolean;
   onOpen: () => void;
 }) {
-  const { rotate, x, y, fastener } = scatter(photo.id);
+  const { rotate, x, y } = scatter(photo.id);
 
   return (
     <li
@@ -38,7 +36,6 @@ export function Polaroid({
           transition={{ type: 'spring', stiffness: 220, damping: 28 }}
           aria-label={photo.note.caption ?? 'Open photo'}
         >
-          <span className={FASTENER[fastener]} />
           <Frame photo={photo} />
         </motion.button>
       )}

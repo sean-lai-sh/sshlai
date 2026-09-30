@@ -1,22 +1,22 @@
-// Hand-written side of the board, keyed by photo id (lowercased filename).
-// Everything technical comes from EXIF via `npm run photos`; `film` here overrides
-// what the camera recorded, e.g. for film bodies with no metadata.
+import type { PhotoExif } from './index';
+
+// Hand-written side of the table, keyed by photo id (the filename, lowercased and slugged).
+// Board order follows this object. Photos without an entry go at the end.
+// Everything under `exif` overrides what the camera recorded.
 export type PhotoNote = {
   caption?: string;
   place?: string;
-  film?: string;
+  exif?: Partial<PhotoExif>;
   hidden?: boolean;
 };
 
 export const notes: Record<string, PhotoNote> = {
-  dscf0511: { caption: 'lights out before the walk-on', place: 'Arthur Ashe, Queens' },
-  dscf0515: { caption: 'smoke + blue, the whole stadium humming', place: 'Arthur Ashe, Queens' },
-  dscf0527: { caption: 'nosebleeds, best seats in the house', place: 'Arthur Ashe, Queens' },
-  dscf0536: { caption: 'the court glows like a phone screen', place: 'Arthur Ashe, Queens' },
-  dscf0544: { caption: 'twenty-three thousand people holding their breath', place: 'Arthur Ashe, Queens' },
-  dscf0549: { caption: 'rally', place: 'Arthur Ashe, Queens' },
-  dscf0550: { caption: 'rally, still going', place: 'Arthur Ashe, Queens' },
-  dscf0551: { caption: 'ok this rally is insane', place: 'Arthur Ashe, Queens' },
-  dscf0553: { caption: 'break point', place: 'Arthur Ashe, Queens' },
+  dscf1715: { caption: 'WSQ at night', place: 'Washington Square Park' },
+  dscf0490: { caption: 'wisteria spilling over Bleecker', place: '157 Bleecker St' },
+  dscf0454: { caption: 'afternoon sun across the dial' },
+  dscf0702: { caption: 'out through the revolving door' },
+  'iso12800-3': { caption: 'lights down at Ashe', place: 'Arthur Ashe, Queens' },
+  dscf1421: { caption: 'two ways down the block', place: 'Greenwich Village' },
+  dscf1428: { caption: 'crossing, under the pines' },
   dscf0714: { caption: 'umbrellas at the plaza, golden hour', place: 'Rockefeller Center' },
 };
