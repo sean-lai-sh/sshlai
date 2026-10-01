@@ -1,4 +1,4 @@
-// Turns originals in /photos into board thumbnails, full-res prints,
+// Turns originals in /photos into board thumbnails, prints at two sizes,
 // and lib/photos/manifest.json (EXIF + dimensions). Captions live in lib/photos/notes.ts.
 // `npm run photos -- --force` rebuilds everything regardless of the cache.
 import { createHash } from 'node:crypto';
@@ -18,6 +18,8 @@ const FORCE = process.argv.includes('--force');
 
 const SIZES = {
   thumb: { edge: 640, quality: 72 },
+  // Laptops and smaller get the 1200px print; only XL screens fetch the 2400px one.
+  large: { edge: 1200, quality: 84 },
   full: { edge: 2400, quality: 84 },
 };
 
@@ -143,6 +145,7 @@ async function processPhoto({ id, name }) {
   return {
     id,
     thumb: `/photos/thumb/${id}.webp`,
+    large: `/photos/large/${id}.webp`,
     full: `/photos/full/${id}.webp`,
     blur: fresh ? prev.blur : await renderBlur(path.join(OUT, 'thumb', `${id}.webp`)),
     width,

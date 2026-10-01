@@ -15,6 +15,7 @@ export type PhotoExif = {
 export type Photo = {
   id: string;
   thumb: string;
+  large: string;
   full: string;
   blur: string;
   width: number;
