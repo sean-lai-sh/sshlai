@@ -2,11 +2,9 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { isPortrait, settings, type Photo } from '@/lib/photos';
-import { DateStamp } from './Polaroid';
+import { DateStamp, PRINT_SPRING } from './Polaroid';
+import { pen } from './fonts';
 import styles from './photo.module.css';
-
-// Hold on black at least this long so a cached print still "develops" after the card lands.
-const MIN_DARK_MS = 750;
 
 export function PrintView({ photo, onClose }: { photo: Photo; onClose: () => void }) {
   useEffect(() => {
@@ -45,23 +43,24 @@ export function PrintView({ photo, onClose }: { photo: Photo; onClose: () => voi
         layoutId={`polaroid-${photo.id}`}
         className={`${styles.frame} relative flex ${portrait ? 'flex-row p-3 pr-0 md:p-5 md:pr-0' : 'flex-col p-[3%] pb-0'}`}
         style={{ rotate: -0.6, width: portrait ? undefined : `min(92vw, 1100px, calc((86vh - 160px) * ${aspect}))` }}
-        transition={{ type: 'spring', stiffness: 200, damping: 26 }}
+        transition={PRINT_SPRING}
         onClick={(e) => e.stopPropagation()}
       >
         <motion.div
           layoutId={`well-${photo.id}`}
+          transition={PRINT_SPRING}
           className={`${styles.photoWell} relative shrink-0 overflow-hidden`}
           style={{
             aspectRatio: `${photo.width} / ${photo.height}`,
             height: portrait ? `min(82vh, calc((92vw - ${lipWidth}) / ${aspect}))` : undefined,
           }}
         >
-          <DevelopingPrint src={photo.full} alt={note.caption ?? ''} />
+          <Print thumb={photo.thumb} full={photo.full} alt={note.caption ?? ''} />
           <DateStamp takenAt={exif.takenAt} className="text-xs md:text-sm" />
         </motion.div>
 
         <motion.figcaption
-          className={`${styles.hand} flex gap-x-8 gap-y-3 ${
+          className={`${styles.hand} ${pen.className} flex gap-x-8 gap-y-3 ${
             portrait
               ? 'flex-col justify-between px-4 py-1 md:px-6'
               : 'flex-col px-1 pb-5 pt-4 md:flex-row md:items-end md:justify-between'
@@ -72,10 +71,10 @@ export function PrintView({ photo, onClose }: { photo: Photo; onClose: () => voi
           exit={{ opacity: 0, transition: { duration: 0.1 } }}
         >
           <div className="min-w-0">
-            {note.caption && <p className="text-3xl leading-none md:text-5xl">{note.caption}</p>}
-            {note.place && <p className="mt-2 text-xl opacity-60 md:text-2xl">{note.place}</p>}
+            {note.caption && <p className="text-2xl leading-tight md:text-4xl">{note.caption}</p>}
+            {note.place && <p className="mt-1 text-base opacity-60 md:text-lg">{note.place}</p>}
           </div>
-          <div className={`shrink-0 text-lg leading-tight opacity-80 md:text-2xl ${portrait ? '' : 'md:text-right'}`}>
+          <div className={`shrink-0 text-sm leading-snug opacity-80 md:text-base ${portrait ? '' : 'md:text-right'}`}>
             <p>{[exif.camera, exif.lens].filter(Boolean).join(', ')}</p>
             {portrait ? settings(exif).map((s) => <p key={s}>{s}</p>) : <p>{settings(exif).join(' · ')}</p>}
             {film && <p className="opacity-75">{film}</p>}
@@ -86,22 +85,20 @@ export function PrintView({ photo, onClose }: { photo: Photo; onClose: () => voi
   );
 }
 
-function DevelopingPrint({ src, alt }: { src: string; alt: string }) {
-  const [developed, setDeveloped] = useState(false);
-
-  useEffect(() => {
-    let live = true;
-    const img = new Image();
-    img.src = src;
-    Promise.all([img.decode().catch(() => {}), new Promise((r) => setTimeout(r, MIN_DARK_MS))]).then(
-      () => live && setDeveloped(true),
-    );
-    return () => {
-      live = false;
-    };
-  }, [src]);
-
-  if (!developed) return null;
-  // eslint-disable-next-line @next/next/no-img-element
-  return <img src={src} alt={alt} className={`${styles.develop} absolute inset-0 h-full w-full object-cover`} />;
+// Already developed on the table, so the thumb shows at once and the full print sharpens in over it.
+function Print({ thumb, full, alt }: { thumb: string; full: string; alt: string }) {
+  const [sharp, setSharp] = useState(false);
+  return (
+    <>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={thumb} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={full}
+        alt={alt}
+        onLoad={() => setSharp(true)}
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${sharp ? 'opacity-100' : 'opacity-0'}`}
+      />
+    </>
+  );
 }
