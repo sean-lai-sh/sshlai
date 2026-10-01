@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { isPortrait, settings, type Photo } from '@/lib/photos';
 import { DateStamp, PRINT_SPRING } from './Polaroid';
 import { pen } from './fonts';
-import { isPrintLoaded, markPrintLoaded } from './prints';
+import { isPrintLoaded, markPrintLoaded, printSrc } from './prints';
 import styles from './photo.module.css';
 
 export function PrintView({ photo, onClose }: { photo: Photo; onClose: () => void }) {
@@ -56,7 +56,7 @@ export function PrintView({ photo, onClose }: { photo: Photo; onClose: () => voi
             height: portrait ? `min(82vh, calc((92vw - ${lipWidth}) / ${aspect}))` : undefined,
           }}
         >
-          <Print thumb={photo.thumb} full={photo.full} alt={note.caption ?? ''} />
+          <Print thumb={photo.thumb} full={printSrc(photo)} alt={note.caption ?? ''} />
           <DateStamp takenAt={exif.takenAt} className="text-xs md:text-sm" />
         </motion.div>
 

@@ -2,7 +2,9 @@
 // queue waits for page load and idle, then fetches prints that have been on screen, a couple at a
 // time. Hovering, focusing or touching a print jumps it to the front at high priority, and the
 // queue holds off until that print lands so it isn't sharing the connection. Prints are
-// decoded as they arrive so the zoom doesn't stall on a 2400px decode.
+// decoded as they arrive so the zoom doesn't stall on a large decode.
+import type { Photo } from '@/lib/photos';
+
 type Status = 'queued' | 'loading' | 'loaded';
 
 const BACKGROUND_SLOTS = 2;
@@ -53,6 +55,13 @@ if (typeof window !== 'undefined' && backgroundAllowed()) {
     'requestIdleCallback' in window ? requestIdleCallback(start, { timeout: 2000 }) : setTimeout(start, 500);
   if (document.readyState === 'complete') whenIdle();
   else window.addEventListener('load', whenIdle, { once: true });
+}
+
+// Only XL screens fetch the 2400px print. Laptops top out near 1728px wide, so they stay on 1200px.
+const XL_SCREEN = '(min-width: 1800px)';
+
+export function printSrc(photo: Pick<Photo, 'large' | 'full'>) {
+  return window.matchMedia(XL_SCREEN).matches ? photo.full : photo.large;
 }
 
 // A print came on screen: fetch it in the background, in the order prints were seen.
