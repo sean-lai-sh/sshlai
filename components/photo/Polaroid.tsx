@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { dateStamp, isPortrait, scatter, type Photo } from '@/lib/photos';
 import { pen } from './fonts';
-import { preloadPrint } from './prints';
+import { needPrint, queuePrint } from './prints';
 import styles from './photo.module.css';
 
 // Prints develop once per visit: the first time they land on the table, not every time they're opened.
@@ -43,6 +43,10 @@ export function Polaroid({
     setPhase(reduced ? 'resting' : 'landing');
   }, [inView, phase, photo.id, index, mountedAt, reduced]);
 
+  useEffect(() => {
+    if (inView) queuePrint(photo.full);
+  }, [inView, photo.full]);
+
   return (
     <li
       ref={ref}
@@ -65,10 +69,11 @@ export function Polaroid({
           <motion.button
             type="button"
             layoutId={`polaroid-${photo.id}`}
-            onPointerEnter={() => preloadPrint(photo.full)}
-            onTouchStart={() => preloadPrint(photo.full)}
-            onFocus={() => preloadPrint(photo.full)}
+            onPointerEnter={() => needPrint(photo.full)}
+            onTouchStart={() => needPrint(photo.full)}
+            onFocus={() => needPrint(photo.full)}
             onClick={() => {
+              needPrint(photo.full);
               setPhase('resting');
               onOpen();
             }}
