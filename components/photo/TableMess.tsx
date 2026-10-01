@@ -17,9 +17,9 @@ function CoffeeRing({ className }: { className: string }) {
         </filter>
       </defs>
       <g filter="url(#ring-wobble)">
-        <circle cx="100" cy="100" r="74" fill="rgba(120, 70, 25, 0.07)" />
-        <circle cx="100" cy="100" r="74" fill="none" stroke="rgba(95, 52, 18, 0.38)" strokeWidth="4" strokeDasharray="300 18 90 12" />
-        <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(95, 52, 18, 0.14)" strokeWidth="2" />
+        <circle cx="100" cy="100" r="74" fill="rgba(235, 215, 185, 0.04)" />
+        <circle cx="100" cy="100" r="74" fill="none" stroke="rgba(235, 215, 185, 0.2)" strokeWidth="4" strokeDasharray="300 18 90 12" />
+        <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(235, 215, 185, 0.08)" strokeWidth="2" />
       </g>
     </svg>
   );

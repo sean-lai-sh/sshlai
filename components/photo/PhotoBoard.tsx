@@ -19,11 +19,11 @@ export default function PhotoBoard({ photos }: { photos: Photo[] }) {
   return (
     <main className={`${styles.table} ${hand.className} relative min-h-screen w-screen overflow-clip`}>
       <header className="relative z-10 mx-auto flex max-w-[1360px] items-start justify-between px-6 pt-8 md:px-12 md:pt-12">
-        <div className={`${styles.paper} ${styles.hand} relative -rotate-2 px-6 pb-4 pt-5 shadow-[0_8px_18px_-8px_rgba(60,35,10,0.5)]`}>
+        <div className={`${styles.paper} ${styles.hand} relative -rotate-2 px-6 pb-4 pt-5 shadow-[0_10px_20px_-8px_rgba(10,4,0,0.7)]`}>
           <h1 className="text-6xl leading-none md:text-7xl">photos</h1>
           <p className="mt-1 text-xl opacity-70">left out on the table. tap one to develop it</p>
         </div>
-        <nav className={`${styles.hand} flex gap-5 pt-2 text-2xl`}>
+        <nav className={`${styles.chalk} flex gap-5 pt-2 text-2xl`}>
           <Link href="/" className="underline decoration-wavy decoration-1 underline-offset-4 hover:opacity-70">
             main
           </Link>
