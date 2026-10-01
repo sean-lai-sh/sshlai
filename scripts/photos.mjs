@@ -1,7 +1,10 @@
 // Turns originals in /photos into board thumbnails, full-res prints,
 // and lib/photos/manifest.json (EXIF + dimensions). Captions live in lib/photos/notes.ts.
+// `npm run photos -- --force` rebuilds everything regardless of the cache.
+import { createHash } from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 import exifr from 'exifr';
 
@@ -9,6 +12,9 @@ const ROOT = process.cwd();
 const SRC = path.join(ROOT, 'photos');
 const OUT = path.join(ROOT, 'public/photos');
 const MANIFEST = path.join(ROOT, 'lib/photos/manifest.json');
+// Lives with the gitignored originals it describes.
+const CACHE = path.join(SRC, '.cache.json');
+const FORCE = process.argv.includes('--force');
 
 const SIZES = {
   thumb: { edge: 640, quality: 72 },
@@ -64,32 +70,63 @@ async function readExif(file) {
   };
 }
 
-async function isFresh(out, srcMtime) {
-  try {
-    return (await fs.stat(out)).mtimeMs >= srcMtime;
-  } catch {
-    return false;
-  }
+const sha = (data) => createHash('sha256').update(data).digest('hex').slice(0, 16);
+
+// A photo is reused only when both its original and the pipeline that rendered it are unchanged.
+// The pipeline is this script plus the image libraries, so editing sizes, quality or processing
+// code, or upgrading sharp, rebuilds everything.
+const PIPELINE = sha(
+  JSON.stringify([await fs.readFile(fileURLToPath(import.meta.url)), sharp.versions]),
+);
+
+const exists = (file) => fs.access(file).then(() => true, () => false);
+const readJson = (file, fallback) => fs.readFile(file, 'utf8').then(JSON.parse).catch(() => fallback);
+
+const previous = new Map((await readJson(MANIFEST, [])).map((p) => [p.id, p]));
+const cache = await readJson(CACHE, {});
+const nextCache = {};
+
+function photoId(name) {
+  return path.parse(name).name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
-// Last run's manifest doubles as the cache: a photo is reused when its outputs are newer
-// than the original.
-const previous = new Map(
-  (await fs.readFile(MANIFEST, 'utf8').then(JSON.parse).catch(() => [])).map((p) => [p.id, p]),
-);
+// Checked before anything is written: two originals that normalize to the same id would
+// overwrite each other's output files.
+function assignIds(names) {
+  const byId = new Map();
+  const problems = [];
+  for (const name of names) {
+    const id = photoId(name);
+    if (!id) problems.push(`  "${name}" has no letters or digits to make an id from`);
+    else byId.set(id, [...(byId.get(id) ?? []), name]);
+  }
+  for (const [id, group] of byId) {
+    if (group.length > 1) problems.push(`  ${group.join(', ')} all become "${id}"`);
+  }
+  if (problems.length) {
+    console.error(`photos: rename these originals, nothing was written:\n${problems.join('\n')}`);
+    process.exit(1);
+  }
+  return [...byId].map(([id, [name]]) => ({ id, name }));
+}
 
 async function renderBlur(thumb) {
   const buf = await sharp(thumb).resize(16, 16, { fit: 'inside' }).webp({ quality: 40 }).toBuffer();
   return `data:image/webp;base64,${buf.toString('base64')}`;
 }
 
-async function processPhoto(name) {
+async function processPhoto({ id, name }) {
   const file = path.join(SRC, name);
-  const id = path.parse(name).name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  const { mtimeMs } = await fs.stat(file);
+  const source = sha(await fs.readFile(file));
   const outputs = Object.keys(SIZES).map((kind) => path.join(OUT, kind, `${id}.webp`));
   const prev = previous.get(id);
-  const fresh = prev !== undefined && (await Promise.all(outputs.map((out) => isFresh(out, mtimeMs)))).every(Boolean);
+  const fresh =
+    !FORCE &&
+    prev !== undefined &&
+    cache[id]?.source === source &&
+    cache[id]?.pipeline === PIPELINE &&
+    (await Promise.all(outputs.map(exists))).every(Boolean);
+  nextCache[id] = { source, pipeline: PIPELINE };
 
   if (!fresh) {
     const upright = await sharp(file).rotate().toBuffer();
@@ -116,9 +153,10 @@ async function processPhoto(name) {
 }
 
 const names = (await fs.readdir(SRC)).filter((n) => /\.(jpe?g|png|webp|tiff?|heic)$/i.test(n));
+const entries = assignIds(names);
 await Promise.all(Object.keys(SIZES).map((k) => fs.mkdir(path.join(OUT, k), { recursive: true })));
 
-const results = await Promise.all(names.map(processPhoto));
+const results = await Promise.all(entries.map(processPhoto));
 const rebuilt = results.filter((p) => !p.fresh).map((p) => p.id);
 const photos = results.map(({ fresh: _, ...p }) => p);
 
@@ -132,4 +170,5 @@ photos.sort((a, b) => (a.exif.takenAt ?? '').localeCompare(b.exif.takenAt ?? '')
 
 await fs.mkdir(path.dirname(MANIFEST), { recursive: true });
 await fs.writeFile(MANIFEST, JSON.stringify(photos, null, 2) + '\n');
+await fs.writeFile(CACHE, JSON.stringify(nextCache, null, 2) + '\n');
 console.log(`photos: ${photos.length} total, rebuilt ${rebuilt.length ? rebuilt.join(', ') : 'none'}`);
