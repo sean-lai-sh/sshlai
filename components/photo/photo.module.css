@@ -92,7 +92,21 @@
 }
 
 .develop {
-  animation: develop 3.2s cubic-bezier(0.3, 0, 0.2, 1) forwards;
+  /* Starts while the print is still settling onto the table. */
+  animation: develop 3.2s cubic-bezier(0.3, 0, 0.2, 1) calc(var(--drop-delay) + 0.3s) both;
+}
+
+/* Lifted off the table while it drops, so the shadow tightens as it lands. */
+.card[data-phase='landing'] .frame {
+  animation: settle 0.6s cubic-bezier(0.2, 0, 0, 1) var(--drop-delay) backwards;
+}
+
+@keyframes settle {
+  from {
+    box-shadow:
+      0 2px 2px rgba(10, 4, 0, 0.15),
+      0 30px 40px -12px rgba(10, 4, 0, 0.45);
+  }
 }
 
 @keyframes develop {
