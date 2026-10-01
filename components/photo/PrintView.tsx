@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { isPortrait, settings, type Photo } from '@/lib/photos';
 import { DateStamp, PRINT_SPRING } from './Polaroid';
 import { pen } from './fonts';
+import { isPrintLoaded, markPrintLoaded } from './prints';
 import styles from './photo.module.css';
 
 export function PrintView({ photo, onClose }: { photo: Photo; onClose: () => void }) {
@@ -85,19 +86,27 @@ export function PrintView({ photo, onClose }: { photo: Photo; onClose: () => voi
   );
 }
 
-// Already developed on the table, so the thumb shows at once and the full print sharpens in over it.
+// Already developed on the table. Usually the full print was fetched on hover and shows at once;
+// if not, a soft-focus thumb stands in and the full print sharpens in over it.
 function Print({ thumb, full, alt }: { thumb: string; full: string; alt: string }) {
-  const [sharp, setSharp] = useState(false);
+  const [ready] = useState(() => isPrintLoaded(full));
+  const [sharp, setSharp] = useState(ready);
   return (
     <>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={thumb} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
+      {!ready && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={thumb} alt="" aria-hidden className="absolute inset-0 h-full w-full scale-[1.04] object-cover blur-[5px]" />
+      )}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={full}
         alt={alt}
-        onLoad={() => setSharp(true)}
-        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${sharp ? 'opacity-100' : 'opacity-0'}`}
+        decoding="async"
+        onLoad={() => {
+          markPrintLoaded(full);
+          setSharp(true);
+        }}
+        className={`absolute inset-0 h-full w-full object-cover ${ready ? '' : 'transition-opacity duration-500'} ${sharp ? 'opacity-100' : 'opacity-0'}`}
       />
     </>
   );
