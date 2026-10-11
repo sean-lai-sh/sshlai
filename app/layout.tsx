@@ -47,6 +47,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata = {
+  metadataBase: new URL('https://seanlai.co'),
   title: 'Sean Lai Portfolio',
   description: 'Full Stack & AI Engineer Portfolio',
   icons: {
