@@ -29,7 +29,7 @@ const ContactPage = () => {
           GitHub
         </a>
         <a
-          href="https://x.com/seansecureshell"
+          href="https://x.com/seanlaish"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:underline duration-300 text-white"
