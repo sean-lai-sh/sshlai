@@ -1,16 +1,29 @@
+'use client'
 import React from 'react'
 import MarqueeBanner from '../Navigation/marquee'
 import { searching } from '@/lib/consts'
 import { MaskText } from '../ui/inlinemask/inlineMask'
-import { AsciiSea } from './asciisea'
+import { AsciiCanvas } from './asciicanvas'
+import { seaScene } from './asciisea'
+import { topoScene } from './asciitopo'
 import AnimatedLink from '../ui/AnimatedLink'
 // import Anim_Button from '../ui/animated_a'
+const scenes = {
+  sea: { scene: seaScene, label: 'ASCII sea driven by Perlin noise' },
+  topo: { scene: topoScene, label: 'ASCII topographic contours driven by Perlin noise' },
+}
+
 const HeroSection = () => {
+  const [sceneKey, setSceneKey] = React.useState<keyof typeof scenes>('sea')
+  React.useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('scene') === 'topo') setSceneKey('topo')
+  }, [])
+  const { scene, label } = scenes[sceneKey]
   return (
     <section className="min-h-screen w-full flex flex-col bg-vantablack scroll-hidden">
       <div className="flex-1 w-full flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20 px-4 py-20 lg:py-0">
         <div className="relative w-full max-w-md lg:max-w-none lg:w-[min(40vw,80vh,640px)] aspect-square shrink-0 overflow-hidden">
-          <AsciiSea className="absolute inset-0" />
+          <AsciiCanvas className="absolute inset-0" scene={scene} label={label} />
         </div>
         {LandingInformation()}
       </div>

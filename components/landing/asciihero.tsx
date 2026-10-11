@@ -4,7 +4,7 @@ import * as React from "react";
 import { loadWasmPerlin, type WasmPerlinNoise } from "@/lib/wasm-loader";
 
 // --- Fallback JavaScript Perlin Noise Implementation ---
-class PerlinNoise {
+export class PerlinNoise {
     private p: number[] = [];
     constructor() {
         // Pre-shuffled permutation table
@@ -205,7 +205,7 @@ export const AsciiNoiseBackground = ({ className = "fixed inset-0 z-[-1] bg-back
         return () => {
             if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
         };
-    }, []);
+    }, [noiseScale]);
 
     // Animation loop
     React.useEffect(() => {
