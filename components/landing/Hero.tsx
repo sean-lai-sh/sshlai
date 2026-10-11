@@ -26,8 +26,8 @@ const HeroSection = () => {
   const { scene, label } = scenes[sceneKey]
   return (
     <section className="min-h-screen w-full flex flex-col bg-vantablack scroll-hidden">
-      <div className="flex-1 w-full flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20 px-4 py-20 lg:py-0">
-        <div className="relative w-full max-w-md lg:max-w-none lg:w-[min(40vw,80vh,640px)] aspect-[2/1] lg:aspect-square shrink-0 overflow-hidden">
+      <div className="flex-1 w-full flex flex-col lg:flex-row items-center justify-start lg:justify-center gap-6 lg:gap-20 px-4 pt-10 pb-16 lg:py-0">
+        <div className="relative w-full max-w-md lg:max-w-none lg:w-[min(40vw,80vh,640px)] aspect-[3/2] lg:aspect-square shrink-0 overflow-hidden">
           <AsciiCanvas className="absolute inset-0" scene={scene} label={label} />
         </div>
         {LandingInformation()}
