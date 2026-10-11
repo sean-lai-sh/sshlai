@@ -56,6 +56,8 @@ class AsciiRenderer {
     private charHeight = 0;
     private cols = 0;
     private rows = 0;
+    private offsetX = 0;
+    private offsetY = 0;
     private lastRenderTime = 0;
     private accumulatedTime = 0;
     private frameInterval = 1000 / 60; // Target 60 FPS
@@ -122,6 +124,8 @@ class AsciiRenderer {
         this.ctx.scale(dpr, dpr);
         this.cols = Math.floor(width / this.charWidth);
         this.rows = Math.floor(height / this.charHeight);
+        this.offsetX = (width - this.cols * this.charWidth) / 2;
+        this.offsetY = (height - this.rows * this.charHeight) / 2;
         this.drawFrame(this.accumulatedTime);
     }
 
@@ -146,9 +150,7 @@ class AsciiRenderer {
     }
     
     private drawFrame(time: number): void {
-        // Blackout bg for clear visibility
-        this.ctx.fillStyle = "#0f0f0f";
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         // Pure white ASCII text
         this.ctx.fillStyle = "#ffffff";
         const currentFontSize = this.options.isLowRes ? this.options.lowResFontSize : this.options.fontSize;
@@ -174,8 +176,8 @@ class AsciiRenderer {
                 const char = this.options.charRamp[charIndex] || " ";
                 this.ctx.fillText(
                     char,
-                    i * this.charWidth + this.charWidth / 2,
-                    j * this.charHeight + this.charHeight / 2
+                    this.offsetX + i * this.charWidth + this.charWidth / 2,
+                    this.offsetY + j * this.charHeight + this.charHeight / 2
                 );
             }
         }

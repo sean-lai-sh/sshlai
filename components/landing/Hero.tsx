@@ -10,8 +10,8 @@ const HeroSection = () => {
     <section className="min-h-screen w-full flex flex-col bg-vantablack scroll-hidden">
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-0 px-4 py-20 lg:py-0">
         <div className="flex items-center justify-center">
-          <div className="relative w-full aspect-square max-w-[min(40vw,80vh)] max-lg:max-w-md border border-beige/15 rounded-sm overflow-hidden">
-            <AsciiNoiseBackground className="absolute inset-0 bg-background" />
+          <div className="relative w-full aspect-square max-w-[min(40vw,80vh)] max-lg:max-w-md overflow-hidden">
+            <AsciiNoiseBackground className="absolute inset-0" />
           </div>
         </div>
         {LandingInformation()}
@@ -27,23 +27,15 @@ function LandingInformation() {
   return <div className="flex justify-center lg:justify-start">
     <div className="w-full max-w-md lg:pr-10 py-4 text-white space-y-6">
       <div>
-        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight">
           <MaskText
             phrases={["Sean Lai"]}
-            style="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight"
+            style="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight"
             customDelay={0.7}
             duration={0.9}
           />
         </h1>
 
-        <div className="mt-2 text-left text-sm sm:text-base md:text-lg max-w-sm sm:max-w-md md:max-w-xl text-beige">
-          <MaskText
-            phrases={["Generating Entropy, Designing Systems"]}
-            style="text-sm sm:text-base md:text-lg text-beige"
-            customDelay={0.7}
-            duration={0.9}
-          />
-        </div>
       </div>
       <p className="text-sm sm:text-base leading-7 text-beige">
         Incoming Winter Software Engineer Intern @ {' '}
