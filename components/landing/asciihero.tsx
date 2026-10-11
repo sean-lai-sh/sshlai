@@ -186,7 +186,7 @@ class AsciiRenderer {
 
 // --- Modular Export: Named, No Controls ---
 // Refactor: Remove UI, controls, export as AsciiNoiseBackground (named export)
-export const AsciiNoiseBackground = ({ className = "fixed inset-0 z-[-1] bg-background" }: { className?: string }) => {
+export const AsciiNoiseBackground = ({ className = "fixed inset-0 z-[-1] bg-background", noiseScale }: { className?: string; noiseScale?: number }) => {
     const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
     const rendererRef = React.useRef<AsciiRenderer | null>(null);
     const animationFrameId = React.useRef<number | null>(null);
@@ -197,7 +197,7 @@ export const AsciiNoiseBackground = ({ className = "fixed inset-0 z-[-1] bg-back
         const init = async () => {
             if (!canvasRef.current) return;
             await document.fonts.ready;
-            rendererRef.current = new AsciiRenderer(canvasRef.current, {});
+            rendererRef.current = new AsciiRenderer(canvasRef.current, noiseScale ? { noiseScale } : {});
             await rendererRef.current.init();
             setIsInitialized(true);
         };

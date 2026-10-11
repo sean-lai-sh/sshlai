@@ -10,7 +10,7 @@ const HeroSection = () => {
     <section className="min-h-screen w-full flex flex-col bg-vantablack scroll-hidden">
       <div className="flex-1 w-full flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20 px-4 py-20 lg:py-0">
         <div className="relative w-full max-w-md lg:max-w-none lg:w-[min(40vw,80vh,640px)] aspect-square shrink-0 overflow-hidden">
-          <AsciiNoiseBackground className="absolute inset-0" />
+          <AsciiNoiseBackground className="absolute inset-0" noiseScale={2.5} />
         </div>
         {LandingInformation()}
       </div>
