@@ -116,11 +116,12 @@ class AsciiRenderer {
 
     public resize(): void {
         const dpr = window.devicePixelRatio || 1;
-        this.canvas.width = window.innerWidth * dpr;
-        this.canvas.height = window.innerHeight * dpr;
+        const { width, height } = this.canvas.getBoundingClientRect();
+        this.canvas.width = width * dpr;
+        this.canvas.height = height * dpr;
         this.ctx.scale(dpr, dpr);
-        this.cols = Math.floor(window.innerWidth / this.charWidth);
-        this.rows = Math.floor(window.innerHeight / this.charHeight);
+        this.cols = Math.floor(width / this.charWidth);
+        this.rows = Math.floor(height / this.charHeight);
         this.drawFrame(this.accumulatedTime);
     }
 
@@ -183,7 +184,7 @@ class AsciiRenderer {
 
 // --- Modular Export: Named, No Controls ---
 // Refactor: Remove UI, controls, export as AsciiNoiseBackground (named export)
-export const AsciiNoiseBackground = () => {
+export const AsciiNoiseBackground = ({ className = "fixed inset-0 z-[-1] bg-background" }: { className?: string }) => {
     const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
     const rendererRef = React.useRef<AsciiRenderer | null>(null);
     const animationFrameId = React.useRef<number | null>(null);
@@ -224,17 +225,15 @@ export const AsciiNoiseBackground = () => {
         };
     }, [isInitialized]);
 
-    // Resize on window resize
     React.useEffect(() => {
-        const onResize = () => {
-            if (rendererRef.current) rendererRef.current.resize();
-        };
-        window.addEventListener("resize", onResize);
-        return () => window.removeEventListener("resize", onResize);
-    }, []);
+        if (!isInitialized || !canvasRef.current) return;
+        const observer = new ResizeObserver(() => rendererRef.current?.resize());
+        observer.observe(canvasRef.current);
+        return () => observer.disconnect();
+    }, [isInitialized]);
 
     return (
-        <div className="fixed inset-0 z-[-1] bg-background overflow-hidden font-mono pointer-events-none select-none" aria-label="Animated ASCII art background">
+        <div className={`overflow-hidden font-mono pointer-events-none select-none ${className}`} aria-label="Animated ASCII art">
             <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
         </div>
     );

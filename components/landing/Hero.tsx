@@ -7,11 +7,16 @@ import AnimatedLink from '../ui/AnimatedLink'
 // import Anim_Button from '../ui/animated_a'
 const HeroSection = () => {
   return (
-    <section className="min-h-[50vh] lg:min-h-[80vh] w-full text-black flex flex-col justify-center lg:px-6 bg-transparent scroll-hidden">
-      <AsciiNoiseBackground />
-      {LandingInformation()}
-      {/* <ReachOut /> */}
-        {searching && <MarqueeBanner />}
+    <section className="min-h-screen w-full flex flex-col bg-vantablack scroll-hidden">
+      <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-0 px-4 py-20 lg:py-0">
+        <div className="flex items-center justify-center">
+          <div className="relative w-full aspect-square max-w-[min(40vw,80vh)] max-lg:max-w-md border border-beige/15 rounded-sm overflow-hidden">
+            <AsciiNoiseBackground className="absolute inset-0 bg-background" />
+          </div>
+        </div>
+        {LandingInformation()}
+      </div>
+      {searching && <MarqueeBanner />}
     </section>
   )
 }
@@ -19,8 +24,8 @@ const HeroSection = () => {
 export default HeroSection
 
 function LandingInformation() {
-  return <div className="flex lg:flex-row flex-col lg:justify-between bg-charcoal/80 lg:bg-transparent #backdrop-blur-sm lg:backdrop-blur-none mt-[15rem] md:mt-[10rem] lg:mt-0">
-    <div className="w-full min-w-[40vw] max-w-full md:w-fit p-2 py-4 sm:p-4 lg:p-10 text-white lg:bg-transparent lg:backdrop-blur-sm space-y-4">
+  return <div className="flex justify-center lg:justify-start">
+    <div className="w-full max-w-md lg:pr-10 py-4 text-white space-y-6">
       <div>
         <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight">
           <MaskText
@@ -40,10 +45,7 @@ function LandingInformation() {
           />
         </div>
       </div>
-          {/* <Anim_Button content="Resume" href="/Sean%20Lai%20Resume.pdf" funcAct={() => {}} style='mt-5 min-w-10 max-w-[10rem]'/> */}
-    </div>
-    <div className="lg:bg-transparent lg:backdrop-blur-sm p-2 py-4 sm:p-4 lg:p-10 w-full max-w-full md:w-1/2 h-full flex items-center justify-start md:items-start md:justify-start text-xs sm:text-base lg:text-base lg:leading-7 text-beige overflow-x-hidden">
-      <p>
+      <p className="text-sm sm:text-base leading-7 text-beige">
         Incoming Winter Software Engineer Intern @ {' '}
         <AnimatedLink href="https://forus.com">
           Forus
@@ -93,8 +95,6 @@ function LandingInformation() {
         Sidequest(s):
         <br />Events for VCs & Founders, and touching grass
       </p>
-        
-
     </div>
   </div>
 }

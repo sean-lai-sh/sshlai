@@ -3,7 +3,6 @@ import {HeroSection} from "@/components/landing";
 import { useEffect } from "react";
 import Lenis from "lenis";
 import Stair from "@/components/animated/Stair";
-import Experience from "@/components/landing/experience";
 
 
 // components/Hero.tsx
@@ -30,7 +29,6 @@ export default function Hero() {
       <Stair>
           <HeroSection/>
           {/* <Work /> */}
-          <Experience/>
           {/* <HorizontalExpansion/>  */}
           {/* <Contact /> */}
       </Stair>  
