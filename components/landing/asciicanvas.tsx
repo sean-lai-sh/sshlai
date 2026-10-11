@@ -1,14 +1,34 @@
 "use client";
 
 import * as React from "react";
-import { loadWasmPerlin } from "@/lib/wasm-loader";
+import { loadWasmNoiseField, loadWasmPerlin } from "@/lib/wasm-loader";
 import { PerlinNoise } from "./asciihero";
 
-export type Noise = { noise(x: number, y: number, z: number): number };
+export type Noise = {
+    noise(x: number, y: number, z: number): number;
+    // Row-major grid of noise in [0, 1], same contract as the Rust `generate_noise`.
+    field(width: number, height: number, t: number, scale: number): Float32Array;
+};
 export type Grid = { cols: number; rows: number; cw: number; ch: number; ox: number; oy: number };
 export type Scene = (ctx: CanvasRenderingContext2D, grid: Grid, t: number, noise: Noise) => void;
 
 const LINE_HEIGHT = 1.15;
+
+function jsNoise(): Noise {
+    const perlin = new PerlinNoise();
+    return {
+        noise: (x, y, z) => perlin.noise(x, y, z),
+        field: (width, height, t, scale) => {
+            const out = new Float32Array(width * height);
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    out[y * width + x] = (perlin.noise((x / width) * scale, (y / height) * scale, t) + 1) / 2;
+                }
+            }
+            return out;
+        },
+    };
+}
 
 export const cellCenter = (grid: Grid, i: number, j: number) =>
     [grid.ox + i * grid.cw + grid.cw / 2, grid.oy + j * grid.ch + grid.ch / 2] as const;
@@ -21,9 +41,9 @@ export const AsciiCanvas = ({ scene, targetCols = 56, className = "", label }: {
         const ctx = canvas?.getContext("2d");
         if (!canvas || !ctx) return;
 
-        let noise: Noise = new PerlinNoise();
-        loadWasmPerlin().then((wasm) => {
-            if (wasm) noise = wasm;
+        let noise = jsNoise();
+        Promise.all([loadWasmPerlin(), loadWasmNoiseField()]).then(([generator, field]) => {
+            if (generator && field) noise = { noise: (x, y, z) => generator.noise(x, y, z), field };
         });
 
         let grid: Grid | null = null;
