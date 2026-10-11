@@ -10,8 +10,10 @@ const OCTAVES = [
 const TOTAL_WEIGHT = OCTAVES.reduce((sum, o) => sum + o.weight, 0);
 
 export const fieldScene: Scene = (ctx, grid, t, perlin) => {
-    const { cols, rows } = grid;
-    const layers = OCTAVES.map((o) => perlin.field(cols, rows, t * o.speed + o.offset, o.scale));
+    const { cols, rows, cw, ch } = grid;
+    // generate_noise spreads `scale` over both axes, so sample a square grid and draw only the rows that fit.
+    const squareRows = Math.max(rows, Math.round((cols * cw) / ch));
+    const layers = OCTAVES.map((o) => perlin.field(cols, squareRows, t * o.speed + o.offset, o.scale));
     ctx.fillStyle = "#ffffff";
     for (let j = 0; j < rows; j++) {
         for (let i = 0; i < cols; i++) {
