@@ -4,19 +4,24 @@ import MarqueeBanner from '../Navigation/marquee'
 import { searching } from '@/lib/consts'
 import { MaskText } from '../ui/inlinemask/inlineMask'
 import { AsciiCanvas } from './asciicanvas'
+import { fieldScene } from './asciifield'
+import { reactionScene } from './asciireaction'
 import { seaScene } from './asciisea'
 import { topoScene } from './asciitopo'
 import AnimatedLink from '../ui/AnimatedLink'
 // import Anim_Button from '../ui/animated_a'
 const scenes = {
+  field: { scene: fieldScene, label: 'ASCII Perlin noise field' },
+  reaction: { scene: reactionScene, label: 'ASCII reaction-diffusion pattern' },
   sea: { scene: seaScene, label: 'ASCII sea driven by Perlin noise' },
   topo: { scene: topoScene, label: 'ASCII topographic contours driven by Perlin noise' },
 }
 
 const HeroSection = () => {
-  const [sceneKey, setSceneKey] = React.useState<keyof typeof scenes>('sea')
+  const [sceneKey, setSceneKey] = React.useState<keyof typeof scenes>('field')
   React.useEffect(() => {
-    if (new URLSearchParams(window.location.search).get('scene') === 'topo') setSceneKey('topo')
+    const requested = new URLSearchParams(window.location.search).get('scene')
+    if (requested && requested in scenes) setSceneKey(requested as keyof typeof scenes)
   }, [])
   const { scene, label } = scenes[sceneKey]
   return (
